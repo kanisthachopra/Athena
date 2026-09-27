@@ -63,7 +63,7 @@ export default async function TodayPage() {
   const date = new Intl.DateTimeFormat("en", { weekday: "long", month: "long", day: "numeric" }).format(new Date());
 
   return (
-    <main className="min-h-screen bg-cream text-ink">
+    <main className="min-h-screen bg-cream pb-24 text-ink sm:pb-0">
       <AppHeader familyName={family?.display_name ?? "Your family"} />
       <div className="mx-auto max-w-7xl px-5 py-10 lg:px-10 lg:py-14">
         <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">

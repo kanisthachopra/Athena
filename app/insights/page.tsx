@@ -52,7 +52,7 @@ export default async function InsightsPage() {
   const strongestDomain = strongestSignal && strongestSignal[1] > 0 ? strongestSignal[0] : undefined;
 
   return (
-    <main className="min-h-screen bg-cream text-ink">
+    <main className="min-h-screen bg-cream pb-24 text-ink sm:pb-0">
       <AppHeader familyName={family?.display_name ?? "Your family"} />
       <div className="mx-auto max-w-6xl px-5 py-10 lg:px-10 lg:py-14">
         <p className="eyebrow"><BarChart3 size={15} /> Learning, noticed</p>

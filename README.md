@@ -2,7 +2,7 @@
 
 MIRA is a calm, parent-first learning companion for families with young children. It turns everyday moments into age-aware learning invitations and will eventually adapt weekly plans from parent observations, family priorities, languages, and a reviewed activity library.
 
-This repository currently implements **Milestones 1–3**: secure family onboarding, a reviewed weekly learning loop, and transparent adaptation from caregiver observations.
+This repository currently implements **Milestones 1–4**: secure family onboarding, a reviewed weekly learning loop, transparent adaptation from caregiver observations, and caregiver-controlled flexible planning.
 
 ## What is working
 
@@ -15,6 +15,9 @@ This repository currently implements **Milestones 1–3**: secure family onboard
 - Activity guidance, safety notes, and quick caregiver feedback
 - A learning-insights journal that treats observations as signals rather than scores
 - Deterministic next-week adaptation with visible selection reasons
+- An age-filtered reviewed activity library
+- Caregiver-controlled activity swaps and penalty-free skipping
+- Mobile navigation for the complete learning loop
 - PostgreSQL Row Level Security across family, planning, and observation data
 - Server-side auth and data access through `@supabase/ssr`
 

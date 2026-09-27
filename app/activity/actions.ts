@@ -26,3 +26,17 @@ export async function saveFeedback(_previous: FeedbackState, formData: FormData)
   revalidatePath("/week");
   redirect("/today");
 }
+
+export async function skipActivity(formData: FormData) {
+  const instanceId = String(formData.get("instanceId") ?? "");
+  if (!instanceId) throw new Error("Activity not found.");
+  const supabase = await createClient();
+  const { data: authData } = await supabase.auth.getClaims();
+  if (!authData?.claims?.sub) redirect("/auth/login");
+  const { error } = await supabase.rpc("skip_activity", { p_instance_id: instanceId });
+  if (error) throw new Error(error.message);
+  revalidatePath("/today");
+  revalidatePath("/week");
+  revalidatePath(`/activity/${instanceId}`);
+  redirect("/today");
+}

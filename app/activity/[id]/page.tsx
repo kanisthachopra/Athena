@@ -1,9 +1,10 @@
 import { AppHeader } from "@/components/app-header";
 import { FeedbackForm } from "@/components/feedback-form";
 import { createClient } from "@/lib/supabase/server";
-import { ArrowLeft, Clock3, Eye, Heart, MessageCircle, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Clock3, Eye, Heart, MessageCircle, RefreshCw, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import { skipActivity } from "../actions";
 
 type Activity = {
   id: string;
@@ -37,7 +38,7 @@ export default async function ActivityPage({ params }: { params: Promise<{ id: s
   const template = activity.activity_templates;
 
   return (
-    <main className="min-h-screen bg-cream text-ink">
+    <main className="min-h-screen bg-cream pb-24 text-ink sm:pb-0">
       <AppHeader familyName={family?.display_name ?? "Your family"} />
       <div className="mx-auto max-w-5xl px-5 py-10 lg:px-10 lg:py-14">
         <Link href="/week" className="button-ghost -ml-4 gap-2"><ArrowLeft size={17} /> Back to the week</Link>
@@ -56,7 +57,8 @@ export default async function ActivityPage({ params }: { params: Promise<{ id: s
           </article>
           <aside className="space-y-5">
             <div className="soft-card"><Heart size={20} className="text-[#a9503b]" /><p className="eyebrow mt-5">Why it matters</p><p className="mt-3 leading-7 text-ink/60">{template?.why_it_matters}</p></div>
-            <div className="soft-card"><h2 className="font-serif text-2xl font-semibold">What happened?</h2><p className="mt-2 text-sm leading-6 text-ink/50">Quick feedback helps the next plan fit better. No judgement, no scores.</p><div className="mt-6">{activity.status === "completed" ? <p className="rounded-xl bg-[#eef3ea] p-4 text-sm font-semibold text-[#52634e]">Feedback saved for this activity.</p> : <FeedbackForm instanceId={activity.id} />}</div></div>
+            <div className="soft-card"><h2 className="font-serif text-2xl font-semibold">What happened?</h2><p className="mt-2 text-sm leading-6 text-ink/50">Quick feedback helps the next plan fit better. No judgement, no scores.</p><div className="mt-6">{activity.status === "completed" ? <p className="rounded-xl bg-[#eef3ea] p-4 text-sm font-semibold text-[#52634e]">Feedback saved for this activity.</p> : activity.status === "skipped" ? <p className="rounded-xl bg-[#f3eee3] p-4 text-sm font-semibold text-[#80613f]">Skipped without penalty. Family life comes first.</p> : <FeedbackForm instanceId={activity.id} />}</div></div>
+            {activity.status === "planned" && <div className="rounded-[1.75rem] border border-black/5 bg-paper p-6"><p className="text-sm leading-6 text-ink/50">Not the right fit today?</p><div className="mt-4 flex flex-wrap gap-2"><Link href={`/library?replace=${activity.id}`} className="button-ghost gap-2"><RefreshCw size={16} /> Choose another</Link><form action={skipActivity}><input type="hidden" name="instanceId" value={activity.id} /><button type="submit" className="button-ghost text-ink/50">Skip without penalty</button></form></div></div>}
           </aside>
         </div>
       </div>
