@@ -1,8 +1,7 @@
 import { AppHeader } from "@/components/app-header";
-import { createClient } from "@/lib/supabase/server";
+import { requireFamilyContext } from "@/lib/family-context";
 import { BarChart3, Heart, History, Repeat2, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 type Observation = {
   id: string;
@@ -22,17 +21,7 @@ const domainNames: Record<string, string> = { language: "Language", movement: "M
 export const metadata = { title: "Insights" };
 
 export default async function InsightsPage() {
-  const supabase = await createClient();
-  const { data: authData } = await supabase.auth.getClaims();
-  if (!authData?.claims?.sub) redirect("/auth/login");
-  const { data: membership } = await supabase.from("family_members").select("family_id").limit(1).maybeSingle();
-  if (!membership) redirect("/onboarding");
-
-  const [{ data: family }, { data: child }] = await Promise.all([
-    supabase.from("families").select("display_name").eq("id", membership.family_id).single(),
-    supabase.from("children").select("id,nickname").eq("family_id", membership.family_id).limit(1).maybeSingle(),
-  ]);
-  if (!child) redirect("/onboarding");
+  const { supabase, family, activeChild: child } = await requireFamilyContext();
 
   const { data } = await supabase
     .from("observations")

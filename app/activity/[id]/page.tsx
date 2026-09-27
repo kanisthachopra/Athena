@@ -1,9 +1,9 @@
 import { AppHeader } from "@/components/app-header";
 import { FeedbackForm } from "@/components/feedback-form";
-import { createClient } from "@/lib/supabase/server";
+import { requireFamilyContext } from "@/lib/family-context";
 import { ArrowLeft, Clock3, Eye, Heart, MessageCircle, RefreshCw, ShieldCheck } from "lucide-react";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { skipActivity } from "../actions";
 
 type Activity = {
@@ -24,15 +24,8 @@ type Activity = {
 
 export default async function ActivityPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const supabase = await createClient();
-  const { data: authData } = await supabase.auth.getClaims();
-  if (!authData?.claims?.sub) redirect("/auth/login");
-  const { data: membership } = await supabase.from("family_members").select("family_id").limit(1).maybeSingle();
-  if (!membership) redirect("/onboarding");
-  const [{ data: family }, { data }] = await Promise.all([
-    supabase.from("families").select("display_name").eq("id", membership.family_id).single(),
-    supabase.from("activity_instances").select("id,status,personalized_title,personalized_instructions,activity_templates(domain,duration_minutes,conversation_prompt,look_for,why_it_matters,safety_note,materials)").eq("id", id).maybeSingle(),
-  ]);
+  const { supabase, family } = await requireFamilyContext();
+  const { data } = await supabase.from("activity_instances").select("id,status,personalized_title,personalized_instructions,activity_templates(domain,duration_minutes,conversation_prompt,look_for,why_it_matters,safety_note,materials)").eq("id", id).maybeSingle();
   if (!data) notFound();
   const activity = data as unknown as Activity;
   const template = activity.activity_templates;

@@ -1,8 +1,7 @@
 import { AppHeader } from "@/components/app-header";
-import { createClient } from "@/lib/supabase/server";
+import { requireFamilyContext } from "@/lib/family-context";
 import { ArrowRight, BookOpen, Check, Clock3, RefreshCw, ShieldCheck } from "lucide-react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { replaceActivity } from "./actions";
 
 type Template = {
@@ -29,18 +28,8 @@ export const metadata = { title: "Activity library" };
 
 export default async function LibraryPage({ searchParams }: { searchParams: Promise<{ domain?: string; replace?: string }> }) {
   const { domain, replace } = await searchParams;
-  const supabase = await createClient();
-  const { data: authData } = await supabase.auth.getClaims();
-  if (!authData?.claims?.sub) redirect("/auth/login");
-  const { data: membership } = await supabase.from("family_members").select("family_id").limit(1).maybeSingle();
-  if (!membership) redirect("/onboarding");
-
-  const [{ data: family }, { data: childData }] = await Promise.all([
-    supabase.from("families").select("display_name").eq("id", membership.family_id).single(),
-    supabase.from("children").select("id,nickname,birth_year,birth_month").eq("family_id", membership.family_id).limit(1).maybeSingle(),
-  ]);
-  const child = childData as Child | null;
-  if (!child) redirect("/onboarding");
+  const { supabase, family, activeChild } = await requireFamilyContext();
+  const child = activeChild as Child;
   const months = ageInMonths(child);
 
   let query = supabase.from("activity_templates").select("id,title,domain,duration_minutes,summary,why_it_matters,safety_note,materials,embedded_learning").lte("min_age_months", months).gte("max_age_months", months).eq("reviewed", true).order("domain").order("title");

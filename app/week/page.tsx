@@ -1,5 +1,5 @@
 import { AppHeader } from "@/components/app-header";
-import { createClient } from "@/lib/supabase/server";
+import { requireFamilyContext } from "@/lib/family-context";
 import { ArrowRight, CalendarDays, Check, Clock3, RefreshCw, SlidersHorizontal, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -22,17 +22,8 @@ export const metadata = { title: "This week" };
 
 export default async function WeekPage({ searchParams }: { searchParams: Promise<{ plan?: string }> }) {
   const requestedPlan = (await searchParams).plan;
-  const supabase = await createClient();
-  const { data: authData } = await supabase.auth.getClaims();
-  if (!authData?.claims?.sub) redirect("/auth/login");
-  const { data: membership } = await supabase.from("family_members").select("family_id").limit(1).maybeSingle();
-  if (!membership) redirect("/onboarding");
-  const [{ data: family }, { data: child }, { data: preference }] = await Promise.all([
-    supabase.from("families").select("display_name").eq("id", membership.family_id).single(),
-    supabase.from("children").select("id,nickname").eq("family_id", membership.family_id).limit(1).single(),
-    supabase.from("family_preferences").select("family_id").eq("family_id", membership.family_id).maybeSingle(),
-  ]);
-  if (!child) redirect("/onboarding");
+  const { supabase, membership, family, activeChild: child } = await requireFamilyContext();
+  const { data: preference } = await supabase.from("family_preferences").select("family_id").eq("family_id", membership.family_id).maybeSingle();
   if (!preference) redirect("/setup");
 
   const { data: planData } = await supabase.from("plans").select("id,week_start,adaptation_summary,generation_method").eq("child_id", child.id).eq("status", "active").order("week_start", { ascending: false }).limit(6);

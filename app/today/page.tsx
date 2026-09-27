@@ -1,8 +1,7 @@
 import { AppHeader } from "@/components/app-header";
-import { createClient } from "@/lib/supabase/server";
+import { requireFamilyContext } from "@/lib/family-context";
 import { ArrowRight, CalendarDays, Clock3, CloudSun, Leaf, Lightbulb, Settings2, ShieldCheck } from "lucide-react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 type Child = { id: string; nickname: string; birth_year: number; birth_month: number };
 type TodayActivity = {
@@ -31,19 +30,8 @@ function childAge(child: Child) {
 export const metadata = { title: "Today" };
 
 export default async function TodayPage() {
-  const supabase = await createClient();
-  const { data: authData } = await supabase.auth.getClaims();
-  if (!authData?.claims?.sub) redirect("/auth/login");
-
-  const { data: membership } = await supabase.from("family_members").select("family_id").limit(1).maybeSingle();
-  if (!membership) redirect("/onboarding");
-
-  const [{ data: family }, { data: children }] = await Promise.all([
-    supabase.from("families").select("display_name").eq("id", membership.family_id).single(),
-    supabase.from("children").select("id,nickname,birth_year,birth_month").eq("family_id", membership.family_id).order("created_at"),
-  ]);
-  const child = children?.[0] as Child | undefined;
-  if (!child) redirect("/onboarding");
+  const { supabase, membership, family, activeChild } = await requireFamilyContext();
+  const child = activeChild as Child;
 
   const { data: preference } = await supabase.from("family_preferences").select("family_id").eq("family_id", membership.family_id).maybeSingle();
   let activity: TodayActivity | null = null;

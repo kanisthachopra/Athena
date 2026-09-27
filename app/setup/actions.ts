@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { requireFamilyContext } from "@/lib/family-context";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -14,14 +14,7 @@ export async function saveLearningProfile(
   _previousState: ProfileState,
   formData: FormData,
 ): Promise<ProfileState> {
-  const supabase = await createClient();
-  const { data: authData } = await supabase.auth.getClaims();
-  if (!authData?.claims?.sub) redirect("/auth/login");
-
-  const { data: membership } = await supabase.from("family_members").select("family_id").limit(1).maybeSingle();
-  if (!membership) redirect("/onboarding");
-  const { data: child } = await supabase.from("children").select("id").eq("family_id", membership.family_id).limit(1).maybeSingle();
-  if (!child) redirect("/onboarding");
+  const { supabase, membership, activeChild: child } = await requireFamilyContext();
 
   const weekdayMinutes = Number(formData.get("weekdayMinutes"));
   const weekendMinutes = Number(formData.get("weekendMinutes"));
