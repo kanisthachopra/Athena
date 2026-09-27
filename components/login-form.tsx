@@ -102,6 +102,11 @@ export function LoginForm({
                 Create an account
               </Link>
             </div>
+            <div className="mt-3 text-center text-sm">
+              <Link href="/auth/sign-up-success" className="text-ink/60 underline underline-offset-4">
+                Confirmation link expired?
+              </Link>
+            </div>
           </form>
         </CardContent>
       </Card>
