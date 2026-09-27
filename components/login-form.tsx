@@ -17,9 +17,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function LoginForm({
+  nextPath = "/today",
   className,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+}: React.ComponentPropsWithoutRef<"div"> & { nextPath?: string }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -38,7 +39,7 @@ export function LoginForm({
         password,
       });
       if (error) throw error;
-      router.push("/today");
+      router.push(nextPath);
       router.refresh();
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
@@ -96,7 +97,7 @@ export function LoginForm({
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
               <Link
-                href="/auth/sign-up"
+                href={`/auth/sign-up?next=${encodeURIComponent(nextPath)}`}
                 className="underline underline-offset-4"
               >
                 Create an account

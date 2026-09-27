@@ -77,7 +77,7 @@ export default async function TodayPage() {
               </div>
               <div className="flex flex-col gap-4 p-7 sm:flex-row sm:items-center sm:justify-between sm:p-9">
                 <p className="max-w-lg text-sm leading-6 text-ink/50">About two minutes. Your answers stay private to your family.</p>
-                <Link href="/setup" className="button-primary">Create our plan <ArrowRight size={17} /></Link>
+                {membership.role === "viewer" ? <p className="rounded-full bg-sage/15 px-4 py-2 text-sm font-semibold text-[#52634e]">Waiting for a caregiver to create the plan</p> : <Link href="/setup" className="button-primary">Create our plan <ArrowRight size={17} /></Link>}
               </div>
             </section>
           ) : activity ? (
@@ -101,7 +101,7 @@ export default async function TodayPage() {
               <CalendarDays className="text-[#52634e]" size={24} />
               <h2 className="mt-6 font-serif text-3xl font-semibold">This week is complete.</h2>
               <p className="mt-3 max-w-xl leading-7 text-ink/60">You&apos;ve reached the end of the current plan. Review the week or adjust the family profile whenever you&apos;re ready.</p>
-              <div className="mt-7 flex flex-wrap gap-3"><Link href="/week" className="button-primary">Review our week <ArrowRight size={17} /></Link><Link href="/setup" className="button-ghost">Adjust profile</Link></div>
+              <div className="mt-7 flex flex-wrap gap-3"><Link href="/week" className="button-primary">Review our week <ArrowRight size={17} /></Link>{membership.role !== "viewer" && <Link href="/setup" className="button-ghost">Adjust profile</Link>}</div>
             </section>
           )}
 

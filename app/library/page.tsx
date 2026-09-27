@@ -28,7 +28,7 @@ export const metadata = { title: "Activity library" };
 
 export default async function LibraryPage({ searchParams }: { searchParams: Promise<{ domain?: string; replace?: string }> }) {
   const { domain, replace } = await searchParams;
-  const { supabase, family, activeChild } = await requireFamilyContext();
+  const { supabase, family, activeChild, membership } = await requireFamilyContext();
   const child = activeChild as Child;
   const months = ageInMonths(child);
 
@@ -36,7 +36,7 @@ export default async function LibraryPage({ searchParams }: { searchParams: Prom
   if (domain && domainNames[domain]) query = query.eq("domain", domain);
   const [{ data }, { data: replacementTarget }] = await Promise.all([
     query,
-    replace ? supabase.from("activity_instances").select("id,plan_id,personalized_title,status").eq("id", replace).eq("child_id", child.id).maybeSingle() : Promise.resolve({ data: null }),
+    replace && membership.role !== "viewer" ? supabase.from("activity_instances").select("id,plan_id,personalized_title,status").eq("id", replace).eq("child_id", child.id).maybeSingle() : Promise.resolve({ data: null }),
   ]);
   const replacementMode = replacementTarget?.status === "planned" ? replacementTarget : null;
   let templates = (data ?? []) as Template[];
