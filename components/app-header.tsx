@@ -23,8 +23,9 @@ export function AppHeader({ familyName }: { familyName: string }) {
         <div className="flex items-center gap-8">
           <Link href="/today" className="flex items-center gap-3"><span className="grid size-9 place-items-center rounded-full bg-ink text-xs font-bold text-[#f7f3e9]">M</span><span className="font-serif text-xl font-semibold">MIRA</span></Link>
           <nav className="hidden items-center gap-1 sm:flex" aria-label="Main navigation">
-            <Link href="/today" className="rounded-full bg-[#ece6d8] px-4 py-2 text-sm font-semibold">Today</Link>
-            <span className="px-4 py-2 text-sm text-ink/35" title="Coming in the next milestone">Week</span>
+            <Link href="/today" className="rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#ece6d8]">Today</Link>
+            <Link href="/week" className="rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#ece6d8]">Week</Link>
+            <Link href="/setup" className="rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#ece6d8]">Profile</Link>
           </nav>
         </div>
         <div className="flex items-center gap-2 sm:gap-4">
