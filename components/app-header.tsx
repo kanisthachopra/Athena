@@ -25,6 +25,7 @@ export function AppHeader({ familyName }: { familyName: string }) {
           <nav className="hidden items-center gap-1 sm:flex" aria-label="Main navigation">
             <Link href="/today" className="rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#ece6d8]">Today</Link>
             <Link href="/week" className="rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#ece6d8]">Week</Link>
+            <Link href="/insights" className="rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#ece6d8]">Insights</Link>
             <Link href="/setup" className="rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#ece6d8]">Profile</Link>
           </nav>
         </div>
