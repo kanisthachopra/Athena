@@ -1,0 +1,89 @@
+import { AppHeader } from "@/components/app-header";
+import { createClient } from "@/lib/supabase/server";
+import { ArrowRight, Clock3, CloudSun, Leaf, Lightbulb, ShieldCheck } from "lucide-react";
+import { redirect } from "next/navigation";
+
+type Child = { id: string; nickname: string; birth_year: number; birth_month: number };
+
+function childAge(child: Child) {
+  const now = new Date();
+  let months = (now.getFullYear() - child.birth_year) * 12 + (now.getMonth() + 1 - child.birth_month);
+  months = Math.max(0, months);
+  if (months < 24) return `${months} month${months === 1 ? "" : "s"}`;
+  const years = Math.floor(months / 12);
+  const remainder = months % 12;
+  return remainder ? `${years}y ${remainder}m` : `${years} year${years === 1 ? "" : "s"}`;
+}
+
+export const metadata = { title: "Today" };
+
+export default async function TodayPage() {
+  const supabase = await createClient();
+  const { data: authData } = await supabase.auth.getClaims();
+  if (!authData?.claims?.sub) redirect("/auth/login");
+
+  const { data: membership } = await supabase.from("family_members").select("family_id").limit(1).maybeSingle();
+  if (!membership) redirect("/onboarding");
+
+  const [{ data: family }, { data: children }] = await Promise.all([
+    supabase.from("families").select("display_name").eq("id", membership.family_id).single(),
+    supabase.from("children").select("id,nickname,birth_year,birth_month").eq("family_id", membership.family_id).order("created_at"),
+  ]);
+  const child = children?.[0] as Child | undefined;
+  if (!child) redirect("/onboarding");
+
+  const greeting = new Date().getHours() < 12 ? "Good morning" : new Date().getHours() < 18 ? "Good afternoon" : "Good evening";
+  const date = new Intl.DateTimeFormat("en", { weekday: "long", month: "long", day: "numeric" }).format(new Date());
+
+  return (
+    <main className="min-h-screen bg-cream text-ink">
+      <AppHeader familyName={family?.display_name ?? "Your family"} />
+      <div className="mx-auto max-w-7xl px-5 py-10 lg:px-10 lg:py-14">
+        <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+          <div>
+            <p className="eyebrow"><CloudSun size={15} /> {date}</p>
+            <h1 className="mt-3 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">{greeting}. <span className="text-coral">Let&apos;s be curious.</span></h1>
+            <p className="mt-3 text-ink/55">A gentle invitation for {child.nickname}, with plenty of room to follow their lead.</p>
+          </div>
+          <div className="flex items-center gap-3 rounded-2xl border border-black/5 bg-paper px-4 py-3 shadow-sm">
+            <div className="grid size-10 place-items-center rounded-xl bg-[#dce4d6] font-serif font-semibold text-[#52634e]">{child.nickname.charAt(0).toUpperCase()}</div>
+            <div><p className="text-sm font-semibold">{child.nickname}</p><p className="text-xs text-ink/45">{childAge(child)} old</p></div>
+          </div>
+        </div>
+
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1.5fr_.7fr]">
+          <section className="overflow-hidden rounded-[2rem] border border-black/5 bg-paper shadow-[0_20px_60px_rgba(55,62,53,.08)]">
+            <div className="bg-[#e8dcc6] p-7 sm:p-9">
+              <div className="flex flex-wrap items-center gap-3"><span className="rounded-full bg-[#fffdf8] px-3 py-1.5 text-xs font-semibold text-[#52634e]">Today&apos;s invitation</span><span className="flex items-center gap-1.5 text-xs text-ink/50"><Clock3 size={14} /> 10–15 minutes</span></div>
+              <h2 className="mt-7 max-w-xl font-serif text-3xl font-semibold tracking-tight sm:text-4xl">Find a family of objects</h2>
+              <p className="mt-4 max-w-2xl text-lg leading-8 text-ink/65">Gather a few safe household objects and wonder aloud which ones belong together. Let {child.nickname} decide what “together” means.</p>
+            </div>
+            <div className="grid gap-8 p-7 sm:grid-cols-2 sm:p-9">
+              <div><p className="text-xs font-bold uppercase tracking-[.16em] text-ink/40">Try saying</p><p className="mt-3 font-serif text-xl italic leading-8">“I wonder which of these are a family?”</p></div>
+              <div><p className="text-xs font-bold uppercase tracking-[.16em] text-ink/40">Look for</p><p className="mt-3 leading-7 text-ink/60">Sorting by colour, size, purpose—or an inventive rule that only your child can see.</p></div>
+            </div>
+            <div className="flex flex-col gap-4 border-t border-black/5 px-7 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-9">
+              <p className="flex items-center gap-2 text-sm text-ink/50"><ShieldCheck size={17} className="text-[#52634e]" /> Use large, non-breakable objects and stay nearby.</p>
+              <button disabled className="button-primary opacity-45" title="Feedback arrives in Milestone 2">I tried this <ArrowRight size={17} /></button>
+            </div>
+          </section>
+
+          <aside className="space-y-5">
+            <div className="soft-card">
+              <div className="icon-orb icon-orb-sage"><Leaf size={20} /></div>
+              <p className="eyebrow mt-6">Why this today</p>
+              <p className="mt-3 leading-7 text-ink/60">Sorting builds early mathematical thinking while giving {child.nickname} real control over the rules.</p>
+            </div>
+            <div className="rounded-[1.75rem] bg-ink p-7 text-[#f7f3e9]">
+              <Lightbulb size={22} className="text-[#e7ac92]" />
+              <h3 className="mt-5 font-serif text-2xl font-semibold">Keep it light</h3>
+              <p className="mt-3 leading-7 text-white/60">If interest lasts two minutes, that still counts. MIRA follows attention; it doesn&apos;t demand it.</p>
+            </div>
+          </aside>
+        </div>
+
+        <div className="mt-8 flex items-center justify-center gap-2 text-xs text-ink/40"><span className="size-1.5 rounded-full bg-[#829378]" /> Saved securely for {family?.display_name ?? "your family"}</div>
+      </div>
+    </main>
+  );
+}
