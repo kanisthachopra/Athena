@@ -1,15 +1,16 @@
 import { AppHeader } from "@/components/app-header";
 import { AddChildForm } from "@/components/add-child-form";
 import { FamilyInviteForm } from "@/components/family-invite-form";
+import { FamilyNameForm } from "@/components/family-name-form";
 import { requireFamilyContext } from "@/lib/family-context";
-import { Baby, Check, Clock3, Mail, Settings2, ShieldCheck, Trash2, UserRound, Users } from "lucide-react";
+import { Archive, Baby, Check, Clock3, Mail, Pencil, Settings2, ShieldCheck, Trash2, UserRound, Users } from "lucide-react";
 import Link from "next/link";
-import { removeFamilyMember, revokeFamilyInvitation, switchChild } from "./actions";
+import { removeFamilyMember, restoreChildProfile, revokeFamilyInvitation, switchChild } from "./actions";
 
 export const metadata = { title: "Family" };
 
 export default async function FamilyPage() {
-  const { supabase, userId, family, children, activeChild, membership } = await requireFamilyContext();
+  const { supabase, userId, family, children, archivedChildren, activeChild, membership } = await requireFamilyContext();
   const { data: memberData } = await supabase.rpc("list_family_members", { p_family_id: membership.family_id });
   const members = (memberData ?? []) as { user_id: string; email: string; role: "owner" | "caregiver" | "viewer"; joined_at: string }[];
   const { data: invitationData } = membership.role === "owner"
@@ -26,11 +27,15 @@ export default async function FamilyPage() {
         {children.map((child) => {
           const active = child.id === activeChild.id;
           const birthDate = new Intl.DateTimeFormat("en", { month: "long", year: "numeric" }).format(new Date(child.birth_year, child.birth_month - 1, 1));
-          return <article key={child.id} className={`rounded-[1.75rem] border p-6 ${active ? "border-[#829378] bg-[#eef3ea]" : "border-black/5 bg-paper"}`}><div className="flex items-start justify-between gap-4"><div className="grid size-12 place-items-center rounded-2xl bg-[#dce4d6] text-[#52634e]"><Baby size={21} /></div>{active && <span className="flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#52634e]"><Check size={13} /> Active</span>}</div><h2 className="mt-5 font-serif text-2xl font-semibold">{child.nickname}</h2><p className="mt-1 text-sm text-ink/45">Born {birthDate}</p>{!active && <form action={switchChild} className="mt-5"><input type="hidden" name="childId" value={child.id} /><input type="hidden" name="returnTo" value="/today" /><button className="button-primary" type="submit">Switch to {child.nickname}</button></form>}</article>;
+          return <article key={child.id} className={`rounded-[1.75rem] border p-6 ${active ? "border-[#829378] bg-[#eef3ea]" : "border-black/5 bg-paper"}`}><div className="flex items-start justify-between gap-4"><div className="grid size-12 place-items-center rounded-2xl bg-[#dce4d6] text-[#52634e]"><Baby size={21} /></div>{active && <span className="flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#52634e]"><Check size={13} /> Active</span>}</div><h2 className="mt-5 font-serif text-2xl font-semibold">{child.nickname}</h2><p className="mt-1 text-sm text-ink/45">Born {birthDate}</p><div className="mt-5 flex flex-wrap gap-2">{!active && <form action={switchChild}><input type="hidden" name="childId" value={child.id} /><input type="hidden" name="returnTo" value="/today" /><button className="button-primary" type="submit">Switch to {child.nickname}</button></form>}<Link href={`/family/child/${child.id}`} className="button-ghost gap-2"><Pencil size={15} /> Manage profile</Link></div></article>;
         })}
       </section>
 
       {membership.role !== "viewer" && <section className="profile-section mt-8"><p className="eyebrow">Add another child</p><h2 className="mt-3 font-serif text-3xl font-semibold">Create a separate learning journey</h2><p className="mt-3 max-w-2xl text-sm leading-6 text-ink/55">Each child gets their own aspirations, plans, feedback, and insights. A nickname is enough.</p><AddChildForm /></section>}
+
+      {membership.role === "owner" && <section className="profile-section mt-8"><p className="eyebrow"><Settings2 size={15} /> Family details</p><h2 className="mt-3 font-serif text-3xl font-semibold">How MIRA names your space</h2><p className="mt-2 text-sm leading-6 text-ink/55">This name appears in the navigation and is shared with family members.</p><FamilyNameForm initialName={family?.display_name ?? "Your family"} /></section>}
+
+      {membership.role === "owner" && archivedChildren.length > 0 && <section className="profile-section mt-8"><p className="eyebrow"><Archive size={15} /> Archived profiles</p><h2 className="mt-3 font-serif text-3xl font-semibold">Learning journeys kept safely</h2><p className="mt-2 text-sm leading-6 text-ink/55">Archived profiles stay out of daily planning without losing their history.</p><div className="mt-6 space-y-3">{archivedChildren.map((child) => <div key={child.id} className="flex flex-col gap-3 rounded-2xl border border-black/5 bg-white/70 p-4 sm:flex-row sm:items-center sm:justify-between"><div><p className="font-semibold">{child.nickname}</p><p className="mt-1 text-xs text-ink/45">Archived {new Intl.DateTimeFormat("en", { month: "short", day: "numeric", year: "numeric" }).format(new Date(child.archived_at!))}</p></div><div className="flex flex-wrap gap-2"><Link href={`/family/child/${child.id}`} className="button-ghost">View record</Link><form action={restoreChildProfile}><input type="hidden" name="childId" value={child.id} /><button className="button-primary" type="submit">Restore</button></form></div></div>)}</div></section>}
 
       <section className="profile-section mt-8">
         <p className="eyebrow"><ShieldCheck size={15} /> Family access</p>

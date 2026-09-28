@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 
 export type AddChildState = { error: string | null };
 export type InviteState = { error: string | null; invitePath: string | null };
+export type ProfileState = { error: string | null; success: string | null };
 
 export async function addChild(_previous: AddChildState, formData: FormData): Promise<AddChildState> {
   const nickname = String(formData.get("nickname") ?? "").trim();
@@ -85,4 +86,63 @@ export async function removeFamilyMember(formData: FormData) {
   });
   if (error) throw new Error(error.message);
   revalidatePath("/family");
+}
+
+export async function updateFamilyName(
+  _previous: ProfileState,
+  formData: FormData,
+): Promise<ProfileState> {
+  const displayName = String(formData.get("displayName") ?? "").trim();
+  if (!displayName || displayName.length > 80) return { error: "Enter a family name between 1 and 80 characters.", success: null };
+  const { supabase, membership } = await requireFamilyContext();
+  if (membership.role !== "owner") return { error: "Only the family owner can rename the family.", success: null };
+  const { error } = await supabase.rpc("update_family_name", { p_family_id: membership.family_id, p_display_name: displayName });
+  if (error) return { error: error.message, success: null };
+  revalidatePath("/", "layout");
+  return { error: null, success: "Family name updated." };
+}
+
+export async function updateChildProfile(
+  _previous: ProfileState,
+  formData: FormData,
+): Promise<ProfileState> {
+  const childId = String(formData.get("childId") ?? "");
+  const nickname = String(formData.get("nickname") ?? "").trim();
+  const birthYear = Number(formData.get("birthYear"));
+  const birthMonth = Number(formData.get("birthMonth"));
+  const currentYear = new Date().getFullYear();
+  if (!nickname || nickname.length > 60) return { error: "Enter a first name or nickname.", success: null };
+  if (!Number.isInteger(birthMonth) || birthMonth < 1 || birthMonth > 12) return { error: "Choose a valid birth month.", success: null };
+  if (!Number.isInteger(birthYear) || birthYear < currentYear - 18 || birthYear > currentYear) return { error: "Choose a valid birth year.", success: null };
+  const { supabase, membership } = await requireFamilyContext();
+  if (membership.role === "viewer") return { error: "Caregiver access is required.", success: null };
+  const { error } = await supabase.rpc("update_child_profile", {
+    p_child_id: childId,
+    p_nickname: nickname,
+    p_birth_year: birthYear,
+    p_birth_month: birthMonth,
+  });
+  if (error) return { error: error.message, success: null };
+  revalidatePath("/", "layout");
+  return { error: null, success: "Child profile updated." };
+}
+
+export async function archiveChildProfile(formData: FormData) {
+  const childId = String(formData.get("childId") ?? "");
+  const { supabase, membership } = await requireFamilyContext();
+  if (membership.role !== "owner") throw new Error("Only the family owner can archive a child profile.");
+  const { error } = await supabase.rpc("archive_child_profile", { p_child_id: childId });
+  if (error) throw new Error(error.message);
+  revalidatePath("/", "layout");
+  redirect("/family");
+}
+
+export async function restoreChildProfile(formData: FormData) {
+  const childId = String(formData.get("childId") ?? "");
+  const { supabase, membership } = await requireFamilyContext();
+  if (membership.role !== "owner") throw new Error("Only the family owner can restore a child profile.");
+  const { error } = await supabase.rpc("restore_child_profile", { p_child_id: childId });
+  if (error) throw new Error(error.message);
+  revalidatePath("/", "layout");
+  redirect(`/family/child/${childId}`);
 }
