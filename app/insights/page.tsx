@@ -2,7 +2,8 @@ import { AppHeader } from "@/components/app-header";
 import { DeleteLearningMomentForm } from "@/components/delete-learning-moment-form";
 import { LearningMomentForm } from "@/components/learning-moment-form";
 import { requireFamilyContext } from "@/lib/family-context";
-import { BarChart3, BookHeart, Heart, History, Repeat2, Sparkles } from "lucide-react";
+import { CompassEvidence, interpretCompassSignal, isLearningDomain, learningDomains } from "@/lib/learning-compass";
+import { ArrowRight, BookHeart, Compass, Heart, History, Info, Repeat2, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 type Observation = {
@@ -50,12 +51,12 @@ function localDateString(date: Date) {
   return `${year}-${month}-${day}`;
 }
 
-export const metadata = { title: "Insights" };
+export const metadata = { title: "Learning journey" };
 
 export default async function InsightsPage() {
   const { supabase, membership, family, activeChild: child } = await requireFamilyContext();
 
-  const [observationResult, momentResult] = await Promise.all([
+  const [observationResult, momentResult, compassResult] = await Promise.all([
     supabase
       .from("observations")
       .select("id,engagement,challenge_level,repeated,parent_note,created_at,activity_instances(personalized_title,activity_templates(domain))")
@@ -67,21 +68,22 @@ export default async function InsightsPage() {
       .eq("child_id", child.id)
       .order("occurred_on", { ascending: false })
       .order("created_at", { ascending: false }),
+    supabase.rpc("get_learning_compass", { p_child_id: child.id }),
   ]);
   if (observationResult.error) throw new Error(observationResult.error.message);
   if (momentResult.error) throw new Error(momentResult.error.message);
+  if (compassResult.error) throw new Error(compassResult.error.message);
 
   const observations = (observationResult.data ?? []) as unknown as Observation[];
   const moments = (momentResult.data ?? []) as LearningMoment[];
   const highEngagement = observations.filter((item) => item.engagement === "high").length;
   const repeated = observations.filter((item) => item.repeated).length;
-  const domainScores = observations.reduce<Record<string, number>>((scores, item) => {
-    const domain = item.activity_instances?.activity_templates?.domain;
-    if (domain) scores[domain] = (scores[domain] ?? 0) + (item.engagement === "high" ? 3 : item.engagement === "medium" ? 1 : -1) + (item.repeated ? 2 : 0);
-    return scores;
-  }, {});
-  const strongestSignal = Object.entries(domainScores).sort((a, b) => b[1] - a[1])[0];
-  const strongestDomain = strongestSignal && strongestSignal[1] > 0 ? strongestSignal[0] : undefined;
+  const compass = ((compassResult.data ?? []) as CompassEvidence[])
+    .filter((item) => isLearningDomain(item.domain))
+    .map((item) => ({ ...item, meta: learningDomains[item.domain as keyof typeof learningDomains], interpretation: interpretCompassSignal(item) }));
+  const evidencedDomains = compass.filter((item) => item.interpretation.evidenceCount > 0);
+  const currentPull = [...evidencedDomains].sort((a, b) => b.interpretation.score - a.interpretation.score || b.interpretation.evidenceCount - a.interpretation.evidenceCount)[0];
+  const totalSignals = compass.reduce((total, item) => total + item.interpretation.evidenceCount, 0);
 
   const journal = [
     ...observations.map((item) => ({ kind: "activity" as const, date: item.created_at, item })),
@@ -92,10 +94,37 @@ export default async function InsightsPage() {
   return (
     <main className="min-h-screen bg-cream pb-24 text-ink sm:pb-0">
       <AppHeader familyName={family?.display_name ?? "Your family"} />
-      <div className="mx-auto max-w-6xl px-5 py-10 lg:px-10 lg:py-14">
-        <p className="eyebrow"><BarChart3 size={15} /> Learning, noticed</p>
-        <h1 className="mt-3 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">Small signals from {child.nickname}&apos;s days.</h1>
-        <p className="mt-4 max-w-2xl leading-7 text-ink/55">These are caregiver observations, not grades or developmental assessments. MIRA uses them gently to shape variety and relevance.</p>
+      <div className="mx-auto max-w-7xl px-5 py-10 lg:px-10 lg:py-14">
+        <p className="eyebrow"><Compass size={15} /> Learning compass</p>
+        <div className="mt-3 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div><h1 className="font-serif text-4xl font-semibold tracking-tight sm:text-5xl">Follow the threads in {child.nickname}&apos;s days.</h1><p className="mt-4 max-w-3xl leading-7 text-ink/55">MIRA combines planned feedback with the learning you notice in ordinary life. It looks for current interests while deliberately protecting breadth and variety.</p></div>
+          <Link href="/week" className="button-primary shrink-0">See this week <ArrowRight size={17} /></Link>
+        </div>
+
+        <section className="mt-10 overflow-hidden rounded-[2rem] border border-black/5 bg-paper shadow-[0_20px_60px_rgba(55,62,53,.06)]">
+          <div className="grid gap-6 bg-[#2d342e] p-7 text-[#f7f3e9] sm:p-9 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div><p className="text-xs font-bold uppercase tracking-[.18em] text-[#becbb3]">A 90-day view</p><h2 className="mt-3 font-serif text-3xl font-semibold">A map of attention—not a report card.</h2><p className="mt-3 max-w-2xl leading-7 text-white/60">Quiet areas are not gaps, and strong signals are not scores. The compass helps MIRA choose what to revisit and where to keep the week open.</p></div>
+            <div className="grid grid-cols-3 gap-2 text-center">
+              <div className="rounded-2xl bg-white/10 px-4 py-3"><p className="text-2xl font-semibold">{totalSignals}</p><p className="mt-1 text-[11px] text-white/55">signals</p></div>
+              <div className="rounded-2xl bg-white/10 px-4 py-3"><p className="text-2xl font-semibold">{evidencedDomains.length}</p><p className="mt-1 text-[11px] text-white/55">areas noticed</p></div>
+              <div className="rounded-2xl bg-white/10 px-4 py-3"><p className="max-w-24 truncate font-serif text-lg font-semibold">{currentPull?.meta.shortName ?? "Listening"}</p><p className="mt-1 text-[11px] text-white/55">current pull</p></div>
+            </div>
+          </div>
+          <div className="grid gap-px bg-black/5 sm:grid-cols-2 lg:grid-cols-4">
+            {compass.map((item) => (
+              <article key={item.domain} className="bg-paper p-6">
+                <div className="flex items-start justify-between gap-3"><span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${item.meta.accent}`}>{item.interpretation.label}</span><span className="text-xs text-ink/35">{item.interpretation.evidenceCount} {item.interpretation.evidenceCount === 1 ? "signal" : "signals"}</span></div>
+                <h3 className="mt-5 font-serif text-xl font-semibold">{item.meta.name}</h3>
+                <p className="mt-2 text-sm leading-6 text-ink/50">{item.meta.description}</p>
+                <p className="mt-5 border-t border-black/5 pt-4 text-sm leading-6 text-ink/65"><span className="font-semibold text-ink">A gentle next move:</span> {item.interpretation.nextMove}</p>
+              </article>
+            ))}
+          </div>
+          <details className="group border-t border-black/5 px-7 py-5 sm:px-9">
+            <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-semibold"><Info size={16} className="text-[#52634e]" /> How MIRA reads these signals</summary>
+            <div className="mt-4 grid gap-4 text-sm leading-6 text-ink/55 sm:grid-cols-3"><p><strong className="text-ink">Interest:</strong> high engagement and child-led repetition make a thread more likely to return.</p><p><strong className="text-ink">Fit:</strong> challenge feedback changes whether the next invitation should stay familiar or add a small variation.</p><p><strong className="text-ink">Breadth:</strong> the planner covers different learning areas before repeating a popular one.</p></div>
+          </details>
+        </section>
 
         <section className="mt-10 rounded-[2rem] border border-black/5 bg-paper p-7 shadow-[0_20px_60px_rgba(55,62,53,.06)] sm:p-9">
           <p className="eyebrow"><BookHeart size={15} /> Everyday moments</p>
@@ -112,7 +141,7 @@ export default async function InsightsPage() {
           <div className="soft-card"><History size={20} className="text-[#52634e]" /><p className="mt-5 text-3xl font-semibold">{journal.length}</p><p className="mt-1 text-sm text-ink/50">moments captured</p></div>
           <div className="soft-card"><Heart size={20} className="text-[#a9503b]" /><p className="mt-5 text-3xl font-semibold">{highEngagement}</p><p className="mt-1 text-sm text-ink/50">high-interest activities</p></div>
           <div className="soft-card"><Repeat2 size={20} className="text-[#4e696c]" /><p className="mt-5 text-3xl font-semibold">{repeated}</p><p className="mt-1 text-sm text-ink/50">chose to repeat</p></div>
-          <div className="soft-card"><Sparkles size={20} className="text-[#80613f]" /><p className="mt-5 font-serif text-xl font-semibold">{strongestDomain ? domainNames[strongestDomain] ?? strongestDomain : "Still emerging"}</p><p className="mt-1 text-sm text-ink/50">strongest activity signal</p></div>
+          <div className="soft-card"><Sparkles size={20} className="text-[#80613f]" /><p className="mt-5 font-serif text-xl font-semibold">{currentPull?.meta.shortName ?? "Still listening"}</p><p className="mt-1 text-sm text-ink/50">current area of interest</p></div>
         </section>
 
         <section className="mt-8 rounded-[2rem] border border-black/5 bg-paper p-7 shadow-[0_20px_60px_rgba(55,62,53,.06)] sm:p-9">
