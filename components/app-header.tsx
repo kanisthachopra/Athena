@@ -1,7 +1,7 @@
 "use client";
 
 import { createClient } from "@/lib/supabase/client";
-import { BookOpen, CalendarDays, Compass, House, LogOut, Users } from "lucide-react";
+import { BarChart3, BookOpen, CalendarDays, House, LogOut, Users } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -27,7 +27,7 @@ export function AppHeader({ familyName }: { familyName: string }) {
               <Link href="/today" className="rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#ece6d8]">Today</Link>
               <Link href="/week" className="rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#ece6d8]">Week</Link>
               <Link href="/library" className="rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#ece6d8]">Library</Link>
-              <Link href="/insights" className="rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#ece6d8]">Journey</Link>
+              <Link href="/insights" className="rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#ece6d8]">Insights</Link>
               <Link href="/family" className="rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#ece6d8]">Family</Link>
             </nav>
           </div>
@@ -41,7 +41,7 @@ export function AppHeader({ familyName }: { familyName: string }) {
         <Link href="/today" className="flex flex-col items-center gap-1 rounded-xl px-1 py-2 text-[10px] font-semibold"><House size={18} />Today</Link>
         <Link href="/week" className="flex flex-col items-center gap-1 rounded-xl px-1 py-2 text-[10px] font-semibold"><CalendarDays size={18} />Week</Link>
         <Link href="/library" className="flex flex-col items-center gap-1 rounded-xl px-1 py-2 text-[10px] font-semibold"><BookOpen size={18} />Library</Link>
-        <Link href="/insights" className="flex flex-col items-center gap-1 rounded-xl px-1 py-2 text-[10px] font-semibold"><Compass size={18} />Journey</Link>
+        <Link href="/insights" className="flex flex-col items-center gap-1 rounded-xl px-1 py-2 text-[10px] font-semibold"><BarChart3 size={18} />Insights</Link>
         <Link href="/family" className="flex flex-col items-center gap-1 rounded-xl px-1 py-2 text-[10px] font-semibold"><Users size={18} />Family</Link>
       </nav>
     </>

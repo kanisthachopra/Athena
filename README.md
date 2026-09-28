@@ -2,7 +2,7 @@
 
 MIRA is a calm, parent-first learning companion for families with young children. It turns everyday moments into age-aware learning invitations and will eventually adapt weekly plans from parent observations, family priorities, languages, and a reviewed activity library.
 
-This repository currently implements **Milestones 1–13**: secure family onboarding, a reviewed weekly learning loop, transparent adaptation, flexible planning and scheduling, persistent multi-child support, role-aware shared caregiving, family-controlled profile data, an everyday learning journal, fully editable learning profiles, child-specific saved activities, editable observations, and an explainable learning compass.
+This repository currently implements **Milestones 1–12**: secure family onboarding, a reviewed weekly learning loop, transparent adaptation, flexible planning and scheduling, persistent multi-child support, role-aware shared caregiving, family-controlled profile data, an everyday learning journal, fully editable learning profiles, child-specific saved activities, and editable observations.
 
 ## What is working
 
@@ -35,9 +35,6 @@ This repository currently implements **Milestones 1–13**: secure family onboar
 - Saved activities included in authenticated family exports
 - Completed observations can be reopened and corrected without creating duplicates
 - Viewers can read saved feedback while caregivers retain edit control
-- A 90-day learning compass combining planned feedback and spontaneous family moments
-- Balanced deterministic planning that protects breadth before reinforcing current interests
-- Transparent next-step guidance without grades, milestones, or developmental claims
 - PostgreSQL Row Level Security across family, planning, and observation data
 - Server-side auth and data access through `@supabase/ssr`
 
@@ -82,5 +79,3 @@ npm run build
 ## Product direction
 
 The deterministic learning loop and shared household model now work end to end. A future AI layer can help phrase reflections or suggest reviewed variations, but it must remain bounded by family preferences, the curated activity library, and explicit caregiver control.
-
-The concrete transition from deterministic planning to the bounded AI studio is documented in [the product roadmap](docs/PRODUCT_ROADMAP.md).
