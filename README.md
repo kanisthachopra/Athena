@@ -1,8 +1,8 @@
 # MIRA
 
-MIRA is a calm, parent-first learning companion for families with young children. It turns everyday moments into age-aware learning invitations and will eventually adapt weekly plans from parent observations, family priorities, languages, and a reviewed activity library.
+MIRA is a calm, parent-first learning companion for families with young children. It protects relationships, autonomy, play, and family capacity while helping parents notice and shape rich learning across ordinary life.
 
-This repository currently implements **Milestones 1–12**: secure family onboarding, a reviewed weekly learning loop, transparent adaptation, flexible planning and scheduling, persistent multi-child support, role-aware shared caregiving, family-controlled profile data, an everyday learning journal, fully editable learning profiles, child-specific saved activities, and editable observations.
+This repository currently implements **Milestones 1–13**: secure family onboarding, a low-pressure weekly opportunity portfolio, transparent deterministic adaptation, flexible planning, persistent multi-child support, role-aware shared caregiving, family-controlled profile data, an everyday learning journal, editable observations, and the source-grounded capability, enrichment, safety, provenance, and Parent Mode foundations.
 
 ## What is working
 
@@ -11,11 +11,11 @@ This repository currently implements **Milestones 1–12**: secure family onboar
 - Atomic family + first-child onboarding
 - A persisted, personalized Today view
 - A family learning profile with rhythm, languages, and aspirations
-- Seven-day plans drawn from a reviewed, age-aware activity library
-- Activity guidance, safety notes, and quick caregiver feedback
+- Weekly portfolios that combine intentional invitations, embedded moments, communication, and protected open time
+- Parent Mode guidance with preparation, adult role, support ladder, autonomy, adaptations, stop signals, and safety
 - A learning-insights journal that treats observations as signals rather than scores
 - Deterministic next-week adaptation with visible selection reasons
-- An age-filtered reviewed activity library
+- A secondary idea shelf filtered by age, family time ceiling, and screen approach
 - Caregiver-controlled activity swaps and penalty-free skipping
 - Mobile navigation for the complete learning loop
 - A Family workspace with secure additional-child creation
@@ -35,6 +35,10 @@ This repository currently implements **Milestones 1–12**: secure family onboar
 - Saved activities included in authenticated family exports
 - Completed observations can be reopened and corrected without creating duplicates
 - Viewers can read saved feedback while caregivers retain edit control
+- Nine core capabilities kept separate from fourteen optional enrichment tracks
+- Versioned activity content, hazard taxonomy, and an evidence-claim registry that stays empty until sources are reviewed
+- A Family Education Constitution schema that puts protected conditions above aspirations
+- Auditable portfolio types, parent-effort estimates, recent-exposure balancing, and visible selection reasons
 - PostgreSQL Row Level Security across family, planning, and observation data
 - Server-side auth and data access through `@supabase/ssr`
 
@@ -78,6 +82,6 @@ npm run build
 
 ## Product direction
 
-The deterministic learning loop and shared household model now work end to end. A future AI layer can help phrase reflections or suggest reviewed variations, but it must remain bounded by family preferences, the curated activity library, and explicit caregiver control.
+The deterministic learning loop and shared household model now work end to end. The next deterministic work is to make the Family Education Constitution and household constraints editable, audit seed coverage, and strengthen planner tests. Only then should AI help with linguistic extraction, reflection, or bounded selection; it must remain constrained by deterministic eligibility and explicit caregiver control.
 
 Development is governed by the source-grounded [MIRA product specification](docs/MIRA_PRODUCT_SPEC.md). The [current-state audit](docs/CURRENT_STATE_AUDIT.md) identifies prototype drift, and the [development roadmap](docs/DEVELOPMENT_ROADMAP.md) defines the corrected path from deterministic foundations to bounded AI.

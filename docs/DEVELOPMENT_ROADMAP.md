@@ -6,6 +6,8 @@ This roadmap is subordinate to `MIRA_PRODUCT_SPEC.md` and should be updated when
 
 Goal: make the data model and primary experience capable of representing the actual product before any generative feature ships.
 
+Progress: the canonical taxonomy, rich activity primitive, hazard and claim registries, constitution schema, opportunity portfolio, Parent Mode, eligibility-aware idea shelf, and redesigned Today/Week/navigation are implemented in migration 13. The remaining deterministic pass is to expose constitution and household constraints in the profile, add planner evaluation fixtures, and complete the seed coverage audit before starting the AI layer.
+
 Deliverables:
 
 - canonical nine-capability and enrichment-track schema;
@@ -74,4 +76,3 @@ Deliverables:
 - build the permanent planner and safety evaluation suite from real failure cases.
 
 Do not prioritize marketplaces, child accounts, gamification, performance scores, native apps, autonomous agent networks, fine-tuning, or thousands of generated activities before the central parent-planning loop is validated.
-
