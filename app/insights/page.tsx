@@ -1,6 +1,8 @@
 import { AppHeader } from "@/components/app-header";
+import { DeleteLearningMomentForm } from "@/components/delete-learning-moment-form";
+import { LearningMomentForm } from "@/components/learning-moment-form";
 import { requireFamilyContext } from "@/lib/family-context";
-import { BarChart3, Heart, History, Repeat2, Sparkles } from "lucide-react";
+import { BarChart3, BookHeart, Heart, History, Repeat2, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 type Observation = {
@@ -16,20 +18,61 @@ type Observation = {
   } | null;
 };
 
-const domainNames: Record<string, string> = { language: "Language", movement: "Movement", sensory: "Sensory", maths: "Early maths", creative: "Creative", life_skills: "Life skills", nature: "Nature" };
+type LearningMoment = {
+  id: string;
+  occurred_on: string;
+  domain: string;
+  title: string;
+  note: string;
+  created_at: string;
+};
+
+const domainNames: Record<string, string> = {
+  everyday: "Everyday discovery",
+  language: "Language",
+  movement: "Movement",
+  sensory: "Sensory",
+  maths: "Early maths",
+  creative: "Creative",
+  life_skills: "Life skills",
+  nature: "Nature",
+};
+
+function readableDate(value: string) {
+  const date = value.length === 10 ? new Date(`${value}T12:00:00`) : new Date(value);
+  return new Intl.DateTimeFormat("en", { month: "short", day: "numeric" }).format(date);
+}
+
+function localDateString(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
 
 export const metadata = { title: "Insights" };
 
 export default async function InsightsPage() {
-  const { supabase, family, activeChild: child } = await requireFamilyContext();
+  const { supabase, membership, family, activeChild: child } = await requireFamilyContext();
 
-  const { data } = await supabase
-    .from("observations")
-    .select("id,engagement,challenge_level,repeated,parent_note,created_at,activity_instances(personalized_title,activity_templates(domain))")
-    .eq("child_id", child.id)
-    .order("created_at", { ascending: false });
-  const observations = (data ?? []) as unknown as Observation[];
+  const [observationResult, momentResult] = await Promise.all([
+    supabase
+      .from("observations")
+      .select("id,engagement,challenge_level,repeated,parent_note,created_at,activity_instances(personalized_title,activity_templates(domain))")
+      .eq("child_id", child.id)
+      .order("created_at", { ascending: false }),
+    supabase
+      .from("learning_moments")
+      .select("id,occurred_on,domain,title,note,created_at")
+      .eq("child_id", child.id)
+      .order("occurred_on", { ascending: false })
+      .order("created_at", { ascending: false }),
+  ]);
+  if (observationResult.error) throw new Error(observationResult.error.message);
+  if (momentResult.error) throw new Error(momentResult.error.message);
 
+  const observations = (observationResult.data ?? []) as unknown as Observation[];
+  const moments = (momentResult.data ?? []) as LearningMoment[];
   const highEngagement = observations.filter((item) => item.engagement === "high").length;
   const repeated = observations.filter((item) => item.repeated).length;
   const domainScores = observations.reduce<Record<string, number>>((scores, item) => {
@@ -40,6 +83,12 @@ export default async function InsightsPage() {
   const strongestSignal = Object.entries(domainScores).sort((a, b) => b[1] - a[1])[0];
   const strongestDomain = strongestSignal && strongestSignal[1] > 0 ? strongestSignal[0] : undefined;
 
+  const journal = [
+    ...observations.map((item) => ({ kind: "activity" as const, date: item.created_at, item })),
+    ...moments.map((item) => ({ kind: "moment" as const, date: `${item.occurred_on}T12:00:00`, item })),
+  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const today = localDateString(new Date());
+
   return (
     <main className="min-h-screen bg-cream pb-24 text-ink sm:pb-0">
       <AppHeader familyName={family?.display_name ?? "Your family"} />
@@ -48,30 +97,42 @@ export default async function InsightsPage() {
         <h1 className="mt-3 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">Small signals from {child.nickname}&apos;s days.</h1>
         <p className="mt-4 max-w-2xl leading-7 text-ink/55">These are caregiver observations, not grades or developmental assessments. MIRA uses them gently to shape variety and relevance.</p>
 
-        {observations.length === 0 ? (
-          <section className="mt-10 rounded-[2rem] border border-black/5 bg-paper p-8 shadow-[0_20px_60px_rgba(55,62,53,.06)] sm:p-10">
-            <Sparkles size={24} className="text-[#a9503b]" /><h2 className="mt-6 font-serif text-3xl font-semibold">The story starts with one observation.</h2><p className="mt-3 max-w-xl leading-7 text-ink/60">After trying an activity, share what held attention and how the challenge felt. Patterns will appear here without turning childhood into a scorecard.</p><Link href="/today" className="button-primary mt-7">See today&apos;s invitation</Link>
-          </section>
-        ) : (
-          <>
-            <section className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="soft-card"><History size={20} className="text-[#52634e]" /><p className="mt-5 text-3xl font-semibold">{observations.length}</p><p className="mt-1 text-sm text-ink/50">activities noticed</p></div>
-              <div className="soft-card"><Heart size={20} className="text-[#a9503b]" /><p className="mt-5 text-3xl font-semibold">{highEngagement}</p><p className="mt-1 text-sm text-ink/50">high-interest moments</p></div>
-              <div className="soft-card"><Repeat2 size={20} className="text-[#4e696c]" /><p className="mt-5 text-3xl font-semibold">{repeated}</p><p className="mt-1 text-sm text-ink/50">chose to repeat</p></div>
-              <div className="soft-card"><Sparkles size={20} className="text-[#80613f]" /><p className="mt-5 font-serif text-xl font-semibold">{strongestDomain ? domainNames[strongestDomain] ?? strongestDomain : "Still emerging"}</p><p className="mt-1 text-sm text-ink/50">strongest current signal</p></div>
-            </section>
+        <section className="mt-10 rounded-[2rem] border border-black/5 bg-paper p-7 shadow-[0_20px_60px_rgba(55,62,53,.06)] sm:p-9">
+          <p className="eyebrow"><BookHeart size={15} /> Everyday moments</p>
+          <h2 className="mt-3 font-serif text-3xl font-semibold">Notice what happened naturally.</h2>
+          <p className="mt-3 max-w-2xl leading-7 text-ink/60">Learning rarely waits for the plan. Save a question, discovery, new skill, or small fascination while it is still fresh.</p>
+          {membership.role === "viewer" ? (
+            <p className="mt-6 rounded-xl bg-sage/15 p-4 text-sm leading-6 text-[#52634e]">Viewer access keeps the journal read-only. An owner or caregiver can add moments.</p>
+          ) : (
+            <LearningMomentForm childName={child.nickname} today={today} />
+          )}
+        </section>
 
-            <section className="mt-8 rounded-[2rem] border border-black/5 bg-paper p-7 shadow-[0_20px_60px_rgba(55,62,53,.06)] sm:p-9">
-              <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p className="eyebrow">Observation journal</p><h2 className="mt-3 font-serif text-3xl font-semibold">What you have noticed</h2></div><Link href="/week" className="button-ghost">View the plan</Link></div>
-              <div className="mt-7 divide-y divide-black/5">
-                {observations.map((item) => {
-                  const domain = item.activity_instances?.activity_templates?.domain;
-                  return <article key={item.id} className="grid gap-3 py-5 sm:grid-cols-[1fr_auto] sm:items-start"><div><div className="flex flex-wrap items-center gap-2"><span className="rounded-full bg-[#e8efe3] px-2.5 py-1 text-xs font-semibold text-[#52634e]">{domain ? domainNames[domain] ?? domain : "Activity"}</span><span className="text-xs text-ink/40">{new Intl.DateTimeFormat("en", { month: "short", day: "numeric" }).format(new Date(item.created_at))}</span></div><h3 className="mt-3 font-serif text-xl font-semibold">{item.activity_instances?.personalized_title}</h3>{item.parent_note && <p className="mt-2 text-sm leading-6 text-ink/60">“{item.parent_note}”</p>}</div><div className="text-sm text-ink/50 sm:text-right"><p className="capitalize">{item.engagement} engagement</p><p className="mt-1">{item.challenge_level === "just_right" ? "Challenge felt just right" : item.challenge_level === "easy" ? "Challenge felt easy" : "A stretching challenge"}</p>{item.repeated && <p className="mt-1 font-semibold text-[#52634e]">Repeated by choice</p>}</div></article>;
-                })}
-              </div>
-            </section>
-          </>
-        )}
+        <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="soft-card"><History size={20} className="text-[#52634e]" /><p className="mt-5 text-3xl font-semibold">{journal.length}</p><p className="mt-1 text-sm text-ink/50">moments captured</p></div>
+          <div className="soft-card"><Heart size={20} className="text-[#a9503b]" /><p className="mt-5 text-3xl font-semibold">{highEngagement}</p><p className="mt-1 text-sm text-ink/50">high-interest activities</p></div>
+          <div className="soft-card"><Repeat2 size={20} className="text-[#4e696c]" /><p className="mt-5 text-3xl font-semibold">{repeated}</p><p className="mt-1 text-sm text-ink/50">chose to repeat</p></div>
+          <div className="soft-card"><Sparkles size={20} className="text-[#80613f]" /><p className="mt-5 font-serif text-xl font-semibold">{strongestDomain ? domainNames[strongestDomain] ?? strongestDomain : "Still emerging"}</p><p className="mt-1 text-sm text-ink/50">strongest activity signal</p></div>
+        </section>
+
+        <section className="mt-8 rounded-[2rem] border border-black/5 bg-paper p-7 shadow-[0_20px_60px_rgba(55,62,53,.06)] sm:p-9">
+          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p className="eyebrow">Observation journal</p><h2 className="mt-3 font-serif text-3xl font-semibold">What you have noticed</h2></div><Link href="/week" className="button-ghost">View the plan</Link></div>
+          {journal.length === 0 ? (
+            <div className="mt-7 rounded-2xl bg-[#f3eee3] p-6"><Sparkles size={22} className="text-[#a9503b]" /><h3 className="mt-4 font-serif text-2xl font-semibold">The story starts with one observation.</h3><p className="mt-2 max-w-xl text-sm leading-6 text-ink/60">Add an everyday moment above, or share what happened after trying a planned activity.</p></div>
+          ) : (
+            <div className="mt-7 divide-y divide-black/5">
+              {journal.map((entry) => {
+                if (entry.kind === "moment") {
+                  const item = entry.item;
+                  return <article key={`moment-${item.id}`} className="grid gap-3 py-5 sm:grid-cols-[1fr_auto] sm:items-start"><div><div className="flex flex-wrap items-center gap-2"><span className="rounded-full bg-[#f3eee3] px-2.5 py-1 text-xs font-semibold text-[#80613f]">{domainNames[item.domain] ?? item.domain}</span><span className="text-xs text-ink/40">{readableDate(item.occurred_on)}</span></div><h3 className="mt-3 font-serif text-xl font-semibold">{item.title}</h3><p className="mt-2 text-sm leading-6 text-ink/60">{item.note}</p></div>{membership.role !== "viewer" && <DeleteLearningMomentForm momentId={item.id} title={item.title} />}</article>;
+                }
+                const item = entry.item;
+                const domain = item.activity_instances?.activity_templates?.domain;
+                return <article key={`activity-${item.id}`} className="grid gap-3 py-5 sm:grid-cols-[1fr_auto] sm:items-start"><div><div className="flex flex-wrap items-center gap-2"><span className="rounded-full bg-[#e8efe3] px-2.5 py-1 text-xs font-semibold text-[#52634e]">{domain ? domainNames[domain] ?? domain : "Activity"}</span><span className="text-xs text-ink/40">{readableDate(item.created_at)}</span></div><h3 className="mt-3 font-serif text-xl font-semibold">{item.activity_instances?.personalized_title}</h3>{item.parent_note && <p className="mt-2 text-sm leading-6 text-ink/60">“{item.parent_note}”</p>}</div><div className="text-sm text-ink/50 sm:text-right"><p className="capitalize">{item.engagement} engagement</p><p className="mt-1">{item.challenge_level === "just_right" ? "Challenge felt just right" : item.challenge_level === "easy" ? "Challenge felt easy" : "A stretching challenge"}</p>{item.repeated && <p className="mt-1 font-semibold text-[#52634e]">Repeated by choice</p>}</div></article>;
+              })}
+            </div>
+          )}
+        </section>
       </div>
     </main>
   );
