@@ -1,4 +1,5 @@
 import { AppHeader } from "@/components/app-header";
+import { RescheduleActivityForm } from "@/components/reschedule-activity-form";
 import { requireFamilyContext } from "@/lib/family-context";
 import { ArrowRight, CalendarDays, Check, Clock3, RefreshCw, SlidersHorizontal, Sparkles } from "lucide-react";
 import Link from "next/link";
@@ -18,6 +19,18 @@ type Plan = { id: string; week_start: string; adaptation_summary: string; genera
 
 const domainNames: Record<string, string> = { language: "Language", movement: "Movement", sensory: "Sensory", maths: "Early maths", creative: "Creative", life_skills: "Life skills", nature: "Nature" };
 
+function weekDays(weekStart: string) {
+  const base = new Date(`${weekStart}T12:00:00`);
+  return Array.from({ length: 7 }, (_, index) => {
+    const date = new Date(base);
+    date.setDate(base.getDate() + index);
+    return {
+      value: `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`,
+      label: new Intl.DateTimeFormat("en", { weekday: "long", month: "short", day: "numeric" }).format(date),
+    };
+  });
+}
+
 export const metadata = { title: "This week" };
 
 export default async function WeekPage({ searchParams }: { searchParams: Promise<{ plan?: string }> }) {
@@ -32,6 +45,7 @@ export default async function WeekPage({ searchParams }: { searchParams: Promise
   if (!plan) redirect("/setup");
   const { data } = await supabase.from("activity_instances").select("id,scheduled_date,status,personalized_title,selection_reason,activity_templates(domain,duration_minutes,summary)").eq("plan_id", plan.id).order("scheduled_date");
   const items = (data ?? []) as unknown as PlanItem[];
+  const days = weekDays(plan.week_start);
 
   return (
     <main className="min-h-screen bg-cream pb-24 text-ink sm:pb-0">
@@ -51,7 +65,7 @@ export default async function WeekPage({ searchParams }: { searchParams: Promise
               <article key={item.id} className="grid gap-5 rounded-[1.5rem] border border-black/5 bg-paper p-5 shadow-[0_10px_30px_rgba(55,62,53,.05)] sm:grid-cols-[90px_1fr_auto] sm:items-center sm:p-6">
                 <div><p className="text-xs font-bold uppercase tracking-[.14em] text-ink/40">Day {index + 1}</p><p className="mt-1 text-sm font-semibold">{day}</p></div>
                 <div><div className="flex flex-wrap items-center gap-2"><span className="rounded-full bg-[#e8efe3] px-2.5 py-1 text-xs font-semibold text-[#52634e]">{domainNames[template?.domain ?? ""] ?? template?.domain}</span><span className="flex items-center gap-1 text-xs text-ink/40"><Clock3 size={13} /> {template?.duration_minutes} min</span>{item.status === "completed" && <span className="flex items-center gap-1 text-xs font-semibold text-[#52634e]"><Check size={13} /> Tried</span>}{item.status === "skipped" && <span className="text-xs font-semibold text-[#80613f]">Skipped</span>}</div><Link href={`/activity/${item.id}`} className="group inline-flex items-center gap-2"><h2 className="mt-3 font-serif text-2xl font-semibold group-hover:underline">{item.personalized_title}</h2><ArrowRight className="mt-3 text-ink/30 transition group-hover:translate-x-1" size={18} /></Link><p className="mt-1 line-clamp-2 text-sm leading-6 text-ink/55">{template?.summary}</p>{plan.generation_method === "adaptive_deterministic_v1" && <p className="mt-2 text-xs font-semibold text-[#697565]">Why this fits: {item.selection_reason}</p>}</div>
-                <div className="flex gap-2 sm:flex-col sm:items-end"><Link href={`/activity/${item.id}`} className="button-ghost px-3">Open</Link>{membership.role !== "viewer" && item.status === "planned" && <Link href={`/library?replace=${item.id}`} className="button-ghost gap-1 px-3 text-ink/50"><RefreshCw size={14} /> Swap</Link>}</div>
+                <div className="flex flex-wrap gap-2 sm:flex-col sm:items-end"><Link href={`/activity/${item.id}`} className="button-ghost px-3">Open</Link>{membership.role !== "viewer" && item.status === "planned" && <><RescheduleActivityForm instanceId={item.id} scheduledDate={item.scheduled_date} days={days} /><Link href={`/library?replace=${item.id}`} className="button-ghost gap-1 px-3 text-ink/50"><RefreshCw size={14} /> Swap activity</Link></>}</div>
               </article>
             );
           })}
