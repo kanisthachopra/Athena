@@ -10,6 +10,8 @@ export async function saveFeedback(_previous: FeedbackState, formData: FormData)
   const instanceId = String(formData.get("instanceId") ?? "");
   const engagement = String(formData.get("engagement") ?? "");
   const challenge = String(formData.get("challenge") ?? "");
+  const requestedReturn = String(formData.get("returnTo") ?? "/today");
+  const returnTo = requestedReturn === `/activity/${instanceId}` ? requestedReturn : "/today";
   if (!instanceId || !["low", "medium", "high"].includes(engagement) || !["easy", "just_right", "stretch"].includes(challenge)) return { error: "Choose an engagement and challenge level." };
   const supabase = await createClient();
   const { data: authData } = await supabase.auth.getClaims();
@@ -24,7 +26,9 @@ export async function saveFeedback(_previous: FeedbackState, formData: FormData)
   if (error) return { error: error.message };
   revalidatePath("/today");
   revalidatePath("/week");
-  redirect("/today");
+  revalidatePath("/insights");
+  revalidatePath(`/activity/${instanceId}`);
+  redirect(returnTo);
 }
 
 export async function skipActivity(formData: FormData) {

@@ -22,12 +22,26 @@ type Activity = {
   } | null;
 };
 
+type Observation = {
+  engagement: "low" | "medium" | "high";
+  challenge_level: "easy" | "just_right" | "stretch";
+  repeated: boolean;
+  parent_note: string | null;
+};
+
+const engagementLabels = { low: "Not today", medium: "Some interest", high: "Loved it" };
+const challengeLabels = { easy: "Very easy", just_right: "Just right", stretch: "A stretch" };
+
 export default async function ActivityPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const { supabase, family, membership } = await requireFamilyContext();
-  const { data } = await supabase.from("activity_instances").select("id,status,personalized_title,personalized_instructions,activity_templates(domain,duration_minutes,conversation_prompt,look_for,why_it_matters,safety_note,materials)").eq("id", id).maybeSingle();
+  const [{ data }, { data: observationData }] = await Promise.all([
+    supabase.from("activity_instances").select("id,status,personalized_title,personalized_instructions,activity_templates(domain,duration_minutes,conversation_prompt,look_for,why_it_matters,safety_note,materials)").eq("id", id).maybeSingle(),
+    supabase.from("observations").select("engagement,challenge_level,repeated,parent_note").eq("activity_instance_id", id).maybeSingle(),
+  ]);
   if (!data) notFound();
   const activity = data as unknown as Activity;
+  const observation = observationData as Observation | null;
   const template = activity.activity_templates;
 
   return (
@@ -50,7 +64,12 @@ export default async function ActivityPage({ params }: { params: Promise<{ id: s
           </article>
           <aside className="space-y-5">
             <div className="soft-card"><Heart size={20} className="text-[#a9503b]" /><p className="eyebrow mt-5">Why it matters</p><p className="mt-3 leading-7 text-ink/60">{template?.why_it_matters}</p></div>
-            <div className="soft-card"><h2 className="font-serif text-2xl font-semibold">What happened?</h2><p className="mt-2 text-sm leading-6 text-ink/50">Quick feedback helps the next plan fit better. No judgement, no scores.</p><div className="mt-6">{activity.status === "completed" ? <p className="rounded-xl bg-[#eef3ea] p-4 text-sm font-semibold text-[#52634e]">Feedback saved for this activity.</p> : activity.status === "skipped" ? <p className="rounded-xl bg-[#f3eee3] p-4 text-sm font-semibold text-[#80613f]">Skipped without penalty. Family life comes first.</p> : membership.role === "viewer" ? <p className="rounded-xl bg-[#eef3ea] p-4 text-sm leading-6 text-[#52634e]">Viewer access is read-only. A caregiver can add an observation after trying this activity.</p> : <FeedbackForm instanceId={activity.id} />}</div></div>
+            <div className="soft-card"><h2 className="font-serif text-2xl font-semibold">What happened?</h2><p className="mt-2 text-sm leading-6 text-ink/50">Quick feedback helps the next plan fit better. No judgement, no scores.</p><div className="mt-6">{
+              activity.status === "skipped" ? <p className="rounded-xl bg-[#f3eee3] p-4 text-sm font-semibold text-[#80613f]">Skipped without penalty. Family life comes first.</p>
+                : membership.role === "viewer" ? activity.status === "completed" && observation ? <div className="space-y-4 rounded-xl bg-[#eef3ea] p-4 text-sm text-[#52634e]"><p className="font-semibold">Saved observation</p><div className="flex flex-wrap gap-2"><span className="rounded-full bg-white/70 px-3 py-1">{engagementLabels[observation.engagement]}</span><span className="rounded-full bg-white/70 px-3 py-1">{challengeLabels[observation.challenge_level]}</span>{observation.repeated && <span className="rounded-full bg-white/70 px-3 py-1">Repeated it</span>}</div>{observation.parent_note && <p className="leading-6 text-ink/60">{observation.parent_note}</p>}<p className="text-xs text-ink/40">Viewer access is read-only.</p></div> : <p className="rounded-xl bg-[#eef3ea] p-4 text-sm leading-6 text-[#52634e]">Viewer access is read-only. A caregiver can add an observation after trying this activity.</p>
+                  : activity.status === "completed" ? <div><p className="mb-5 rounded-xl bg-[#eef3ea] p-4 text-sm font-semibold text-[#52634e]">Observation saved. You can correct it anytime.</p><FeedbackForm instanceId={activity.id} initial={observation} returnTo={`/activity/${activity.id}`} /></div>
+                    : <FeedbackForm instanceId={activity.id} />
+            }</div></div>
             {membership.role !== "viewer" && activity.status === "planned" && <div className="rounded-[1.75rem] border border-black/5 bg-paper p-6"><p className="text-sm leading-6 text-ink/50">Not the right fit today?</p><div className="mt-4 flex flex-wrap gap-2"><Link href={`/library?replace=${activity.id}`} className="button-ghost gap-2"><RefreshCw size={16} /> Choose another</Link><form action={skipActivity}><input type="hidden" name="instanceId" value={activity.id} /><button type="submit" className="button-ghost text-ink/50">Skip without penalty</button></form></div></div>}
           </aside>
         </div>
