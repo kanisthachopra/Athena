@@ -11,7 +11,7 @@ function SubmitButton({ editing }: { editing: boolean }) {
   const { pending } = useFormStatus();
   return (
     <button className="button-primary button-large w-full sm:w-auto" disabled={pending} type="submit">
-      {pending ? <><LoaderCircle className="animate-spin" size={18} /> Building the week…</> : <>{editing ? "Update our plan" : "Create our first week"}<ArrowRight size={18} /></>}
+      {pending ? <><LoaderCircle className="animate-spin" size={18} /> {editing ? "Saving changes…" : "Building the week…"}</> : <>{editing ? "Save profile changes" : "Create our first week"}<ArrowRight size={18} /></>}
     </button>
   );
 }
@@ -22,10 +22,17 @@ type InitialProfile = {
   weekday_minutes?: number;
   weekend_minutes?: number;
   prefer_embedded_learning?: boolean;
-} | null;
+  aspirations: string[];
+  languageGoals: string[];
+  caregiverName: string;
+  relationship: string;
+  caregiverLanguages: string[];
+};
 
-export function LearningProfileForm({ childName, initial }: { childName: string; initial: InitialProfile }) {
-  const [state, action] = useActionState(saveLearningProfile, { error: null });
+export function LearningProfileForm({ childName, initial, configured }: { childName: string; initial: InitialProfile; configured: boolean }) {
+  const [state, action] = useActionState(saveLearningProfile, { error: null, success: null });
+  const selectedAspirations = new Set(initial.aspirations.map((item) => item.toLowerCase()));
+  const customAspirations = initial.aspirations.filter((item) => !aspirations.some((standard) => standard.toLowerCase() === item.toLowerCase()));
 
   return (
     <form action={action} className="space-y-7">
@@ -51,23 +58,24 @@ export function LearningProfileForm({ childName, initial }: { childName: string;
         <p className="eyebrow">3 · Your hopes for {childName}</p>
         <h2 className="mt-3 font-serif text-2xl font-semibold">What matters most right now?</h2>
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {aspirations.map((item) => <label key={item} className="flex cursor-pointer items-center gap-3 rounded-xl border border-black/10 bg-white p-3 text-sm font-medium has-[:checked]:border-[#829378] has-[:checked]:bg-[#eef3ea]"><input type="checkbox" name="aspirations" value={item} className="size-4 accent-[#52634e]" />{item}</label>)}
+          {aspirations.map((item) => <label key={item} className="flex cursor-pointer items-center gap-3 rounded-xl border border-black/10 bg-white p-3 text-sm font-medium has-[:checked]:border-[#829378] has-[:checked]:bg-[#eef3ea]"><input type="checkbox" name="aspirations" value={item} defaultChecked={selectedAspirations.has(item.toLowerCase())} className="size-4 accent-[#52634e]" />{item}</label>)}
         </div>
-        <input className="mira-input mt-4" name="customAspiration" placeholder="Another hope, in your own words (optional)" maxLength={80} />
+        <input className="mira-input mt-4" name="customAspiration" defaultValue={customAspirations.join(", ")} placeholder="Other hopes, separated with commas (optional)" />
       </section>
 
       <section className="profile-section">
         <p className="eyebrow">4 · People and languages</p>
         <div className="mt-6 grid gap-5 sm:grid-cols-2">
-          <label><span className="mb-2 block text-sm font-semibold">Primary caregiver</span><input className="mira-input" name="caregiverName" placeholder="Your name or nickname" maxLength={60} /></label>
-          <label><span className="mb-2 block text-sm font-semibold">Relationship</span><input className="mira-input" name="relationship" placeholder="Mum, dad, grandparent…" maxLength={60} /></label>
-          <label><span className="mb-2 block text-sm font-semibold">Languages you can use</span><input className="mira-input" name="caregiverLanguages" placeholder="English, Hindi" /><span className="mt-2 block text-xs text-ink/45">Separate languages with commas.</span></label>
-          <label><span className="mb-2 block text-sm font-semibold">Languages you want {childName} to grow with</span><input className="mira-input" name="languageGoals" placeholder="Hindi, Mandarin" /><span className="mt-2 block text-xs text-ink/45">These can include future goals.</span></label>
+          <label><span className="mb-2 block text-sm font-semibold">Primary caregiver</span><input className="mira-input" name="caregiverName" defaultValue={initial.caregiverName} placeholder="Your name or nickname" maxLength={60} /></label>
+          <label><span className="mb-2 block text-sm font-semibold">Relationship</span><input className="mira-input" name="relationship" defaultValue={initial.relationship} placeholder="Mum, dad, grandparent…" maxLength={60} /></label>
+          <label><span className="mb-2 block text-sm font-semibold">Languages you can use</span><input className="mira-input" name="caregiverLanguages" defaultValue={initial.caregiverLanguages.join(", ")} placeholder="English, Hindi" /><span className="mt-2 block text-xs text-ink/45">Separate languages with commas.</span></label>
+          <label><span className="mb-2 block text-sm font-semibold">Languages you want {childName} to grow with</span><input className="mira-input" name="languageGoals" defaultValue={initial.languageGoals.join(", ")} placeholder="Hindi, Mandarin" /><span className="mt-2 block text-xs text-ink/45">These can include future goals.</span></label>
         </div>
       </section>
 
       {state.error && <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{state.error}</p>}
-      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center"><p className="max-w-md text-xs leading-5 text-ink/45">MIRA uses these choices as planning constraints. You can change them later.</p><SubmitButton editing={Boolean(initial)} /></div>
+      {state.success && <p role="status" className="rounded-xl bg-[#e8efe3] px-4 py-3 text-sm font-semibold text-[#52634e]">{state.success}</p>}
+      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center"><p className="max-w-md text-xs leading-5 text-ink/45">{configured ? "Changes guide future plans. MIRA keeps the current week stable so completed and upcoming activities do not shift unexpectedly." : "MIRA uses these choices as planning constraints. You can change them later."}</p><SubmitButton editing={configured} /></div>
     </form>
   );
 }
