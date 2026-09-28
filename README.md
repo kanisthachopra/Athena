@@ -79,3 +79,5 @@ npm run build
 ## Product direction
 
 The deterministic learning loop and shared household model now work end to end. A future AI layer can help phrase reflections or suggest reviewed variations, but it must remain bounded by family preferences, the curated activity library, and explicit caregiver control.
+
+Development is governed by the source-grounded [MIRA product specification](docs/MIRA_PRODUCT_SPEC.md). The [current-state audit](docs/CURRENT_STATE_AUDIT.md) identifies prototype drift, and the [development roadmap](docs/DEVELOPMENT_ROADMAP.md) defines the corrected path from deterministic foundations to bounded AI.
