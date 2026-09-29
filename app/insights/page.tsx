@@ -2,7 +2,7 @@ import { AppHeader } from "@/components/app-header";
 import { DeleteLearningMomentForm } from "@/components/delete-learning-moment-form";
 import { LearningMomentForm } from "@/components/learning-moment-form";
 import { requireFamilyContext } from "@/lib/family-context";
-import { BarChart3, BookHeart, Heart, History, Repeat2, Sparkles } from "lucide-react";
+import { BookHeart, History, Layers3, Repeat2, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 type Observation = {
@@ -50,7 +50,7 @@ function localDateString(date: Date) {
   return `${year}-${month}-${day}`;
 }
 
-export const metadata = { title: "Insights" };
+export const metadata = { title: "Journey" };
 
 export default async function InsightsPage() {
   const { supabase, membership, family, activeChild: child } = await requireFamilyContext();
@@ -73,15 +73,11 @@ export default async function InsightsPage() {
 
   const observations = (observationResult.data ?? []) as unknown as Observation[];
   const moments = (momentResult.data ?? []) as LearningMoment[];
-  const highEngagement = observations.filter((item) => item.engagement === "high").length;
   const repeated = observations.filter((item) => item.repeated).length;
-  const domainScores = observations.reduce<Record<string, number>>((scores, item) => {
-    const domain = item.activity_instances?.activity_templates?.domain;
-    if (domain) scores[domain] = (scores[domain] ?? 0) + (item.engagement === "high" ? 3 : item.engagement === "medium" ? 1 : -1) + (item.repeated ? 2 : 0);
-    return scores;
-  }, {});
-  const strongestSignal = Object.entries(domainScores).sort((a, b) => b[1] - a[1])[0];
-  const strongestDomain = strongestSignal && strongestSignal[1] > 0 ? strongestSignal[0] : undefined;
+  const areasNoticed = new Set([
+    ...moments.map((item) => item.domain),
+    ...observations.map((item) => item.activity_instances?.activity_templates?.domain).filter(Boolean),
+  ]).size;
 
   const journal = [
     ...observations.map((item) => ({ kind: "activity" as const, date: item.created_at, item })),
@@ -93,29 +89,31 @@ export default async function InsightsPage() {
     <main className="min-h-screen bg-cream pb-24 text-ink sm:pb-0">
       <AppHeader familyName={family?.display_name ?? "Your family"} />
       <div className="mx-auto max-w-6xl px-5 py-10 lg:px-10 lg:py-14">
-        <p className="eyebrow"><BarChart3 size={15} /> Learning, noticed</p>
-        <h1 className="mt-3 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">Small signals from {child.nickname}&apos;s days.</h1>
-        <p className="mt-4 max-w-2xl leading-7 text-ink/55">These are caregiver observations, not grades or developmental assessments. MIRA uses them gently to shape variety and relevance.</p>
+        <p className="text-sm font-semibold text-[#386357]">Learning, noticed</p>
+        <h1 className="mt-3 font-serif text-4xl tracking-tight sm:text-5xl">The small story of {child.nickname}&apos;s days.</h1>
+        <p className="mt-4 max-w-2xl leading-7 text-ink/55">A caregiver journal—not a grade, milestone checklist, or developmental assessment. MIRA uses confirmed moments gently to shape variety and relevance.</p>
 
-        <section className="mt-10 rounded-[2rem] border border-black/5 bg-paper p-7 shadow-[0_20px_60px_rgba(55,62,53,.06)] sm:p-9">
-          <p className="eyebrow"><BookHeart size={15} /> Everyday moments</p>
-          <h2 className="mt-3 font-serif text-3xl font-semibold">Notice what happened naturally.</h2>
-          <p className="mt-3 max-w-2xl leading-7 text-ink/60">Learning rarely waits for the plan. Save a question, discovery, new skill, or small fascination while it is still fresh.</p>
+        <section id="notice-a-moment" className="journal-rule mt-8 scroll-mt-28 pt-8">
+          <div className="rounded-[1.5rem] border border-[#d4c8e5] bg-[#eee7f5] p-7 shadow-[0_14px_40px_rgba(41,50,47,.04)] sm:p-9">
+          <p className="eyebrow text-[#6d5688]"><Sparkles size={15} /> Notice a moment</p>
+          <h2 className="mt-3 font-serif text-3xl">Tell it in your own words.</h2>
+          <p className="mt-3 max-w-2xl leading-7 text-ink/60">Learning rarely waits for the plan. MIRA can organize your note, but you inspect and edit every word before it enters the journal.</p>
           {membership.role === "viewer" ? (
             <p className="mt-6 rounded-xl bg-sage/15 p-4 text-sm leading-6 text-[#52634e]">Viewer access keeps the journal read-only. An owner or caregiver can add moments.</p>
           ) : (
             <LearningMomentForm childName={child.nickname} today={today} />
           )}
+          </div>
         </section>
 
         <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="soft-card"><History size={20} className="text-[#52634e]" /><p className="mt-5 text-3xl font-semibold">{journal.length}</p><p className="mt-1 text-sm text-ink/50">moments captured</p></div>
-          <div className="soft-card"><Heart size={20} className="text-[#a9503b]" /><p className="mt-5 text-3xl font-semibold">{highEngagement}</p><p className="mt-1 text-sm text-ink/50">high-interest activities</p></div>
-          <div className="soft-card"><Repeat2 size={20} className="text-[#4e696c]" /><p className="mt-5 text-3xl font-semibold">{repeated}</p><p className="mt-1 text-sm text-ink/50">chose to repeat</p></div>
-          <div className="soft-card"><Sparkles size={20} className="text-[#80613f]" /><p className="mt-5 font-serif text-xl font-semibold">{strongestDomain ? domainNames[strongestDomain] ?? strongestDomain : "Still emerging"}</p><p className="mt-1 text-sm text-ink/50">strongest activity signal</p></div>
+          <div className="soft-card"><History size={20} className="text-[#386357]" /><p className="mt-5 text-3xl font-semibold">{journal.length}</p><p className="mt-1 text-sm text-ink/50">moments remembered</p></div>
+          <div className="soft-card"><BookHeart size={20} className="text-[#6d5688]" /><p className="mt-5 text-3xl font-semibold">{moments.length}</p><p className="mt-1 text-sm text-ink/50">everyday discoveries</p></div>
+          <div className="soft-card"><Repeat2 size={20} className="text-[#466474]" /><p className="mt-5 text-3xl font-semibold">{repeated}</p><p className="mt-1 text-sm text-ink/50">repeated by choice</p></div>
+          <div className="soft-card"><Layers3 size={20} className="text-[#80613f]" /><p className="mt-5 text-3xl font-semibold">{areasNoticed}</p><p className="mt-1 text-sm text-ink/50">areas appearing naturally</p></div>
         </section>
 
-        <section className="mt-8 rounded-[2rem] border border-black/5 bg-paper p-7 shadow-[0_20px_60px_rgba(55,62,53,.06)] sm:p-9">
+        <section className="mt-8 rounded-[1.5rem] border border-[#bfd9d8] bg-paper p-7 shadow-[0_14px_40px_rgba(41,50,47,.04)] sm:p-9">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p className="eyebrow">Observation journal</p><h2 className="mt-3 font-serif text-3xl font-semibold">What you have noticed</h2></div><Link href="/week" className="button-ghost">View the plan</Link></div>
           {journal.length === 0 ? (
             <div className="mt-7 rounded-2xl bg-[#f3eee3] p-6"><Sparkles size={22} className="text-[#a9503b]" /><h3 className="mt-4 font-serif text-2xl font-semibold">The story starts with one observation.</h3><p className="mt-2 max-w-xl text-sm leading-6 text-ink/60">Add an everyday moment above, or share what happened after trying a planned activity.</p></div>

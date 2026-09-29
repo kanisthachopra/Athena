@@ -32,6 +32,8 @@ Exit criteria:
 
 Goal: introduce AI only for jobs that are genuinely linguistic and remain easy for the parent to inspect and correct.
 
+Progress: the server-only Nebius adapter, schema validation, typed observation proposal, parent confirmation flow, privacy-minimized logging, timeouts, retry boundary, daily budgets, and deterministic observation fallback are implemented in migration 14. Free-text onboarding extraction remains before this milestone is complete.
+
 Deliverables:
 
 - one server-only AI service and replaceable provider adapter;
@@ -54,6 +56,8 @@ Exit criteria:
 ## Then: Milestone 15 — Hybrid planner, Parent Mode, and Ask
 
 Goal: combine deterministic safety and eligibility with bounded AI judgement and useful parent education.
+
+Progress: a first read-only, context-minimized Ask surface is available. It cannot mutate plans or profiles; candidate selection, plan validation, personalization, and change confirmation remain future work.
 
 Deliverables:
 

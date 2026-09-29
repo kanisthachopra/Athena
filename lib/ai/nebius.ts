@@ -1,0 +1,124 @@
+import "server-only";
+
+const API_URL = "https://api.tokenfactory.nebius.com/v1/chat/completions";
+const DEFAULT_MODEL = "Qwen/Qwen3-30B-A3B-Instruct-2507";
+const REQUEST_TIMEOUT_MS = 12_000;
+
+type JsonSchema = Record<string, unknown>;
+
+type NebiusUsage = {
+  prompt_tokens?: number;
+  completion_tokens?: number;
+  total_tokens?: number;
+};
+
+type NebiusResponse = {
+  model?: string;
+  choices?: Array<{ message?: { content?: string } }>;
+  usage?: NebiusUsage;
+};
+
+export type StructuredCompletion = {
+  content: unknown;
+  model: string;
+  promptTokens: number;
+  completionTokens: number;
+  latencyMs: number;
+};
+
+export class AiProviderError extends Error {
+  constructor(
+    message: string,
+    readonly code: "not_configured" | "timeout" | "provider_error" | "invalid_response",
+  ) {
+    super(message);
+  }
+}
+
+async function requestOnce(args: {
+  apiKey: string;
+  model: string;
+  system: string;
+  user: string;
+  schemaName: string;
+  schema: JsonSchema;
+}) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${args.apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: args.model,
+        temperature: 0.1,
+        max_tokens: 420,
+        messages: [
+          { role: "system", content: args.system },
+          { role: "user", content: args.user },
+        ],
+        response_format: {
+          type: "json_schema",
+          json_schema: {
+            name: args.schemaName,
+            strict: true,
+            schema: args.schema,
+          },
+        },
+      }),
+      cache: "no-store",
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      const retryable = response.status === 429 || response.status >= 500;
+      return { retryable, error: new AiProviderError(`Nebius returned ${response.status}.`, "provider_error") } as const;
+    }
+
+    return { retryable: false, data: (await response.json()) as NebiusResponse } as const;
+  } catch (error) {
+    if (error instanceof Error && error.name === "AbortError") {
+      return { retryable: false, error: new AiProviderError("Nebius timed out.", "timeout") } as const;
+    }
+    return { retryable: true, error: new AiProviderError("Nebius could not be reached.", "provider_error") } as const;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+export async function createStructuredCompletion(args: {
+  system: string;
+  user: string;
+  schemaName: string;
+  schema: JsonSchema;
+}): Promise<StructuredCompletion> {
+  const apiKey = process.env.NEBIUS_API_KEY;
+  if (!apiKey) throw new AiProviderError("Nebius is not configured.", "not_configured");
+
+  const model = process.env.NEBIUS_MODEL || DEFAULT_MODEL;
+  const startedAt = Date.now();
+  let result = await requestOnce({ ...args, apiKey, model });
+  if (result.error && result.retryable) {
+    result = await requestOnce({ ...args, apiKey, model });
+  }
+  if (result.error) throw result.error;
+
+  const content = result.data.choices?.[0]?.message?.content;
+  if (!content) throw new AiProviderError("Nebius returned no structured content.", "invalid_response");
+
+  try {
+    return {
+      content: JSON.parse(content),
+      model: result.data.model || model,
+      promptTokens: result.data.usage?.prompt_tokens ?? 0,
+      completionTokens: result.data.usage?.completion_tokens ?? 0,
+      latencyMs: Date.now() - startedAt,
+    };
+  } catch {
+    throw new AiProviderError("Nebius returned malformed JSON.", "invalid_response");
+  }
+}
