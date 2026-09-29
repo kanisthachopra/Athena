@@ -3,6 +3,9 @@ import "server-only";
 const API_URL = "https://api.tokenfactory.nebius.com/v1/chat/completions";
 const DEFAULT_MODEL = "Qwen/Qwen3-30B-A3B-Instruct-2507";
 const REQUEST_TIMEOUT_MS = 12_000;
+const DEFAULT_MAX_TOKENS = 420;
+const MIN_MAX_TOKENS = 64;
+const MAX_MAX_TOKENS = 1_200;
 
 type JsonSchema = Record<string, unknown>;
 
@@ -14,7 +17,10 @@ type NebiusUsage = {
 
 type NebiusResponse = {
   model?: string;
-  choices?: Array<{ message?: { content?: string } }>;
+  choices?: Array<{
+    finish_reason?: string | null;
+    message?: { content?: string };
+  }>;
   usage?: NebiusUsage;
 };
 
@@ -42,6 +48,7 @@ async function requestOnce(args: {
   user: string;
   schemaName: string;
   schema: JsonSchema;
+  maxTokens: number;
 }) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
@@ -56,7 +63,7 @@ async function requestOnce(args: {
       body: JSON.stringify({
         model: args.model,
         temperature: 0.1,
-        max_tokens: 420,
+        max_tokens: args.maxTokens,
         messages: [
           { role: "system", content: args.system },
           { role: "user", content: args.user },
@@ -95,19 +102,29 @@ export async function createStructuredCompletion(args: {
   user: string;
   schemaName: string;
   schema: JsonSchema;
+  maxTokens?: number;
 }): Promise<StructuredCompletion> {
   const apiKey = process.env.NEBIUS_API_KEY;
   if (!apiKey) throw new AiProviderError("Nebius is not configured.", "not_configured");
 
   const model = process.env.NEBIUS_MODEL || DEFAULT_MODEL;
+  const maxTokens = Math.min(
+    MAX_MAX_TOKENS,
+    Math.max(MIN_MAX_TOKENS, args.maxTokens ?? DEFAULT_MAX_TOKENS),
+  );
   const startedAt = Date.now();
-  let result = await requestOnce({ ...args, apiKey, model });
+  let result = await requestOnce({ ...args, apiKey, model, maxTokens });
   if (result.error && result.retryable) {
-    result = await requestOnce({ ...args, apiKey, model });
+    result = await requestOnce({ ...args, apiKey, model, maxTokens });
   }
   if (result.error) throw result.error;
 
-  const content = result.data.choices?.[0]?.message?.content;
+  const choice = result.data.choices?.[0];
+  if (choice?.finish_reason === "length") {
+    throw new AiProviderError("Nebius stopped before completing the response.", "invalid_response");
+  }
+
+  const content = choice?.message?.content;
   if (!content) throw new AiProviderError("Nebius returned no structured content.", "invalid_response");
 
   try {

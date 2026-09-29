@@ -49,9 +49,9 @@ export function AskMiraForm() {
 
       <aside className="space-y-5">
         {state.answer ? (
-          <article className="rounded-[1.5rem] border border-[#d4c8e5] bg-[#eee7f5] p-6 sm:p-7" aria-live="polite">
+          <article className="overflow-visible rounded-[1.5rem] border border-[#d4c8e5] bg-[#eee7f5] p-6 sm:p-7" aria-live="polite">
             <p className="eyebrow text-[#6d5688]"><Sparkles size={14} /> A thoughtful response</p>
-            <p className="mt-4 whitespace-pre-line leading-7 text-ink/75">{state.answer.answer}</p>
+            <p className="mt-4 max-w-[68ch] whitespace-pre-wrap break-words leading-7 text-ink/75">{state.answer.answer}</p>
             <div className="mt-5 border-t border-black/10 pt-5">
               <p className="text-xs font-bold uppercase tracking-[.14em] text-ink/45">You could try</p>
               <ul className="mt-3 space-y-3">
