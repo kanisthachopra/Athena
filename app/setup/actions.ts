@@ -13,7 +13,7 @@ function commaList(value: FormDataEntryValue | null) {
     if (!item || seen.has(key)) return false;
     seen.add(key);
     return true;
-  }).slice(0, 8);
+  });
 }
 
 export async function saveLearningProfile(
@@ -29,11 +29,13 @@ export async function saveLearningProfile(
   if (!Number.isInteger(weekendMinutes) || weekendMinutes < 0 || weekendMinutes > 240) return { error: "Weekend time must be between 0 and 240 minutes.", success: null };
 
   const aspirations = [...formData.getAll("aspirations").map(String), ...commaList(formData.get("customAspiration"))];
-  const uniqueAspirations = [...new Map(aspirations.map((item) => [item.toLowerCase(), item])).values()].slice(0, 8);
+  const uniqueAspirations = [...new Map(aspirations.map((item) => [item.toLowerCase(), item])).values()];
+  if (uniqueAspirations.length > 8) return { error: "Choose up to eight hopes so your profile stays focused.", success: null };
   if (uniqueAspirations.length === 0) return { error: "Choose at least one hope for your child.", success: null };
   if (uniqueAspirations.some((item) => item.length > 80)) return { error: "Keep each hope under 80 characters.", success: null };
   const caregiverLanguages = commaList(formData.get("caregiverLanguages"));
   const languageGoals = commaList(formData.get("languageGoals"));
+  if (caregiverLanguages.length > 8 || languageGoals.length > 8) return { error: "Use up to eight languages in each language field.", success: null };
   if ([...caregiverLanguages, ...languageGoals].some((item) => item.length > 60)) return { error: "Keep each language under 60 characters.", success: null };
 
   const { data: existingPreference } = await supabase

@@ -32,7 +32,7 @@ Exit criteria:
 
 Goal: introduce AI only for jobs that are genuinely linguistic and remain easy for the parent to inspect and correct.
 
-Progress: the server-only Nebius adapter, schema validation, typed observation proposal, parent confirmation flow, privacy-minimized logging, timeouts, retry boundary, daily budgets, and deterministic observation fallback are implemented in migration 14. Free-text onboarding extraction remains before this milestone is complete.
+Progress: the server-only Nebius adapter, schema validation, typed observation proposal, parent confirmation flow, privacy-minimized logging, timeouts, retry boundary, daily budgets, and deterministic observation fallback are implemented in migration 14. Learning Profile now supports optional free-text extraction into existing time, rhythm, aspiration, and language fields. Each suggestion shows a source quote, can be excluded, and is copied into an editable form before explicit saving. Unstated fields remain unchanged; the manual form is always available. Broader constitution extraction, caching, and concurrency-safe budget enforcement remain follow-up work.
 
 Deliverables:
 

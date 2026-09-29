@@ -2,8 +2,10 @@
 
 import { saveLearningProfile } from "@/app/setup/actions";
 import { ArrowRight, LoaderCircle } from "lucide-react";
-import { useActionState } from "react";
+import { useActionState, useRef } from "react";
 import { useFormStatus } from "react-dom";
+import { ProfileStoryForm } from "@/components/profile-story-form";
+import type { ProfileSuggestion } from "@/lib/profile-proposal";
 
 const aspirations = ["Curiosity", "Independence", "Communication", "Creativity", "Confidence", "Kindness"];
 
@@ -31,11 +33,40 @@ type InitialProfile = {
 
 export function LearningProfileForm({ childName, initial, configured }: { childName: string; initial: InitialProfile; configured: boolean }) {
   const [state, action] = useActionState(saveLearningProfile, { error: null, success: null });
+  const formRef = useRef<HTMLFormElement>(null);
   const selectedAspirations = new Set(initial.aspirations.map((item) => item.toLowerCase()));
   const customAspirations = initial.aspirations.filter((item) => !aspirations.some((standard) => standard.toLowerCase() === item.toLowerCase()));
 
+  function applySuggestions(suggestions: ProfileSuggestion[]) {
+    const form = formRef.current;
+    if (!form) return;
+    for (const suggestion of suggestions) {
+      const input = form.elements.namedItem(suggestion.field);
+      if (!(input instanceof HTMLInputElement || input instanceof HTMLSelectElement)) continue;
+      if (input instanceof HTMLInputElement && input.type === "checkbox") {
+        input.checked = suggestion.value === "true";
+      } else if (["customAspiration", "caregiverLanguages", "languageGoals"].includes(suggestion.field)) {
+        const values = [...input.value.split(","), ...suggestion.value.split(",")].map((value) => value.trim()).filter(Boolean);
+        const remaining = values.filter((value) => {
+          if (suggestion.field !== "customAspiration") return true;
+          const standard = aspirations.find((item) => item.toLowerCase() === value.toLowerCase());
+          if (!standard) return true;
+          for (const control of form.elements) {
+            if (control instanceof HTMLInputElement && control.name === "aspirations" && control.value === standard) control.checked = true;
+          }
+          return false;
+        });
+        input.value = [...new Map(remaining.map((value) => [value.toLowerCase(), value])).values()].join(", ");
+      } else input.value = suggestion.value;
+    }
+    const first = form.elements.namedItem(suggestions[0]?.field ?? "weekdayMinutes");
+    if (first instanceof HTMLElement) first.focus();
+  }
+
   return (
-    <form action={action} className="space-y-7">
+    <>
+    <ProfileStoryForm onApply={applySuggestions} />
+    <form ref={formRef} action={action} className="space-y-7">
       <section className="profile-section">
         <p className="eyebrow">1 · Your rhythm</p>
         <h2 className="mt-3 font-serif text-2xl font-semibold">How should learning fit into the week?</h2>
@@ -60,7 +91,7 @@ export function LearningProfileForm({ childName, initial, configured }: { childN
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
           {aspirations.map((item) => <label key={item} className="flex cursor-pointer items-center gap-3 rounded-xl border border-black/10 bg-white p-3 text-sm font-medium has-[:checked]:border-[#829378] has-[:checked]:bg-[#eef3ea]"><input type="checkbox" name="aspirations" value={item} defaultChecked={selectedAspirations.has(item.toLowerCase())} className="size-4 accent-[#52634e]" />{item}</label>)}
         </div>
-        <input className="mira-input mt-4" name="customAspiration" defaultValue={customAspirations.join(", ")} placeholder="Other hopes, separated with commas (optional)" />
+        <label className="mt-4 block"><span className="mb-2 block text-sm font-semibold">Other hopes (optional)</span><input className="mira-input" name="customAspiration" defaultValue={customAspirations.join(", ")} placeholder="Separate hopes with commas" /></label>
       </section>
 
       <section className="profile-section">
@@ -77,5 +108,6 @@ export function LearningProfileForm({ childName, initial, configured }: { childN
       {state.success && <p role="status" className="rounded-xl bg-[#e8efe3] px-4 py-3 text-sm font-semibold text-[#52634e]">{state.success}</p>}
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center"><p className="max-w-md text-xs leading-5 text-ink/45">{configured ? "Changes guide future plans. MIRA keeps the current week stable so completed and upcoming activities do not shift unexpectedly." : "MIRA uses these choices as planning constraints. You can change them later."}</p><SubmitButton editing={configured} /></div>
     </form>
+    </>
   );
 }
