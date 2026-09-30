@@ -1,6 +1,6 @@
 # Development roadmap
 
-This roadmap is subordinate to `MIRA_PRODUCT_SPEC.md` and should be updated whenever product learning changes the implementation sequence.
+This historical milestone roadmap is subordinate to the owner-adopted [MIRA_SOURCE_OF_TRUTH.md](../MIRA_SOURCE_OF_TRUTH.md). Its G0–G5 delivery gates govern future sequencing. The next task is G0: a read-only alignment audit of existing work, not automatic feature expansion. Progress statements below predate adoption and must be checked against repository, database, and test evidence; they do not establish gate completion. See [PROJECT_STATUS.md](PROJECT_STATUS.md).
 
 ## Now: Milestone 13 — Product foundation realignment
 

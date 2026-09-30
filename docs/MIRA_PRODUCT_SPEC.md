@@ -1,6 +1,6 @@
 # MIRA product specification
 
-This document is the working source of truth for MIRA. It distills the complete 231-page product conversation in `MIRA idea log.pdf`. When implementation choices conflict with this specification, the conflict must be made explicit and resolved before development continues.
+This is the earlier working specification, retained for historical context. As of 30 September 2026, the owner-adopted [MIRA_SOURCE_OF_TRUTH.md](../MIRA_SOURCE_OF_TRUTH.md) is canonical and overrides conflicts here. This document's summaries and implementation assumptions are not independent approval or evidence of completeness.
 
 ## Product definition
 

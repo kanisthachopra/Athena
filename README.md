@@ -1,5 +1,7 @@
 # MIRA
 
+Product authority: [MIRA Source of Truth](MIRA_SOURCE_OF_TRUTH.md), explicitly adopted by the owner on 30 September 2026. Read it and [AGENTS.md](AGENTS.md) before development. The historical feature inventory below is not a current verification report; see [project status](docs/PROJECT_STATUS.md) and [decisions](docs/DECISIONS_AND_OPEN_QUESTIONS.md).
+
 MIRA is a calm, parent-first learning companion for families with young children. It protects relationships, autonomy, play, and family capacity while helping parents notice and shape rich learning across ordinary life.
 
 This repository currently implements **Milestones 1–13**: secure family onboarding, a low-pressure weekly opportunity portfolio, transparent deterministic adaptation, flexible planning, persistent multi-child support, role-aware shared caregiving, family-controlled profile data, an everyday learning journal, editable observations, and the source-grounded capability, enrichment, safety, provenance, and Parent Mode foundations.
