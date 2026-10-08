@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T02:33:44Z",
+  "title": "Design System: MIRA",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Plum",
+        "tonalRamp": [
+          "oklch(15% 0.04 310)",
+          "oklch(27% 0.04 310)",
+          "oklch(39% 0.04 310)",
+          "oklch(51% 0.04 310)",
+          "oklch(63% 0.04 310)",
+          "oklch(75% 0.04 310)",
+          "oklch(87% 0.04 310)",
+          "oklch(95% 0.04 310)"
+        ]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Porcelain",
+        "tonalRamp": [
+          "oklch(15% 0.006 310)",
+          "oklch(27% 0.006 310)",
+          "oklch(39% 0.006 310)",
+          "oklch(51% 0.006 310)",
+          "oklch(63% 0.006 310)",
+          "oklch(75% 0.006 310)",
+          "oklch(87% 0.006 310)",
+          "oklch(95% 0.006 310)"
+        ]
+      },
+      "foreground": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0.012 310)",
+          "oklch(27% 0.012 310)",
+          "oklch(39% 0.012 310)",
+          "oklch(51% 0.012 310)",
+          "oklch(63% 0.012 310)",
+          "oklch(75% 0.012 310)",
+          "oklch(87% 0.012 310)",
+          "oklch(95% 0.012 310)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(87% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "secondary": {
+        "role": "neutral",
+        "displayName": "Pale Plum",
+        "tonalRamp": [
+          "oklch(15% 0.014 310)",
+          "oklch(27% 0.014 310)",
+          "oklch(39% 0.014 310)",
+          "oklch(51% 0.014 310)",
+          "oklch(63% 0.014 310)",
+          "oklch(75% 0.014 310)",
+          "oklch(87% 0.014 310)",
+          "oklch(95% 0.014 310)"
+        ]
+      },
+      "muted-foreground": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "tonalRamp": [
+          "oklch(15% 0.012 310)",
+          "oklch(27% 0.012 310)",
+          "oklch(39% 0.012 310)",
+          "oklch(51% 0.012 310)",
+          "oklch(63% 0.012 310)",
+          "oklch(75% 0.012 310)",
+          "oklch(87% 0.012 310)",
+          "oklch(95% 0.012 310)"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Soft Border",
+        "tonalRamp": [
+          "oklch(15% 0.016 310)",
+          "oklch(27% 0.016 310)",
+          "oklch(39% 0.016 310)",
+          "oklch(51% 0.016 310)",
+          "oklch(63% 0.016 310)",
+          "oklch(75% 0.016 310)",
+          "oklch(87% 0.016 310)",
+          "oklch(95% 0.016 310)"
+        ]
+      },
+      "input": {
+        "role": "neutral",
+        "displayName": "Field Border",
+        "tonalRamp": [
+          "oklch(15% 0.025 310)",
+          "oklch(27% 0.025 310)",
+          "oklch(39% 0.025 310)",
+          "oklch(51% 0.025 310)",
+          "oklch(63% 0.025 310)",
+          "oklch(75% 0.025 310)",
+          "oklch(87% 0.025 310)",
+          "oklch(95% 0.025 310)"
+        ]
+      },
+      "workspace-plum": {
+        "role": "primary",
+        "displayName": "Workspace Plum",
+        "tonalRamp": [
+          "oklch(15% 0.05 310)",
+          "oklch(27% 0.05 310)",
+          "oklch(39% 0.05 310)",
+          "oklch(51% 0.05 310)",
+          "oklch(63% 0.05 310)",
+          "oklch(75% 0.05 310)",
+          "oklch(87% 0.05 310)",
+          "oklch(95% 0.05 310)"
+        ]
+      },
+      "workspace-wash": {
+        "role": "neutral",
+        "displayName": "Workspace Wash",
+        "tonalRamp": [
+          "oklch(15% 0.018 310)",
+          "oklch(27% 0.018 310)",
+          "oklch(39% 0.018 310)",
+          "oklch(51% 0.018 310)",
+          "oklch(63% 0.018 310)",
+          "oklch(75% 0.018 310)",
+          "oklch(87% 0.018 310)",
+          "oklch(95% 0.018 310)"
+        ]
+      },
+      "workspace-muted": {
+        "role": "neutral",
+        "displayName": "Workspace Muted",
+        "tonalRamp": [
+          "oklch(15% 0.028 310)",
+          "oklch(27% 0.028 310)",
+          "oklch(39% 0.028 310)",
+          "oklch(51% 0.028 310)",
+          "oklch(63% 0.028 310)",
+          "oklch(75% 0.028 310)",
+          "oklch(87% 0.028 310)",
+          "oklch(95% 0.028 310)"
+        ]
+      },
+      "workspace-border": {
+        "role": "neutral",
+        "displayName": "Workspace Border",
+        "tonalRamp": [
+          "oklch(15% 0.02 310)",
+          "oklch(27% 0.02 310)",
+          "oklch(39% 0.02 310)",
+          "oklch(51% 0.02 310)",
+          "oklch(63% 0.02 310)",
+          "oklch(75% 0.02 310)",
+          "oklch(87% 0.02 310)",
+          "oklch(95% 0.02 310)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Public display",
+        "purpose": "Public hero only."
+      },
+      "headline": {
+        "displayName": "Workspace heading",
+        "purpose": "Quiet page orientation."
+      },
+      "title": {
+        "displayName": "Experience title",
+        "purpose": "Readable titles inside day spaces."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Parent-facing content."
+      },
+      "label": {
+        "displayName": "Control label",
+        "purpose": "Operational action labels."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "week-rearrangement-duration",
+        "value": "420ms",
+        "purpose": "Finite FLIP only after a successful guarded move response. Migration is user-reported applied; live mutation tests were not run because existing plans must remain unchanged."
+      },
+      {
+        "name": "week-rearrangement-easing",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Settle an experience into its destination."
+      },
+      {
+        "name": "preparation-reveal",
+        "value": "220ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "Finite optional-detail reveal from opacity .6 and translateY(-4px); global local-preference and OS reduced-motion rules suppress it."
+      },
+      {
+        "name": "research-disclosure-rotation",
+        "value": "180ms cubic-bezier(.16,1,.3,1)",
+        "purpose": "ChevronDown rotates 180 degrees for an open native primitive disclosure; global local-preference and OS reduced-motion rules suppress the transition."
+      },
+      {
+        "name": "control-transition",
+        "value": "150ms cubic-bezier(.4,0,.2,1)",
+        "purpose": "Tailwind transition-colors default; disabled by local or OS reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact-workspace",
+        "value": "900px"
+      },
+      {
+        "name": "phone-menu",
+        "value": "640px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Confirmed action with a minimum 44px target.",
+      "html": "<button class=\"ds-primary\">Confirm move</button>",
+      "css": ".ds-primary{font-family:var(--font-sans,Lato,Aptos,\"Segoe UI\",sans-serif);display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border:0;border-radius:var(--radius,12px);background:hsl(var(--primary,283 22% 25%));color:white;padding:10px 20px;font-size:14px;font-weight:600;transition:background-color 150ms cubic-bezier(.4,0,.2,1)}.ds-primary:hover{background:hsl(var(--primary,283 22% 25%)/.9)}.ds-primary:disabled{opacity:.55;cursor:not-allowed}.ds-primary:focus-visible,.ds-ghost:focus-visible,.ds-input:focus-visible,.ds-nav a:focus-visible{outline:2px solid #49334f;outline-offset:4px}"
+    },
+    {
+      "name": "Ghost action",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary inline operation.",
+      "html": "<button class=\"ds-ghost\">Get ready</button>",
+      "css": ".ds-ghost{font-family:var(--font-sans,Lato,Aptos,\"Segoe UI\",sans-serif);display:inline-flex;align-items:center;justify-content:center;min-height:44px;border:0;border-radius:var(--radius,12px);background:transparent;color:hsl(var(--foreground,280 9% 19%));padding:8px 16px;font-size:14px;font-weight:600;transition:background-color 150ms cubic-bezier(.4,0,.2,1)}.ds-ghost:hover{background:hsl(var(--secondary,280 27% 94%))}.ds-primary:focus-visible,.ds-ghost:focus-visible,.ds-input:focus-visible,.ds-nav a:focus-visible{outline:2px solid #49334f;outline-offset:4px}"
+    },
+    {
+      "name": "Text field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Labelled parent input.",
+      "html": "<label class=\"ds-field\">Your question<input class=\"ds-input\" placeholder=\"Tell Guide what happened…\" /></label>",
+      "css": ".ds-field{font-family:var(--font-sans,Lato,Aptos,\"Segoe UI\",sans-serif);display:grid;gap:12px;font-size:14px;color:hsl(var(--foreground,280 9% 19%))}.ds-input{font-family:var(--font-sans,Lato,Aptos,\"Segoe UI\",sans-serif);min-height:48px;border:1px solid hsl(var(--input,284 15% 73%));border-radius:var(--radius,12px);background:hsl(var(--card,0 0% 100%));color:hsl(var(--foreground,280 9% 19%));padding:12px 16px;font-size:16px}.ds-input::placeholder{color:hsl(var(--muted-foreground,280 9% 39%))}.ds-input:focus{border-color:hsl(var(--primary,283 22% 25%))}.ds-primary:focus-visible,.ds-ghost:focus-visible,.ds-input:focus-visible,.ds-nav a:focus-visible{outline:2px solid #49334f;outline-offset:4px}"
+    },
+    {
+      "name": "Rail navigation",
+      "kind": "nav",
+      "refersTo": "navigation-active",
+      "description": "A labelled current destination in the left rail.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a href=\"#today\">Today</a><a href=\"#week\" aria-current=\"page\">Week</a><a href=\"#guide\">Guide</a></nav>",
+      "css": ".ds-nav{font-family:var(--font-sans,Lato,Aptos,\"Segoe UI\",sans-serif);display:grid;gap:5px;background:#f1eaf3;padding:20px;width:184px}.ds-nav a{display:flex;align-items:center;gap:12px;padding:12px;border-radius:8px;font-size:15px;text-decoration:none;color:#65566a}.ds-nav a:hover{background:#e7dceb}.ds-nav a[aria-current=page]{background:#49334f;color:#fff}.ds-primary:focus-visible,.ds-ghost:focus-visible,.ds-input:focus-visible,.ds-nav a:focus-visible{outline:2px solid #49334f;outline-offset:4px}"
+    },
+    {
+      "name": "Experience surface",
+      "kind": "card",
+      "refersTo": "spatial-item",
+      "description": "Content within a named day space; illustrative text only.",
+      "html": "<article class=\"ds-item\"><div class=\"ds-meta\">An optional experience</div><h3>Experience title</h3><p>Preparation and context appear here.</p><details><summary>Why this was selected</summary><p>The recorded selection reason appears here.</p></details></article>",
+      "css": ".ds-item{font-family:var(--font-sans,Lato,Aptos,\"Segoe UI\",sans-serif);background:white;border:1px solid #ded6e1;border-radius:10px;padding:20px;color:hsl(var(--foreground,280 9% 19%));overflow-wrap:anywhere}.ds-meta{font-size:13px;color:#716275}.ds-item h3{font-size:20px;font-weight:400;line-height:1.4;margin:10px 0}.ds-item p{font-size:14px;line-height:1.6;color:#716275}.ds-item summary{min-height:44px;padding-top:12px;color:#49334f;cursor:pointer;font-size:14px}.ds-item summary:focus-visible{outline:2px solid #49334f;outline-offset:4px}"
+    },
+    {
+      "name": "Secondary label",
+      "kind": "chip",
+      "refersTo": "badge-secondary",
+      "description": "Existing Badge secondary variant; informational, not an achievement.",
+      "html": "<span class=\"ds-badge\">Optional</span>",
+      "css": ".ds-badge{font-family:var(--font-sans,Lato,Aptos,\"Segoe UI\",sans-serif);display:inline-flex;align-items:center;border:1px solid transparent;border-radius:calc(var(--radius,12px) - 2px);padding:2px 10px;font-size:12px;font-weight:600;background:hsl(var(--secondary,280 27% 94%));color:hsl(var(--secondary-foreground,283 22% 25%));transition:background-color 150ms cubic-bezier(.4,0,.2,1)}.ds-badge:hover{background:hsl(var(--secondary,280 27% 94%)/.8)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Studio — Spatial Workspace",
+    "overview": "Studio gives parents clearly named places to arrange optional experiences. Plum & Porcelain uses restrained plum controls, pale work surfaces, white content and Lato throughout. The owner selected this direction and the left navigation; no new visual direction is implied by this documentation.\n\nThis is a scan of the implemented foundation, subordinate to `MIRA_SOURCE_OF_TRUTH.md`. Shared typography and theme reach the application; Today, Week, Guide, public/auth surfaces and settings/help/memory received implementation work. Other existing surfaces retain portions of their earlier composition. This document does not certify whole-app redesign completion, canonical requirement completion or release readiness. The surface contract is `.impeccable/spatial-implementation-brief.md`; implementation evidence belongs in `docs/PROJECT_STATUS.md`.",
+    "keyCharacteristics": [
+      "Persistent left navigation and a restrained family/page breadcrumb.",
+      "Pale named spaces, white content, readable separation and optional detail.",
+      "Lato typography with quiet headings and labelled operational controls.",
+      "No illustration assets; public home, login and email confirmation omit added visuals."
+    ],
+    "rules": [
+      {
+        "name": "The Meaning Before Color Rule",
+        "body": "Pair status and selection color with readable labels or native state attributes; color alone must not communicate outcome.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do preserve Studio, Plum & Porcelain, Lato and left navigation.",
+      "Do use named spaces, labelled controls and optional detail to reduce planning effort.",
+      "Do respect local motion preference and OS reduced motion.",
+      "Do distinguish implemented UI from verified persistence and release acceptance."
+    ],
+    "donts": [
+      "Don't add illustrations or decorative connector diagrams to this direction.",
+      "Don't add scores, streaks, completion pressure or invented family facts.",
+      "Don't replace the approved rail with app-wide top navigation.",
+      "Don't describe session Guide as contextual persistent chat or call untested move/undo live-verified."
+    ]
+  }
+}

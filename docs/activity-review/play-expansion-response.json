@@ -1,0 +1,400 @@
+{
+  "format": "mira-editorial-response",
+  "version": 1,
+  "packageFingerprint": "0a7aabc59ae08ab843ac945454723de84b8a933a6a4b691df9a345f161c4ae45",
+  "instructions": "Complete only checks within your expertise. Use acceptable, changes_required, outside_expertise or reject. Keep unknown fields null. Supply source locators and requested changes, not just a tick. A complete response is ready for an editorial decision, never automatic publication. Do not enter family or child data.",
+  "reviewers": [
+    {
+      "id": "reviewer-1",
+      "name": null,
+      "qualifications": null,
+      "relevantExpertise": null,
+      "conflictsOfInterest": null
+    }
+  ],
+  "sources": [
+    {
+      "sourceId": "harvard-ef-play-2014",
+      "sourceFingerprint": "f5f630b367ee6f108c7ef349172b81b0645449ee6829c487de614f047f6ab03b",
+      "reviewerId": null,
+      "checkedOn": null,
+      "reviewDueOn": null,
+      "access": null,
+      "appraisal": null,
+      "limitations": null,
+      "rightsAssessment": null
+    },
+    {
+      "sourceId": "naeyc-process-art-2023",
+      "sourceFingerprint": "3af00247cd39edeaaa2b8382b27e9e375851e0cc7f7da657a2d8ef537b848ff9",
+      "reviewerId": null,
+      "checkedOn": null,
+      "reviewDueOn": null,
+      "access": null,
+      "appraisal": null,
+      "limitations": null,
+      "rightsAssessment": null
+    },
+    {
+      "sourceId": "who-movement-under-five-2019",
+      "sourceFingerprint": "14b430a1bd16631c0f372f244cb44358bbb2c3fba1f7a9fbed42ccb574536efb",
+      "reviewerId": null,
+      "checkedOn": null,
+      "reviewDueOn": null,
+      "access": null,
+      "appraisal": null,
+      "limitations": null,
+      "rightsAssessment": null
+    }
+  ],
+  "primitives": [
+    {
+      "primitiveId": "small-movement-mirror",
+      "contentFingerprint": "d71c636f0826892ffba3edc47e1a6b926e6bf12836b5ed0097dabb74f984aee2",
+      "decision": null,
+      "decisionReviewerId": null,
+      "reviewedOn": null,
+      "reviewDueOn": null,
+      "draftIndices": [],
+      "ageMonths": {
+        "minimum": null,
+        "maximum": null
+      },
+      "readinessAndExclusions": null,
+      "languageVarieties": [],
+      "checks": [
+        {
+          "id": "evidence",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "applicability",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "materials",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "supervision",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "hazards",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "autonomy",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "wording",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "adaptation",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "language",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "rights",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        }
+      ]
+    },
+    {
+      "primitiveId": "quiet-rhythm-exchange",
+      "contentFingerprint": "08c0249a4f509502aaf105bbd9204b584e9e6cfb55cd8191386512b33f9c48bf",
+      "decision": null,
+      "decisionReviewerId": null,
+      "reviewedOn": null,
+      "reviewDueOn": null,
+      "draftIndices": [],
+      "ageMonths": {
+        "minimum": null,
+        "maximum": null
+      },
+      "readinessAndExclusions": null,
+      "languageVarieties": [],
+      "checks": [
+        {
+          "id": "evidence",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "applicability",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "materials",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "supervision",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "hazards",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "autonomy",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "wording",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "adaptation",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "language",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "rights",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        }
+      ]
+    },
+    {
+      "primitiveId": "open-mark-making",
+      "contentFingerprint": "79c9f7f28aaaeb5745c22575c992658343c734a935ceae91b37b67b2978f7204",
+      "decision": null,
+      "decisionReviewerId": null,
+      "reviewedOn": null,
+      "reviewDueOn": null,
+      "draftIndices": [],
+      "ageMonths": {
+        "minimum": null,
+        "maximum": null
+      },
+      "readinessAndExclusions": null,
+      "languageVarieties": [],
+      "checks": [
+        {
+          "id": "evidence",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "applicability",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "materials",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "supervision",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "hazards",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "autonomy",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "wording",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "adaptation",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "language",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "rights",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        }
+      ]
+    },
+    {
+      "primitiveId": "child-chosen-grouping",
+      "contentFingerprint": "d93ad0d40ccc2963ddd2397600aedfe5bf6e45a359d19c72ae66d192756a5d58",
+      "decision": null,
+      "decisionReviewerId": null,
+      "reviewedOn": null,
+      "reviewDueOn": null,
+      "draftIndices": [],
+      "ageMonths": {
+        "minimum": null,
+        "maximum": null
+      },
+      "readinessAndExclusions": null,
+      "languageVarieties": [],
+      "checks": [
+        {
+          "id": "evidence",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "applicability",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "materials",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "supervision",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "hazards",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "autonomy",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "wording",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "adaptation",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "language",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        },
+        {
+          "id": "rights",
+          "reviewerId": null,
+          "outcome": null,
+          "evidence": null,
+          "requiredChanges": null
+        }
+      ]
+    }
+  ]
+}

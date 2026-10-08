@@ -1,32 +1,44 @@
 "use server";
 
 import { requireFamilyContext } from "@/lib/family-context";
+import { loadFamilyCalendar } from "@/lib/family-calendar";
+import { birthContextError, isProfileVersion } from "@/lib/child-profile";
+import { creationFailure, isCreationId, type CreationState } from "@/lib/profile-creation";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export type AddChildState = { error: string | null };
+export type AddChildState = CreationState;
 export type InviteState = { error: string | null; invitePath: string | null };
 export type ProfileState = { error: string | null; success: string | null };
+export type ChildProfileState = ProfileState & { updatedAt: string | null; refreshRequired: boolean };
 
 export async function addChild(_previous: AddChildState, formData: FormData): Promise<AddChildState> {
   const nickname = String(formData.get("nickname") ?? "").trim();
   const birthYear = Number(formData.get("birthYear"));
   const birthMonth = Number(formData.get("birthMonth"));
-  const currentYear = new Date().getFullYear();
-  if (!nickname || nickname.length > 60) return { error: "Enter a first name or nickname." };
-  if (!Number.isInteger(birthMonth) || birthMonth < 1 || birthMonth > 12) return { error: "Choose a valid birth month." };
-  if (!Number.isInteger(birthYear) || birthYear < currentYear - 18 || birthYear > currentYear) return { error: "Choose a valid birth year." };
+  const requestId = String(formData.get("requestId") ?? "");
+  const failure = (error: string): CreationState => ({error,createdId:null,checkSaved:false});
+  if (!isCreationId(requestId)) return failure("Reload this form before adding a child.");
+  if (!nickname || nickname.length > 60) return failure("Enter a first name or nickname, up to 60 characters.");
 
   const { supabase, membership } = await requireFamilyContext();
-  const { error } = await supabase.rpc("add_child_to_family", {
+  if (membership.role === "viewer") return failure("Caregiver access is required.");
+  if (formData.get("familyId") !== membership.family_id) return failure("Your family context changed. Reload before adding a child.");
+  let today: string;
+  try { today = (await loadFamilyCalendar(supabase, membership.family_id)).today; }
+  catch { return failure("Your family’s calendar could not be checked. Your details are still here; try again."); }
+  const birthError = birthContextError(birthYear,birthMonth,today);
+  if (birthError) return failure(birthError);
+  const { data, error } = await supabase.rpc("add_child_to_family_checked", {
+    p_request_id: requestId,
     p_family_id: membership.family_id,
     p_nickname: nickname,
     p_birth_year: birthYear,
     p_birth_month: birthMonth,
   });
-  if (error) return { error: error.message };
+  if (error || !isCreationId(data)) return creationFailure(error?.message);
   revalidatePath("/", "layout");
-  redirect("/setup");
+  return { error:null,createdId:data,checkSaved:false };
 }
 
 export async function switchChild(formData: FormData) {
@@ -36,7 +48,7 @@ export async function switchChild(formData: FormData) {
   const { error } = await supabase.rpc("set_active_child", { p_child_id: childId });
   if (error) throw new Error(error.message);
   revalidatePath("/", "layout");
-  redirect(returnTo.startsWith("/") ? returnTo : "/today");
+  redirect(["/today", "/setup", "/family", "/week", "/library", "/insights"].includes(returnTo) ? returnTo : "/today");
 }
 
 export async function createFamilyInvitation(
@@ -103,28 +115,38 @@ export async function updateFamilyName(
 }
 
 export async function updateChildProfile(
-  _previous: ProfileState,
+  _previous: ChildProfileState,
   formData: FormData,
-): Promise<ProfileState> {
+): Promise<ChildProfileState> {
+  const failure = (error: string, refreshRequired = false): ChildProfileState => ({ error, success: null, updatedAt: null, refreshRequired });
   const childId = String(formData.get("childId") ?? "");
+  const expectedUpdatedAt = String(formData.get("updatedAt") ?? "");
   const nickname = String(formData.get("nickname") ?? "").trim();
   const birthYear = Number(formData.get("birthYear"));
   const birthMonth = Number(formData.get("birthMonth"));
-  const currentYear = new Date().getFullYear();
-  if (!nickname || nickname.length > 60) return { error: "Enter a first name or nickname.", success: null };
-  if (!Number.isInteger(birthMonth) || birthMonth < 1 || birthMonth > 12) return { error: "Choose a valid birth month.", success: null };
-  if (!Number.isInteger(birthYear) || birthYear < currentYear - 18 || birthYear > currentYear) return { error: "Choose a valid birth year.", success: null };
-  const { supabase, membership } = await requireFamilyContext();
-  if (membership.role === "viewer") return { error: "Caregiver access is required.", success: null };
-  const { error } = await supabase.rpc("update_child_profile", {
+  if (!nickname || nickname.length > 60) return failure("Enter a first name or nickname, up to 60 characters.");
+  if (!isProfileVersion(expectedUpdatedAt)) return failure("Reload the saved profile before making changes.", true);
+  const { supabase, membership, children } = await requireFamilyContext();
+  if (membership.role === "viewer") return failure("Caregiver access is required.");
+  if (!children.some(child => child.id === childId)) return failure("This profile is no longer available to edit. Return to Family.", true);
+  let today: string;
+  try { today = (await loadFamilyCalendar(supabase, membership.family_id)).today; }
+  catch { return failure("Your family’s calendar could not be checked. Your edits are still here; try saving again."); }
+  const birthError = birthContextError(birthYear, birthMonth, today);
+  if (birthError) return failure(birthError);
+  const { data, error } = await supabase.rpc("update_child_profile_checked", {
     p_child_id: childId,
+    p_expected_updated_at: expectedUpdatedAt,
     p_nickname: nickname,
     p_birth_year: birthYear,
     p_birth_month: birthMonth,
   });
-  if (error) return { error: error.message, success: null };
+  if (error?.message.includes("MIRA_STALE_CHILD_PROFILE")) return failure("This profile changed in another session. Open the saved profile to compare before editing again.", true);
+  if (error?.message.includes("MIRA_FUTURE_BIRTH_MONTH")) return failure("The birth month is in the future. Check the month and year.");
+  if (error?.message.includes("MIRA_INVALID_BIRTH_CONTEXT")) return failure("Check the birth month and year, then try again.");
+  if (error || !data || typeof data.updatedAt !== "string" || !isProfileVersion(data.updatedAt)) return failure("The save could not be confirmed. Open the saved profile to check it before trying again.", true);
   revalidatePath("/", "layout");
-  return { error: null, success: "Child profile updated." };
+  return { error: null, success: "Profile saved.", updatedAt: data.updatedAt, refreshRequired: false };
 }
 
 export async function archiveChildProfile(formData: FormData) {

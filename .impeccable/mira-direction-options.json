@@ -1,0 +1,201 @@
+{
+  "title": "Choose MIRA’s next direction",
+  "question": "Compare the visual studies. Choose a direction, or request a fresh round. These are design proposals with fictional content, not changes to your live app.",
+  "options": [
+    {
+      "id": "studio",
+      "label": "Studio",
+      "kicker": "DIRECTION A",
+      "thesis": "A practical family workspace with a confident cobalt spine and one clear invitation.",
+      "palette": [
+        "#2449D8",
+        "#FFFFFF",
+        "#202221",
+        "#F2C65E"
+      ],
+      "materials": [
+        "matte color fields",
+        "sharp sans-serif typography"
+      ],
+      "viewport": "Persistent navigation, a useful activity brief, and an inline plan-change review.",
+      "risk": "The strong color and larger activity treatment may feel louder than you want.",
+      "comp": ".impeccable/mocks/decision/studio.png",
+      "raised": [
+        {
+          "from": "Tension structures",
+          "raise": "Every suggested change makes its effects on time and preparation explicit."
+        },
+        {
+          "from": "Tape-deck controls",
+          "raise": "Every action has a visible label and an unmistakable state."
+        },
+        {
+          "from": "Dance notation",
+          "raise": "The week preserves the distinction between prepared invitations and unstructured time."
+        },
+        {
+          "from": "Terminal transcripts",
+          "raise": "AI context and parent corrections remain inspectable."
+        },
+        {
+          "from": "One-bit desktop",
+          "raise": "Focus, selection and disabled states must work without color."
+        }
+      ]
+    },
+    {
+      "id": "brief",
+      "label": "Daily Brief",
+      "kicker": "MY RECOMMENDATION",
+      "thesis": "A focused daily brief that helps a busy parent decide in seconds.",
+      "palette": [
+        "#FFFFFF",
+        "#18212D",
+        "#315CCD",
+        "#E9EDF3"
+      ],
+      "materials": [
+        "crisp type",
+        "quiet dividers"
+      ],
+      "viewport": "Compact navigation beside a readable day list; details and AI proposals share a side pane.",
+      "risk": "The most familiar option; distinction depends on excellent content and interaction details.",
+      "comp": ".impeccable/mocks/decision/brief.png"
+    },
+    {
+      "id": "unfold",
+      "label": "Unfold",
+      "verdict": "competitive",
+      "thesis": "A compact day that opens into instructions only when you need them.",
+      "palette": [
+        "#FAFAF8",
+        "#E3B635",
+        "#20211F",
+        "#DDE7EF"
+      ],
+      "materials": [
+        "flat white panels",
+        "gold navigation strip"
+      ],
+      "viewport": "A slim week strip above expanding activity rows, with a visible before-and-after change sheet.",
+      "case": "Strong on progressive disclosure and phone use; less conventional than a persistent sidebar.",
+      "risk": "Expansion must preserve your place, and controls must stay familiar.",
+      "comp": ".impeccable/mocks/decision/unfold.png",
+      "hero": "https://impeccable.style/worlds/cards/paper-folds-pleats-deployable-miura-orbit-sheet-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/paper-folds-pleats-deployable-miura-orbit-sheet.webp"
+    },
+    {
+      "id": "tension",
+      "label": "Tension structures",
+      "verdict": "declined",
+      "thesis": "A map of competing family constraints.",
+      "palette": [
+        "#FFFFFF",
+        "#D13632"
+      ],
+      "materials": [
+        "source system explored"
+      ],
+      "viewport": "Considered as a system for Today, Week and parent guidance.",
+      "risk": "Force graphs would make daily parenting decisions harder to read.",
+      "case": "Force graphs would make daily parenting decisions harder to read.",
+      "kept": "Visible consequences for every proposed change."
+    },
+    {
+      "id": "deck",
+      "label": "Tape-deck controls",
+      "verdict": "declined",
+      "thesis": "One panel of explicit controls.",
+      "palette": [
+        "#FFFFFF",
+        "#D78F31"
+      ],
+      "materials": [
+        "source system explored"
+      ],
+      "viewport": "Considered as a system for Today, Week and parent guidance.",
+      "risk": "Retro instrument styling could distract from ordinary caregiving.",
+      "case": "Retro instrument styling could distract from ordinary caregiving.",
+      "kept": "Clearly labelled controls and states."
+    },
+    {
+      "id": "dance",
+      "label": "Dance notation",
+      "verdict": "declined",
+      "thesis": "A vertical score of the family's day.",
+      "palette": [
+        "#FFFFFF",
+        "#111111"
+      ],
+      "materials": [
+        "source system explored"
+      ],
+      "viewport": "Considered as a system for Today, Week and parent guidance.",
+      "risk": "Precise duration notation risks implying a child timetable.",
+      "case": "Precise duration notation risks implying a child timetable.",
+      "kept": "Readable distinctions between opportunity types."
+    },
+    {
+      "id": "terminal",
+      "label": "Terminal transcript",
+      "verdict": "declined",
+      "thesis": "An inspectable continuous AI transcript.",
+      "palette": [
+        "#FFFFFF",
+        "#68DD82"
+      ],
+      "materials": [
+        "source system explored"
+      ],
+      "viewport": "Considered as a system for Today, Week and parent guidance.",
+      "risk": "A chat-first terminal conflicts with MIRA's structured parent experience.",
+      "case": "A chat-first terminal conflicts with MIRA's structured parent experience.",
+      "kept": "Inspectable context and correction history."
+    },
+    {
+      "id": "desktop",
+      "label": "One-bit desktop",
+      "verdict": "declined",
+      "thesis": "Separate windows for planning and reflection.",
+      "palette": [
+        "#FFFFFF",
+        "#333333"
+      ],
+      "materials": [
+        "source system explored"
+      ],
+      "viewport": "Considered as a system for Today, Week and parent guidance.",
+      "risk": "Overlapping windows add work on a phone.",
+      "case": "Overlapping windows add work on a phone.",
+      "kept": "Selection and focus visible without color."
+    }
+  ],
+  "reroll": {
+    "registers": [
+      "safer",
+      "bolder"
+    ]
+  },
+  "buildPath": {
+    "value": "comp",
+    "toggle": true
+  },
+  "canon": true,
+  "canonCard": {
+    "label": "Familiar essentials",
+    "thesis": "A conventional, restrained app with standard navigation and clear lists.",
+    "palette": [
+      "#FFFFFF",
+      "#242424",
+      "#2563EB"
+    ],
+    "materials": [
+      "neutral surfaces",
+      "native-style controls"
+    ],
+    "viewport": "A simple daily list with standard tabs and a separate details screen.",
+    "risk": "Easy to recognise, but with less individual character.",
+    "comp": ".impeccable/mocks/decision/familiar.png"
+  },
+  "steer": true
+}

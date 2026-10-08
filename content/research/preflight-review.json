@@ -1,0 +1,17 @@
+{
+  "catalogVersion": "research-foundation-2026-10-01.2",
+  "checkpointHash": "90499f6072100577a3cf96ecaa98cae88e41b424305dab603d1c2d2d00d20c42",
+  "reviewedAt": "2026-10-01",
+  "reviewType": "AI-assisted editorial defect inspection; not independent expert review",
+  "publicationApproved": false,
+  "findings": {
+    "responsive-turn": "Remove breathing changes as an educational noticing cue. Clarify that disengagement ends the invitation rather than inviting another matching response. Routine context remains too generic for publication.",
+    "shared-attention": "Drafts introduce assumed birds, colours and events despite the no-invented-context constraint. Replace these with genuinely context-bound wording and review the setting and supervision requirements.",
+    "shared-book": "Wording invents picture details and characters. The instruction to give no response to child cues also conflicts with responsive interaction. Rewrite before applicability and book-material review.",
+    "routine-language": "The first draft assumes toys and includes movement language. Keep care instructions outside the draft and define a non-disruptive context; review both drafts before publication.",
+    "responsive-imitation": "Context order is reversed; the second adult-wording field ends incompletely. Body/posture mirroring exceeds the brief's intended boundary. Rewrite and review sensory and communication accessibility.",
+    "shared-story": "The output invents autobiographical events and introduces a kettle/hot-water context. Reject these instructions; preserve the output only as a generation record.",
+    "follow-pretend": "Local contract rejected the output. It additionally introduces props and supplied pretend roles despite the no-added-materials and child-lead boundaries. No draft is usable.",
+    "notice-comparison": "Remove breathing-change cues and interpretations of interest or release. Fix inconsistent instructions about naming a comparison and stray punctuation. Do not treat mathematical benefit as established for these drafts."
+  }
+}

@@ -59,9 +59,9 @@ export function SignUpForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card className="rounded-[1.75rem] border-black/5 bg-paper shadow-[0_25px_80px_rgba(55,62,53,.1)]">
+      <Card className="rounded-xl border-black/5 bg-paper shadow-[0_25px_80px_rgba(55,62,53,.1)]">
         <CardHeader>
-          <CardTitle className="font-serif text-3xl">Begin with MIRA</CardTitle>
+          <CardTitle className="font-serif text-3xl"><h1>Create your account</h1></CardTitle>
           <CardDescription>Create a private space for your family.</CardDescription>
         </CardHeader>
         <CardContent>
@@ -103,7 +103,7 @@ export function SignUpForm({
                 />
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="h-12 w-full rounded-full bg-ink hover:bg-[#414b42]" disabled={isLoading}>
+              <Button type="submit" className="h-12 w-full rounded-full bg-ink hover:bg-[#63486b]" disabled={isLoading}>
                 {isLoading ? "Creating an account..." : "Sign up"}
               </Button>
             </div>

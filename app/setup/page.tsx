@@ -1,38 +1,17 @@
 import { AppHeader } from "@/components/app-header";
 import { LearningProfileForm } from "@/components/learning-profile-form";
 import { requireFamilyContext } from "@/lib/family-context";
+import { parseLearningProfileSnapshot } from "@/lib/learning-profile";
 
 export const metadata = { title: "Family learning profile" };
 
-type CaregiverProfile = {
-  display_name: string;
-  relationship: string | null;
-  caregiver_languages: { language_code: string }[] | null;
-};
-
 export default async function SetupPage() {
   const { supabase, membership, family, activeChild: child } = await requireFamilyContext();
-  const [preferenceResult, aspirationResult, languageResult, caregiverResult] = await Promise.all([
-    supabase.from("family_preferences").select("screen_policy,structure_level,weekday_minutes,weekend_minutes,prefer_embedded_learning").eq("family_id", membership.family_id).maybeSingle(),
-    supabase.from("aspirations").select("title").eq("child_id", child.id).order("created_at"),
-    supabase.from("child_language_goals").select("language_code").eq("child_id", child.id).order("created_at"),
-    supabase.from("caregivers").select("display_name,relationship,caregiver_languages(language_code)").eq("family_id", membership.family_id).order("created_at").limit(1).maybeSingle(),
-  ]);
-  if (preferenceResult.error) throw new Error(preferenceResult.error.message);
-  if (aspirationResult.error) throw new Error(aspirationResult.error.message);
-  if (languageResult.error) throw new Error(languageResult.error.message);
-  if (caregiverResult.error) throw new Error(caregiverResult.error.message);
-
-  const preference = preferenceResult.data;
-  const caregiver = caregiverResult.data as unknown as CaregiverProfile | null;
-  const initial = {
-    ...preference,
-    aspirations: (aspirationResult.data ?? []).map((item) => item.title),
-    languageGoals: (languageResult.data ?? []).map((item) => item.language_code),
-    caregiverName: caregiver?.display_name ?? "",
-    relationship: caregiver?.relationship ?? "",
-    caregiverLanguages: (caregiver?.caregiver_languages ?? []).map((item) => item.language_code),
-  };
+  const result = await supabase.rpc("get_learning_profile_snapshot", { p_child_id: child.id });
+  const snapshot = !result.error && parseLearningProfileSnapshot(result.data, child.id, membership.family_id);
+  if (!snapshot) throw new Error("Your saved learning profile could not be loaded. Reload to try again; no saved choices have changed.");
+  const { initial, configured, version } = snapshot;
+  const preference = configured ? initial : null;
 
   return (
     <main className="min-h-screen bg-cream pb-24 text-ink sm:pb-0">
@@ -53,10 +32,10 @@ export default async function SetupPage() {
                 <div><dt className="text-xs font-bold uppercase tracking-[.12em] text-ink/40">Hopes for {child.nickname}</dt><dd className="mt-2 text-ink/70">{initial.aspirations.join(", ") || "Not set"}</dd></div>
                 <div><dt className="text-xs font-bold uppercase tracking-[.12em] text-ink/40">Language goals</dt><dd className="mt-2 text-ink/70">{initial.languageGoals.join(", ") || "Not set"}</dd></div>
               </dl>
-              <p className="mt-6 rounded-xl bg-sage/15 p-4 text-sm leading-6 text-[#52634e]">Viewer access keeps this profile read-only. An owner or caregiver can update it.</p>
+              <p className="mt-6 rounded-xl bg-sage/15 p-4 text-sm leading-6 text-[#63486b]">Viewer access keeps this profile read-only. An owner or caregiver can update it.</p>
             </section>
           ) : (
-            <LearningProfileForm childName={child.nickname} initial={initial} configured={Boolean(preference)} />
+            <LearningProfileForm key={child.id} childId={child.id} childName={child.nickname} initial={initial} configured={configured} initialVersion={version} />
           )}
         </div>
       </div>

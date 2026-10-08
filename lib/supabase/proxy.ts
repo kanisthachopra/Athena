@@ -63,12 +63,25 @@ export async function updateSession(request: NextRequest) {
 
   // IMPORTANT: If you remove getClaims() and you use server-side rendering
   // with the Supabase client, your users may be randomly logged out.
-  const { data } = await supabase.auth.getClaims();
+  const { data, error } = await supabase.auth.getClaims();
+  if (error && (!error.status || error.status === 429 || error.status >= 500)) {
+    // Do not mistake an unavailable auth service for a signed-out user.
+    // Fail closed without redirecting to a misleading password prompt.
+    return new NextResponse("MIRA could not check your session because the sign-in service is unavailable. Please reload this page shortly. Your saved information has not been changed.", {
+      status: 503,
+      headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "private, no-store", "Retry-After": "5" },
+    });
+  }
   const user = data?.claims;
 
   if (
     !user
   ) {
+    if (request.nextUrl.pathname.startsWith("/api/athena/")) {
+      const response = NextResponse.json({ error: "Sign in to use voice and live resource help." }, { status: 401, headers: { "Cache-Control": "private, no-store" } });
+      supabaseResponse.cookies.getAll().forEach(cookie => response.cookies.set(cookie));
+      return response;
+    }
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
     const returnPath = `${request.nextUrl.pathname}${request.nextUrl.search}`;

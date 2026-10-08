@@ -1,0 +1,126 @@
+{
+  "format": "mira-activity-release-candidate",
+  "version": 1,
+  "instructions": "Unpublished authoring candidate, not instructions for families. Complete missing fields and resolve the original drafting findings. Source links support only the stated general mechanism. Review the entire completed candidate, including questions, variations and associations. No field here approves or publishes content. Do not add family or child data.",
+  "origin": {
+    "packageFingerprint": "d3e62809c1b67bc62648e55e7371fc57c9b8216c16b3364cfb46f16932e7ed38",
+    "primitiveId": "responsive-imitation",
+    "contentFingerprint": "4381e4ce875cc55af2870405363d3400ffa19490f25c0eea81443955bca1dc00",
+    "draftIndex": 0
+  },
+  "authoring": {
+    "languageVariety": "en",
+    "readiness": "Proposed for 6–23 months, pending independent review, including sensory and communication accessibility. The child voluntarily makes a comfortable sound and the adult knows that a quiet sound response is welcome.",
+    "exclusions": "Not a hearing check, pronunciation lesson, oral-motor exercise or therapy. Do not use with distress sounds or known discomfort with echoes. Do not replace prescribed communication support.",
+    "changesFromDraft": "Selected the sound context by its actual content rather than the reversed context index. Replaced incomplete wording and posture mirroring with a bounded acknowledgement/optional quiet echo; accessibility remains an explicit review topic.",
+    "unresolvedFindings": []
+  },
+  "template": {
+    "title": "Answer their sound",
+    "summary": "Respond to a sound your child freely offers, without asking them to copy you.",
+    "instructions": "In a quiet, settled moment, listen for a comfortable sound your child chooses to make. If this kind of response is welcome to them, softly echo it once or simply acknowledge it. Leave a pause. Respond again only if they choose to continue; otherwise return to what you were doing.",
+    "conversation_prompt": "An acknowledgement such as “I heard that” is enough. You do not have to reproduce the sound.",
+    "look_for": "You may record the sound and your response, without scoring accuracy or counting exchanges. Do not infer hearing, language level or ability from this moment.",
+    "why_it_matters": "The invitation centres the adult's responsiveness, not the child's imitation. The general responsive-care evidence does not establish this as speech practice or therapy.",
+    "safety_note": "Keep ordinary care and safety first. This invitation adds no objects, touch or repositioning. Stay attentive throughout, use only the familiar setting described and stop whenever care is needed. Existing individual professional guidance takes priority.",
+    "parent_preparation": "Choose a quiet moment with no competing care task. Use only a volume and response already comfortable for your child. No recording or playback is needed; two minutes is a planning estimate.",
+    "adult_role": "Be a responsive partner. Do not correct pronunciation, alter the child's mouth or body, or repeat sounds to obtain a response.",
+    "child_choices": "They can make another sound, use their usual non-speech communication, stay quiet or stop.",
+    "make_easier": "Use a quiet acknowledgement instead of an echo. If sound responses are unwelcome, omit this invitation rather than finding a stronger stimulus.",
+    "extend_activity": "Respond to a further child-initiated contribution in the same quiet way. Do not add louder sounds, mouth exercises or repetition targets.",
+    "stop_signals": "Stop if your child turns away, rejects the response, becomes unsettled or needs care. Do not echo crying, coughing or other signs of discomfort.",
+    "avoid_prompt": "No “Say it again”, “Copy me”, required eye contact, sound tests or performance rewards.",
+    "source_note": "Original MIRA draft, not a reproduction or endorsement by a source organisation. Linked claims concern general practice or programmes, not this activity's efficacy. The proposed ages, timing, requirements and variations need independent exact-version review.",
+    "materials": [],
+    "setting": [
+      "A familiar indoor place; no relocation or reaching"
+    ],
+    "support_ladder": [
+      "Acknowledge the child's contribution.",
+      "Offer fewer words or quiet company if welcome.",
+      "Stop rather than requiring a response."
+    ],
+    "observation_prompts": [
+      "You may record the sound and your response, without scoring accuracy or counting exchanges. Do not infer hearing, language level or ability from this moment.",
+      "Was there anything about your response or the setting you would change? Recording a note is optional."
+    ],
+    "hazards": [
+      "Adult attention diverted from essential care",
+      "Pressure to respond or continue",
+      "Unwanted sound or communication demand",
+      "Unsafe movement or reaching if the stated setting is changed"
+    ],
+    "domain": "language",
+    "experience_type": "embedded",
+    "cleanup_level": "none",
+    "cost_level": "none",
+    "caregiver_skill_level": "basic",
+    "screen_requirement": "none",
+    "energy_level": "quiet",
+    "supervision_level": "continuous",
+    "min_age_months": 6,
+    "max_age_months": 23,
+    "duration_minutes": 2,
+    "setup_minutes": 0,
+    "context_requirements": {
+      "schema_version": 1,
+      "max_valid_days": 1,
+      "checks": [
+        {
+          "id": "settled_indoor_moment",
+          "category": "environment",
+          "statement": "We can use a familiar indoor place without moving, reaching or interrupting essential care."
+        },
+        {
+          "id": "attentive_caregiver",
+          "category": "supervision",
+          "statement": "An adult familiar with the child's communication can remain attentive throughout."
+        },
+        {
+          "id": "invitation_readiness",
+          "category": "readiness",
+          "statement": "My child has offered a comfortable sound, and a quiet acknowledgement or echo is already welcome to them."
+        },
+        {
+          "id": "individual_guidance",
+          "category": "restrictions",
+          "statement": "I have checked the listed exclusions and any individual care or communication guidance; this invitation does not conflict with them."
+        }
+      ],
+      "not_required": {
+        "materials": "This exact invitation introduces and handles no objects. This is not approval for material substitutions."
+      }
+    }
+  },
+  "associations": {
+    "capabilities": [
+      {
+        "code": "communication_language",
+        "emphasis": "primary",
+        "rationale": "Offers a response to voluntary communication without training a sound."
+      },
+      {
+        "code": "relationships_attachment",
+        "emphasis": "supporting",
+        "rationale": "Keeps the adult responsive to the child's invitation and ending."
+      }
+    ],
+    "tracks": []
+  },
+  "claims": [
+    {
+      "claimId": "responsive-exchange",
+      "claimFingerprint": "6a1936bfad594be15fb205cc03008968e2a189ee258a142152b051af0cf25e1b",
+      "sourceIds": [
+        "who-ecd-2020",
+        "harvard-responsive",
+        "jeong-2021"
+      ],
+      "wording": "Responsive caregiver-child interaction is a supported general direction for early-learning programmes.",
+      "applicability": "General mechanism and programme-level evidence This is background only; the exact MIRA candidate has not been evaluated.",
+      "notSupported": "A particular MIRA script, number of turns or developmental outcome. The proposed age band and planning minutes are not validated prescriptions.",
+      "support": "general_mechanism"
+    }
+  ],
+  "personalization": "none"
+}

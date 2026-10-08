@@ -1,0 +1,290 @@
+{
+  "compilerVersion": "mira-research-drafts-2",
+  "catalogVersion": "research-foundation-2026-10-01.2",
+  "catalogHash": "bddba6dc06b6d5dbb4f9a028a474035f992c015b21251fa6c5edbf0b9268ac6a",
+  "familyDataSent": false,
+  "stacks": [
+    {
+      "primitiveId": "responsive-turn",
+      "status": "unreviewed_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-01T14:11:48.771Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "e481fe1c5aec7ec3f181e6a7d7b9a518462824c383fba4c362c5832c6c6212bb",
+      "promptTokens": 533,
+      "completionTokens": 330,
+      "latencyMs": 10205,
+      "drafts": [
+        {
+          "title": "Quiet Shared Moment",
+          "invitation": "If you want to, notice what the child is doing with their body or face—like a pause, a glance, or a soft sound. Respond with a gentle, matching expression or tone, then pause and wait. If the child turns away or stops, you can gently rest. The next signal, if any, is theirs to offer.",
+          "caregiverWords": "Match their rhythm with a soft sound or expression, then stay open and still. Let them lead the next move.",
+          "observation": "If you want to, notice if the child shifts their gaze, breathes differently, or makes a small movement—like a hand lift or a smile—then respond in kind and wait.",
+          "claimIds": [
+            "responsive-exchange",
+            "play-communication"
+          ]
+        },
+        {
+          "title": "Familiar Routine",
+          "invitation": "If you want to, notice if the child makes a quiet sound, a pause, or a small gesture during the routine—like a blink, a breath, or a hand movement. Respond with a soft, matching sound or expression, then pause and wait. If the child turns away or stops, you can gently rest. The next signal, if any, is theirs to offer.",
+          "caregiverWords": "Follow their quiet cue with a gentle echo—voice, face, or movement—and then stay open and still. Let them lead the next step.",
+          "observation": "If you want to, notice if the child shifts their weight, looks away, or makes a soft sound—then respond in kind and wait.",
+          "claimIds": [
+            "responsive-exchange",
+            "play-communication"
+          ]
+        }
+      ],
+      "validationIssue": null,
+      "rejectedOutput": null
+    },
+    {
+      "primitiveId": "shared-attention",
+      "status": "unreviewed_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-01T14:12:59.525Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "d02c2e98c50a166705fac0b27a5af00896c7f360efbc78fe62eb88cee2ee1216",
+      "promptTokens": 545,
+      "completionTokens": 373,
+      "latencyMs": 7097,
+      "drafts": [
+        {
+          "title": "Noticing What’s There",
+          "invitation": "If you want to, notice what the child is looking at—whether it’s a shadow on the wall, a bird outside the window, or a pattern in the carpet. Offer a brief, gentle comment like, 'I see the red bird flying' or 'That shape looks like a cloud.' Let the child lead; they can turn away or stop at any time. No need to respond, name, or explain—just follow their gaze and share the moment.",
+          "caregiverWords": "Keep your words simple and optional. Use only what you see, and let the child decide if they want to continue.",
+          "observation": "If you want to, notice whether the child looks back at you, shifts focus, or stays with the object of attention. Watch for any subtle cues that they’re ready to move on.",
+          "claimIds": [
+            "responsive-exchange",
+            "play-communication"
+          ]
+        },
+        {
+          "title": "Watching the World from Here",
+          "invitation": "If you want to, notice what the child is seeing through the window—maybe a tree swaying, a car passing, or a patch of sunlight. Share a quiet, brief observation like, 'The leaves are moving' or 'That car is going fast.' Stay in your current spot and let the child guide the focus. They can look away, close their eyes, or stop at any moment—no pressure to respond or continue.",
+          "caregiverWords": "Speak softly and only if the child seems engaged. Use what’s visible, not what you imagine.",
+          "observation": "If you want to, notice whether the child follows your comment with a glance, a pause, or a shift in posture. Watch for any sign they’re no longer interested.",
+          "claimIds": [
+            "responsive-exchange",
+            "play-communication"
+          ]
+        }
+      ],
+      "validationIssue": null,
+      "rejectedOutput": null
+    },
+    {
+      "primitiveId": "shared-book",
+      "status": "unreviewed_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-01T14:13:07.591Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "c2dcacb8663240a923b2e918bcf304806928e01f88e3fae8a8d1c3a4601aaa48",
+      "promptTokens": 537,
+      "completionTokens": 323,
+      "latencyMs": 8055,
+      "drafts": [
+        {
+          "title": "Familiar Picture",
+          "invitation": "If you want to, notice what the child is looking at in the book. Follow their focus and say just one thing about what they’re seeing—no need to name it or explain. Let them lead the next move. They can turn away or stop at any time.",
+          "caregiverWords": "Say only what you see, in a quiet, open way—like 'Hmm, the sky is a bit wobbly here' or 'Look at how the dog’s tail is moving.' Keep it simple and real.",
+          "observation": "If you want to, notice if the child looks back at the book, shifts their gaze, or turns away—no need to respond to any of it.",
+          "claimIds": [
+            "responsive-exchange",
+            "shared-reading"
+          ]
+        },
+        {
+          "title": "Returning to a Favourite Page",
+          "invitation": "If you want to, notice if the child returns to the same page. Follow their lead and say just one thing about what’s there—no need to repeat or explain. Let them decide what happens next. They can turn away or stop at any time.",
+          "caregiverWords": "Say only what you see, in a quiet, open way—like 'The tree is still there' or 'The little one is smiling again.' Keep it simple and real.",
+          "observation": "If you want to, notice if the child touches the page, points, looks away, or stays still—no need to respond to any of it.",
+          "claimIds": [
+            "responsive-exchange",
+            "shared-reading"
+          ]
+        }
+      ],
+      "validationIssue": null,
+      "rejectedOutput": null
+    },
+    {
+      "primitiveId": "routine-language",
+      "status": "unreviewed_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-01T14:13:15.654Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "9c3f36d8e20003493cc1f49fa16c2693c01671d3a6cd028e1f646f2d05079c6f",
+      "promptTokens": 516,
+      "completionTokens": 351,
+      "latencyMs": 8061,
+      "drafts": [
+        {
+          "title": "Getting ready to leave a room",
+          "invitation": "If you want to, notice what the child is doing or looking at as you prepare to move. Use a few simple words that match what you see—like 'Time to go now,' or 'We’re leaving the toys behind.' Let the child respond in their own way, or turn away if they choose. You can pause and wait, or keep moving, depending on what feels right for both of you.",
+          "caregiverWords": "Keep your words brief and match what’s happening. If the child looks away or doesn’t respond, that’s okay—just continue with the routine.",
+          "observation": "If you want to, notice whether the child looks at you, makes a sound, or shifts their body in response to your words, or if they turn away or stay still.",
+          "claimIds": [
+            "play-communication",
+            "family-fit"
+          ]
+        },
+        {
+          "title": "Greeting a familiar caregiver",
+          "invitation": "If you want to, notice what the child does as the familiar caregiver arrives—whether they look up, move toward them, or stay still. Use a simple phrase that matches the moment, like 'There you are!' or 'You’re back!' Keep your tone warm and natural. Let the child respond in their own way, or stop looking if they choose.",
+          "caregiverWords": "Use a short, gentle phrase that reflects what’s happening. If the child doesn’t respond, that’s okay—just continue with the greeting.",
+          "observation": "If you want to, notice whether the child turns toward the caregiver, makes a sound, or shifts their body, or if they look away or stay still.",
+          "claimIds": [
+            "play-communication",
+            "family-fit"
+          ]
+        }
+      ],
+      "validationIssue": null,
+      "rejectedOutput": null
+    },
+    {
+      "primitiveId": "responsive-imitation",
+      "status": "unreviewed_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-01T14:13:24.070Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "723a73d55fb646955768b39fcb48fa2f68e86c59f5d9b83adde1c0c03b8cd0b3",
+      "promptTokens": 484,
+      "completionTokens": 355,
+      "latencyMs": 8413,
+      "drafts": [
+        {
+          "title": "A sound the child chooses",
+          "invitation": "If you want to, notice the sound or expression the child offers—like a hum, a grunt, or a vocalization—and gently echo it back in your own voice, matching the pitch and rhythm. You can say nothing else, just mirror the sound. The child can turn away or stop at any time.",
+          "caregiverWords": "Echo the child’s sound softly, as if sharing a quiet moment. Keep your tone warm and open, not demanding or performative.",
+          "observation": "If you want to, notice whether the child pauses, shifts, or responds with another sound—like a change in pitch, a new vocalization, or a pause that feels like a turn in a quiet conversation.",
+          "claimIds": [
+            "responsive-exchange"
+          ]
+        },
+        {
+          "title": "An expression the child offers",
+          "invitation": "If you want to, notice the facial expression, gesture, or body movement the child makes—like a smile, a hand lift, or a tilt of the head—and gently reflect it in your own face or posture. You can do this without words, just by mirroring the shape or rhythm of the movement. The child can turn away or stop at any time.",
+          "caregiverWords": "Match the child’s expression with your own, as if you’re sharing a silent moment. Let your face or body follow the shape of theirs, not to copy perfectly, but to reflect the spirit",
+          "observation": "If you want to, notice whether the child holds the expression longer, shifts it, or moves into a new gesture—like a blink, a turn of the head, or a change in posture that feels like a quiet exchange.",
+          "claimIds": [
+            "responsive-exchange"
+          ]
+        }
+      ],
+      "validationIssue": null,
+      "rejectedOutput": null
+    },
+    {
+      "primitiveId": "shared-story",
+      "status": "unreviewed_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-01T14:13:32.544Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "4074d3cfa94954d2826947c96b96d0d58a6435c360eef8594ef2c979c7722fca",
+      "promptTokens": 516,
+      "completionTokens": 381,
+      "latencyMs": 8470,
+      "drafts": [
+        {
+          "title": "A greeting that just happened",
+          "invitation": "If you want to, notice what the child does when someone says hello in the room—like a wave, a smile, or turning toward the voice. Then, gently share a short, true moment from your day: 'I saw a blue bird hop on the fence while I was walking in. It looked at me, then flew away.' Let the child respond in their own way—no need to talk, just be together. They can turn away or stop at any time. CaregiverWords: 'Tell me what you see, or just watch with me.'",
+          "caregiverWords": "Tell me what you see, or just watch with me.",
+          "observation": "If you want to, notice if the child looks toward the speaker, shifts their body, or makes a small sound in response to the greeting.",
+          "claimIds": [
+            "play-communication",
+            "family-fit"
+          ]
+        },
+        {
+          "title": "An ordinary sound in the room",
+          "invitation": "If you want to, notice what the child does when they hear a familiar sound—like a door closing, a clock ticking, or a cup being set down. Then, share a brief, true moment: 'I heard the kettle whistle, so I went to pour water. It made a little song, didn’t it?' Let the child respond in their own way—no need to talk, just be together. They can turn away or stop at any time. CaregiverWords: 'Tell me what you hear, or just listen with me.'",
+          "caregiverWords": "Tell me what you hear, or just listen with me.",
+          "observation": "If you want to, notice if the child pauses, turns their head, or makes a soft sound in response to the sound in the room.",
+          "claimIds": [
+            "play-communication",
+            "family-fit"
+          ]
+        }
+      ],
+      "validationIssue": null,
+      "rejectedOutput": null
+    },
+    {
+      "primitiveId": "follow-pretend",
+      "status": "rejected_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-01T14:13:41.189Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "04df4d9a042508332105831dd6da7a833bd671d57408097c26ae3012d712ddd6",
+      "promptTokens": 597,
+      "completionTokens": 388,
+      "latencyMs": 8640,
+      "drafts": [],
+      "validationIssue": "Draft failed the local content contract; editorial review required.",
+      "rejectedOutput": {
+        "drafts": [
+          {
+            "title": "Join the Adventure",
+            "invitation": "If the child begins pretending—like pretending a block is a spaceship or a blanket is a cape—follow their lead by describing what you see in their world. Use simple, open-ended phrases like 'I see you're flying to the moon' or 'The dragon is guarding the castle.' If you want to, notice how the child responds to your words—whether they expand the story, change the direction, or pause. The child can turn away or stop at any time. No new props, roles, or demands are needed.",
+            "caregiverWords": "Describe only what you observe in the child’s pretend world, using their cues to shape your language. Keep it light and open-ended.",
+            "observation": "If you want to, notice whether the child continues the idea, shifts focus, or disengages—without interpreting their actions as signs of learning or emotion.",
+            "claimIds": [
+              "child-led-play-context"
+            ]
+          },
+          {
+            "title": "Follow the Shift",
+            "invitation": "If the child changes the pretend idea—like turning a toy car into a submarine or a chair into a pirate ship—follow their new direction by mirroring their actions and naming the shift. Say things like 'Now it’s a submarine diving deep' or 'The chair is a ship sailing the sea.' If you want to, notice how the child responds to your words—whether they continue, redirect, or stop. The child can turn away or stop at any time. No new props, roles, or demands are needed.",
+            "caregiverWords": "Use their shift as a cue to adjust your language, staying in step with their imagination.",
+            "observation": "If you want to, notice whether the child maintains the new idea, alters it further, or disengages—without interpreting their actions as signs of learning or emotion.",
+            "claimIds": [
+              "child-led-play-context"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "primitiveId": "notice-comparison",
+      "status": "unreviewed_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-01T14:13:50.668Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "364a6a9359a0af5eea17ca7facba36312deacbce41b88de58119d01fe34c80dd",
+      "promptTokens": 592,
+      "completionTokens": 385,
+      "latencyMs": 9472,
+      "drafts": [
+        {
+          "title": "Notice the difference they see",
+          "invitation": "If you want to, notice how they’re pointing or looking at something that’s different—like one thing being taller, wider, or a different color than another. Say something like, 'I see you’re looking at how this one is longer than that one.' Then pause and let them lead. They can turn away or stop at any time. No need to name it, fix it, or ask what they see.'",
+          "caregiverWords": "Acknowledge the difference they’re noticing without naming it for them. Use simple, descriptive language that matches what they’re observing. Keep your tone calm and open.",
+          "observation": "If you want to, notice whether they continue to look at the difference, shift focus, or move away. Watch for any small gestures like a tilt of the head, a pause, or a change in breath.",
+          "claimIds": [
+            "child-led-play-context",
+            "guided-play-limits"
+          ]
+        },
+        {
+          "title": "Follow the similarity they spot",
+          "invitation": "If you want to, notice when they point to something that seems the same—like two shapes that look alike, or two things that are both shiny. Say something like, 'You’re noticing that these two are kind of alike.' Then wait. Let them decide what happens next. They can turn away or stop at any time. Don’t ask if they see it, don’t explain it, don’t name it.'",
+          "caregiverWords": "Reflect the similarity they’re noticing using their own words or simple descriptions. Stay close to what they’re observing, not what you think it should be.",
+          "observation": "If you want to, notice whether they hold their gaze, reach toward one, or look away. Watch for subtle shifts in attention or body position that signal interest or release.",
+          "claimIds": [
+            "child-led-play-context",
+            "guided-play-limits"
+          ]
+        }
+      ],
+      "validationIssue": null,
+      "rejectedOutput": null
+    }
+  ],
+  "failures": [],
+  "pendingPrimitiveIds": [],
+  "compilationComplete": true,
+  "publicationAllowed": false
+}

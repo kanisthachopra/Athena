@@ -1,35 +1,34 @@
 "use client";
-
 import { saveFeedback } from "@/app/activity/actions";
 import { LoaderCircle } from "lucide-react";
-import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
+import { useActionState, useState } from "react";
+import { challengeLabels, engagementLabels, type ActivityObservation } from "@/lib/activity-observation";
 
-type InitialFeedback = {
-  engagement: "low" | "medium" | "high";
-  challenge_level: "easy" | "just_right" | "stretch";
-  repeated: boolean;
-  parent_note: string | null;
-};
-
-function SaveButton({ editing }: { editing: boolean }) {
-  const { pending } = useFormStatus();
-  return <button className="button-primary w-full" disabled={pending}>{pending ? <><LoaderCircle className="animate-spin" size={17} /> {editing ? "Updating…" : "Saving…"}</> : editing ? "Update observation" : "Save what happened"}</button>;
-}
-
-export function FeedbackForm({ instanceId, initial = null, returnTo = "/today" }: { instanceId: string; initial?: InitialFeedback | null; returnTo?: string }) {
-  const [state, action] = useActionState(saveFeedback, { error: null });
-  const editing = initial !== null;
-  return (
-    <form action={action} className="space-y-6">
-      <input type="hidden" name="instanceId" value={instanceId} />
-      <input type="hidden" name="returnTo" value={returnTo} />
-      <fieldset><legend className="text-sm font-semibold">How engaged were they?</legend><div className="mt-3 grid grid-cols-3 gap-2">{[["low", "Not today"], ["medium", "Some interest"], ["high", "Loved it"]].map(([value, label]) => <label key={value} className="cursor-pointer rounded-xl border border-black/10 bg-white p-3 text-center text-sm has-[:checked]:border-[#829378] has-[:checked]:bg-[#eef3ea]"><input className="sr-only" type="radio" name="engagement" value={value} defaultChecked={initial?.engagement === value} required />{label}</label>)}</div></fieldset>
-      <fieldset><legend className="text-sm font-semibold">How did the challenge feel?</legend><div className="mt-3 grid grid-cols-3 gap-2">{[["easy", "Very easy"], ["just_right", "Just right"], ["stretch", "A stretch"]].map(([value, label]) => <label key={value} className="cursor-pointer rounded-xl border border-black/10 bg-white p-3 text-center text-sm has-[:checked]:border-[#829378] has-[:checked]:bg-[#eef3ea]"><input className="sr-only" type="radio" name="challenge" value={value} defaultChecked={initial?.challenge_level === value} required />{label}</label>)}</div></fieldset>
-      <label className="flex gap-3 rounded-xl bg-[#f3eee3] p-4 text-sm"><input className="size-4 accent-[#52634e]" type="checkbox" name="repeated" defaultChecked={initial?.repeated ?? false} /><span>They chose to repeat part of it</span></label>
-      <label className="block"><span className="mb-2 block text-sm font-semibold">Anything you noticed? <span className="font-normal text-ink/40">Optional</span></span><textarea className="mira-input min-h-28 resize-y" name="note" maxLength={1000} defaultValue={initial?.parent_note ?? ""} placeholder="She ignored the cups but spent ages arranging the spoons…" /></label>
-      {state.error && <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{state.error}</p>}
-      <SaveButton editing={editing} />
-    </form>
-  );
+export function FeedbackForm({ instanceId, templateId, initial = null, returnTo = "/today" }: { instanceId: string; templateId: string | null; initial?: ActivityObservation | null; returnTo?: string }) {
+  const [state, action, pending] = useActionState(saveFeedback, { error: null });
+  const [engagement, setEngagement] = useState(initial?.engagement ?? "");
+  const [challenge, setChallenge] = useState(initial?.challenge_level ?? "");
+  const [repeated, setRepeated] = useState(initial?.repeated == null ? "" : initial.repeated ? "yes" : "no");
+  const [note, setNote] = useState(initial?.parent_note ?? "");
+  return <form action={action} className="space-y-6" aria-busy={pending}>
+    <input type="hidden" name="instanceId" value={instanceId} />
+    <input type="hidden" name="templateId" value={templateId ?? ""} />
+    <input type="hidden" name="revision" value={initial?.revision ?? 0} />
+    <input type="hidden" name="returnTo" value={returnTo} />
+    <p className="text-sm leading-6 text-muted-foreground">Every answer is optional. A blank answer means you did not record it—not that it did not happen.</p>
+    <fieldset disabled={pending} className="grid min-w-0 gap-6">
+      <legend className="sr-only">Your observation</legend>
+      <label className="block"><span className="mb-2 block font-semibold">What did you notice?</span><textarea className="mira-input min-h-28 resize-y" name="note" maxLength={1000} value={note} onChange={event=>setNote(event.target.value)} placeholder="What happened, in your own words…" /></label>
+      <details className="preparation-details" open={initial !== null || undefined}>
+        <summary className="min-h-11 cursor-pointer py-3">Add or review a few details</summary>
+        <div className="grid gap-5 py-4 sm:grid-cols-2">
+          <label><span className="mb-2 block text-sm font-semibold">Interest during this experience</span><select className="mira-input" name="engagement" value={engagement} onChange={event=>setEngagement(event.target.value as typeof engagement)}><option value="">Not recorded</option>{Object.entries(engagementLabels).map(([value,label])=><option key={value} value={value}>{label}</option>)}</select></label>
+          <label><span className="mb-2 block text-sm font-semibold">How the challenge felt</span><select className="mira-input" name="challenge" value={challenge} onChange={event=>setChallenge(event.target.value as typeof challenge)}><option value="">Not recorded</option>{Object.entries(challengeLabels).map(([value,label])=><option key={value} value={value}>{label}</option>)}</select></label>
+          <label className="sm:col-span-2"><span className="mb-2 block text-sm font-semibold">Did they choose to repeat any of it?</span><select className="mira-input" name="repeated" value={repeated} onChange={event=>setRepeated(event.target.value)}><option value="">Not recorded</option><option value="yes">Yes, they chose to repeat it</option><option value="no">No, not this time</option></select></label>
+        </div>
+      </details>
+      <button className="button-primary justify-self-start" disabled={pending}>{pending ? <><LoaderCircle aria-hidden="true" className="animate-spin" size={17} /> Saving observation…</> : initial ? "Update observation" : "Save observation"}</button>
+    </fieldset>
+    {state.error && <p role="alert" className="text-sm leading-7 text-destructive">{state.error}</p>}
+  </form>;
 }

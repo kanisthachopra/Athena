@@ -1,7 +1,13 @@
 import { AppHeader } from "@/components/app-header";
-import { AddChildForm } from "@/components/add-child-form";
+import { ProfileCreationForm } from "@/components/profile-creation-form";
+import { randomUUID } from "node:crypto";
+import { loadFamilyCalendar, calendarLabel } from "@/lib/family-calendar";
+import { birthMonthLabel } from "@/lib/child-profile";
 import { FamilyInviteForm } from "@/components/family-invite-form";
 import { FamilyNameForm } from "@/components/family-name-form";
+import { FamilyLanguageContexts, type FamilyLanguageGoal } from "@/components/family-language-contexts";
+import { FamilyLearningDirections } from "@/components/family-learning-directions";
+import { parseDirectionsSnapshot } from "@/lib/learning-directions";
 import { requireFamilyContext } from "@/lib/family-context";
 import { Archive, Baby, Check, Clock3, Mail, Pencil, Settings2, ShieldCheck, Trash2, UserRound, Users } from "lucide-react";
 import Link from "next/link";
@@ -11,6 +17,12 @@ export const metadata = { title: "Family" };
 
 export default async function FamilyPage() {
   const { supabase, userId, family, children, archivedChildren, activeChild, membership } = await requireFamilyContext();
+  const [languagesResult, caregiversResult, calendar, directionsResult] = await Promise.all([
+    supabase.from("child_language_goals").select("id,language_code,environment,environment_revision").eq("child_id", activeChild.id).order("created_at"),
+    supabase.from("caregivers").select("id,display_name").eq("family_id", membership.family_id).order("created_at"),
+    membership.role !== "viewer" ? loadFamilyCalendar(supabase, membership.family_id).catch(()=>null) : Promise.resolve(null),
+    supabase.rpc("get_aspiration_directions", { p_child_id: activeChild.id }),
+  ]);
   const { data: memberData } = await supabase.rpc("list_family_members", { p_family_id: membership.family_id });
   const members = (memberData ?? []) as { user_id: string; email: string; role: "owner" | "caregiver" | "viewer"; joined_at: string }[];
   const { data: invitationData } = membership.role === "owner"
@@ -26,12 +38,16 @@ export default async function FamilyPage() {
       <section className="mt-10 grid gap-4 sm:grid-cols-2">
         {children.map((child) => {
           const active = child.id === activeChild.id;
-          const birthDate = new Intl.DateTimeFormat("en", { month: "long", year: "numeric" }).format(new Date(child.birth_year, child.birth_month - 1, 1));
-          return <article key={child.id} className={`rounded-[1.75rem] border p-6 ${active ? "border-[#829378] bg-[#eef3ea]" : "border-black/5 bg-paper"}`}><div className="flex items-start justify-between gap-4"><div className="grid size-12 place-items-center rounded-2xl bg-[#dce4d6] text-[#52634e]"><Baby size={21} /></div>{active && <span className="flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#52634e]"><Check size={13} /> Active</span>}</div><h2 className="mt-5 font-serif text-2xl font-semibold">{child.nickname}</h2><p className="mt-1 text-sm text-ink/45">Born {birthDate}</p><div className="mt-5 flex flex-wrap gap-2">{!active && <form action={switchChild}><input type="hidden" name="childId" value={child.id} /><input type="hidden" name="returnTo" value="/today" /><button className="button-primary" type="submit">Switch to {child.nickname}</button></form>}<Link href={`/family/child/${child.id}`} className="button-ghost gap-2"><Pencil size={15} /> Manage profile</Link></div></article>;
+          const birthDate = birthMonthLabel(child.birth_year, child.birth_month);
+          return <article key={child.id} className={`rounded-xl border p-6 ${active ? "border-[#b89bc1] bg-[#f1eaf3]" : "border-black/5 bg-paper"}`}><div className="flex items-start justify-between gap-4"><div className="grid size-12 place-items-center rounded-2xl bg-[#e7dceb] text-[#63486b]"><Baby size={21} /></div>{active && <span className="flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#63486b]"><Check size={13} /> Active</span>}</div><h2 className="mt-5 font-serif text-2xl font-semibold">{child.nickname}</h2><p className="mt-1 text-sm text-ink/45">Born {birthDate}</p><div className="mt-5 flex flex-wrap gap-2">{!active && <form action={switchChild}><input type="hidden" name="childId" value={child.id} /><input type="hidden" name="returnTo" value="/today" /><button className="button-primary" type="submit">Switch to {child.nickname}</button></form>}<Link href={`/family/child/${child.id}`} className="button-ghost gap-2"><Pencil size={15} /> Manage profile</Link></div></article>;
         })}
       </section>
 
-      {membership.role !== "viewer" && <section className="profile-section mt-8"><p className="eyebrow">Add another child</p><h2 className="mt-3 font-serif text-3xl font-semibold">Create a separate learning journey</h2><p className="mt-3 max-w-2xl text-sm leading-6 text-ink/55">Each child gets their own aspirations, plans, feedback, and insights. A nickname is enough.</p><AddChildForm /></section>}
+      <FamilyLanguageContexts key={activeChild.id} childId={activeChild.id} childName={activeChild.nickname} goals={(languagesResult.data ?? []) as FamilyLanguageGoal[]} caregivers={caregiversResult.data ?? []} readOnly={membership.role === "viewer"} unavailable={Boolean(languagesResult.error || caregiversResult.error)} />
+
+      <FamilyLearningDirections key={`directions-${activeChild.id}`} initial={parseDirectionsSnapshot(directionsResult.data, activeChild.id)} readOnly={membership.role === "viewer"} unavailable={Boolean(directionsResult.error)} />
+
+      {membership.role !== "viewer" && <section id="add-child" className="profile-section mt-8 scroll-mt-28"><h2 className="font-serif text-3xl font-semibold">Add another child</h2><p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">Each child has their own profile, plans and observations.</p>{calendar ? <><ProfileCreationForm key={membership.family_id} mode="child" familyId={membership.family_id} requestId={randomUUID()} today={calendar.today} /><p className="mt-5 text-sm leading-6 text-muted-foreground">{calendarLabel(calendar)}</p></> : <p className="mt-5 text-sm leading-6" role="alert">Your family’s calendar could not be loaded. <a href="/family#add-child" className="underline underline-offset-4">Reload before adding a child</a>.</p>}</section>}
 
       {membership.role === "owner" && <section className="profile-section mt-8"><p className="eyebrow"><Settings2 size={15} /> Family details</p><h2 className="mt-3 font-serif text-3xl font-semibold">How MIRA names your space</h2><p className="mt-2 text-sm leading-6 text-ink/55">This name appears in the navigation and is shared with family members.</p><FamilyNameForm initialName={family?.display_name ?? "Your family"} /></section>}
 
@@ -39,9 +55,9 @@ export default async function FamilyPage() {
 
       <section className="profile-section mt-8">
         <p className="eyebrow"><ShieldCheck size={15} /> Family access</p>
-        <div className="mt-3 flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><h2 className="font-serif text-3xl font-semibold">The people learning together</h2><p className="mt-2 max-w-2xl text-sm leading-6 text-ink/55">Caregivers can plan and record observations. Viewers can follow the journey without making changes.</p></div><span className="w-fit rounded-full bg-sage/15 px-3 py-1.5 text-xs font-semibold capitalize text-[#52634e]">Your access: {membership.role}</span></div>
+        <div className="mt-3 flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><h2 className="font-serif text-3xl font-semibold">The people learning together</h2><p className="mt-2 max-w-2xl text-sm leading-6 text-ink/55">Caregivers can plan and record observations. Viewers can follow the journey without making changes.</p></div><span className="w-fit rounded-full bg-sage/15 px-3 py-1.5 text-xs font-semibold capitalize text-[#63486b]">Your access: {membership.role}</span></div>
         <div className="mt-6 divide-y divide-black/5 rounded-2xl border border-black/5 bg-white/70 px-5">
-          {members.map((member) => <div key={member.user_id} className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between"><div className="flex min-w-0 items-center gap-3"><span className="grid size-10 shrink-0 place-items-center rounded-full bg-sage/15 text-[#52634e]"><UserRound size={18} /></span><div className="min-w-0"><p className="truncate text-sm font-semibold">{member.email}{member.user_id === userId && " · You"}</p><p className="mt-0.5 text-xs capitalize text-ink/45">{member.role} · Joined {new Intl.DateTimeFormat("en", { month: "short", year: "numeric" }).format(new Date(member.joined_at))}</p></div></div>{membership.role === "owner" && member.user_id !== userId && member.role !== "owner" && <form action={removeFamilyMember}><input type="hidden" name="memberId" value={member.user_id} /><button className="button-ghost text-red-700" type="submit"><Trash2 size={15} /> Remove</button></form>}</div>)}
+          {members.map((member) => <div key={member.user_id} className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between"><div className="flex min-w-0 items-center gap-3"><span className="grid size-10 shrink-0 place-items-center rounded-full bg-sage/15 text-[#63486b]"><UserRound size={18} /></span><div className="min-w-0"><p className="truncate text-sm font-semibold">{member.email}{member.user_id === userId && " · You"}</p><p className="mt-0.5 text-xs capitalize text-ink/45">{member.role} · Joined {new Intl.DateTimeFormat("en", { month: "short", year: "numeric" }).format(new Date(member.joined_at))}</p></div></div>{membership.role === "owner" && member.user_id !== userId && member.role !== "owner" && <form action={removeFamilyMember}><input type="hidden" name="memberId" value={member.user_id} /><button className="button-ghost text-red-700" type="submit"><Trash2 size={15} /> Remove</button></form>}</div>)}
         </div>
 
         {membership.role === "owner" && <div className="mt-8 border-t border-black/5 pt-7"><p className="flex items-center gap-2 text-sm font-semibold"><Mail size={17} /> Invite someone you trust</p><p className="mt-2 text-sm leading-6 text-ink/50">Create an email-specific link, then send it using your usual messaging app. The recipient must sign in with that exact email.</p><FamilyInviteForm />

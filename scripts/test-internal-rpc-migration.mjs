@@ -1,0 +1,15 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+const sql = readFileSync(new URL("../supabase/migrations/202610010002_restrict_internal_rpc_access.sql", import.meta.url), "utf8");
+const statements = sql.replace(/--[^\n]*/g, "");
+const helpers = ["configure_learning_profile_internal", "generate_weekly_plan_internal", "generate_next_week_plan_internal", "record_activity_feedback_internal", "skip_activity_internal", "replace_planned_activity_internal", "populate_weekly_portfolio_internal"];
+const revoked = [...statements.matchAll(/revoke all on function public\.(\w+_internal)\([^;]*\) from public, anon, authenticated;/g)].map(match => match[1]);
+assert.deepEqual(revoked.sort(), [...helpers].sort());
+assert.match(statements, /^\s*begin;/);
+assert.match(statements, /commit;\s*$/);
+assert.match(statements, /has_function_privilege\('anon', signature, 'EXECUTE'\)/);
+assert.match(statements, /has_function_privilege\('authenticated', signature, 'EXECUTE'\)/);
+assert.match(statements, /raise exception/);
+assert.ok(!/\b(insert|update|delete|drop|truncate|grant)\b/i.test(statements));
+for (const helper of helpers) assert.ok(statements.includes(`'public.${helper}(`));
+console.log("Internal-RPC migration static checks pass: all seven helpers revoke anon/PUBLIC/authenticated, transactional effective-privilege guard, no data mutations. SQL execution and live ACL validation remain separate.");

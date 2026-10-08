@@ -1,0 +1,16 @@
+{
+  "batch": "batch-1-rejected.json",
+  "disposition": "rejected",
+  "reviewType": "development editorial inspection, not independent expert review",
+  "reason": "Passing schema checks did not ensure fidelity to primitive constraints.",
+  "findings": {
+    "responsive-turn": "Introduced feeding and dressing as contexts without an applicability review.",
+    "shared-attention": "Directed adult positioning and attention rather than consistently following the child's existing attention.",
+    "shared-book": "Invented book content and a prior family memory; reported hypothetical observations as facts.",
+    "routine-language": "Introduced objects and a task command; overstated learning interpretation.",
+    "responsive-imitation": "Interpreted breath and eyes as evidence of connection.",
+    "shared-story": "Invented personal memories and recorded hypothetical events as observations."
+  },
+  "publicationAllowed": false,
+  "correctiveAction": "Compiler v2 requires optional observable noticing, generic adult phrasing, explicit opt-out, no invented memory and no added care tasks. These filters are guardrails, not proof of safety."
+}

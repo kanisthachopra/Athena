@@ -1,0 +1,136 @@
+{
+  "format": "mira-activity-release-review",
+  "version": 1,
+  "instructions": "Review the complete release candidate identified by candidateFingerprint, not just its original AI invitation. Every check covers the final wording, materials, context questions, variations and associations. The embedded response retains source appraisal and reviewer evidence. Complete paperwork does not verify the reviewer or authorize publication.",
+  "candidateFingerprint": "28d217f62d2d22c7be8316e5f1c7ef4f6cc2f32f202c1e06c76d955ec6b9ad62",
+  "submission": {
+    "format": "mira-editorial-response",
+    "version": 1,
+    "packageFingerprint": "d3e62809c1b67bc62648e55e7371fc57c9b8216c16b3364cfb46f16932e7ed38",
+    "instructions": "Complete only checks within your expertise. Use acceptable, changes_required, outside_expertise or reject. Keep unknown fields null. Supply source locators and requested changes, not just a tick. A complete response is ready for an editorial decision, never automatic publication. Do not enter family or child data.",
+    "reviewers": [
+      {
+        "id": "reviewer-1",
+        "name": null,
+        "qualifications": null,
+        "relevantExpertise": null,
+        "conflictsOfInterest": null
+      }
+    ],
+    "sources": [
+      {
+        "sourceId": "naeyc-dap",
+        "sourceFingerprint": "1649a378bb53ed15974b73218dbcd3cc937eab8f11d1083141fd16249f7fe3ff",
+        "reviewerId": null,
+        "checkedOn": null,
+        "reviewDueOn": null,
+        "access": null,
+        "appraisal": null,
+        "limitations": null,
+        "rightsAssessment": null
+      },
+      {
+        "sourceId": "skene-guided-play-2022",
+        "sourceFingerprint": "11a85e22b72e926167665298fab79d7e120c8b93f5efe8000809bda250e121c4",
+        "reviewerId": null,
+        "checkedOn": null,
+        "reviewDueOn": null,
+        "access": null,
+        "appraisal": null,
+        "limitations": null,
+        "rightsAssessment": null
+      }
+    ],
+    "primitives": [
+      {
+        "primitiveId": "notice-comparison",
+        "contentFingerprint": "771870c3d3e79f17635d55a5aec6217969b99a4b7dd964ec9f25c29a5d2fc006",
+        "decision": null,
+        "decisionReviewerId": null,
+        "reviewedOn": null,
+        "reviewDueOn": null,
+        "draftIndices": [
+          0
+        ],
+        "ageMonths": {
+          "minimum": null,
+          "maximum": null
+        },
+        "readinessAndExclusions": null,
+        "languageVarieties": [],
+        "checks": [
+          {
+            "id": "evidence",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "applicability",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "materials",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "supervision",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "hazards",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "autonomy",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "wording",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "adaptation",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "language",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "rights",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          }
+        ]
+      }
+    ]
+  }
+}

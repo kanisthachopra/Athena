@@ -29,6 +29,7 @@ export type StructuredCompletion = {
   model: string;
   promptTokens: number;
   completionTokens: number;
+  usageKnown: boolean;
   latencyMs: number;
 };
 
@@ -49,9 +50,10 @@ async function requestOnce(args: {
   schemaName: string;
   schema: JsonSchema;
   maxTokens: number;
+  timeoutMs?: number;
 }) {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  const timer = setTimeout(() => controller.abort(), Math.min(45_000, Math.max(REQUEST_TIMEOUT_MS, args.timeoutMs ?? REQUEST_TIMEOUT_MS)));
 
   try {
     const response = await fetch(API_URL, {
@@ -103,6 +105,9 @@ export async function createStructuredCompletion(args: {
   schemaName: string;
   schema: JsonSchema;
   maxTokens?: number;
+  allowRetry?: boolean;
+  timeoutMs?: number;
+  beforeRequest?: () => Promise<void>;
 }): Promise<StructuredCompletion> {
   const apiKey = process.env.NEBIUS_API_KEY;
   if (!apiKey) throw new AiProviderError("Nebius is not configured.", "not_configured");
@@ -113,8 +118,10 @@ export async function createStructuredCompletion(args: {
     Math.max(MIN_MAX_TOKENS, args.maxTokens ?? DEFAULT_MAX_TOKENS),
   );
   const startedAt = Date.now();
+  await args.beforeRequest?.();
   let result = await requestOnce({ ...args, apiKey, model, maxTokens });
-  if (result.error && result.retryable) {
+  if (result.error && result.retryable && args.allowRetry !== false) {
+    await args.beforeRequest?.();
     result = await requestOnce({ ...args, apiKey, model, maxTokens });
   }
   if (result.error) throw result.error;
@@ -133,6 +140,10 @@ export async function createStructuredCompletion(args: {
       model: result.data.model || model,
       promptTokens: result.data.usage?.prompt_tokens ?? 0,
       completionTokens: result.data.usage?.completion_tokens ?? 0,
+      usageKnown: Number.isSafeInteger(result.data.usage?.prompt_tokens)
+        && Number.isSafeInteger(result.data.usage?.completion_tokens)
+        && (result.data.usage?.prompt_tokens ?? -1) >= 0
+        && (result.data.usage?.completion_tokens ?? -1) >= 0,
       latencyMs: Date.now() - startedAt,
     };
   } catch {

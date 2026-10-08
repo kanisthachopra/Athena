@@ -1,0 +1,142 @@
+{
+  "format": "mira-activity-release-candidate",
+  "version": 1,
+  "instructions": "Unpublished authoring candidate, not instructions for families. Complete missing fields and resolve the original drafting findings. Source links support only the stated general mechanism. Review the entire completed candidate, including questions, variations and associations. No field here approves or publishes content. Do not add family or child data.",
+  "origin": {
+    "packageFingerprint": "d3e62809c1b67bc62648e55e7371fc57c9b8216c16b3364cfb46f16932e7ed38",
+    "primitiveId": "routine-language",
+    "contentFingerprint": "e7f02b079bbe862ab4a2bc5b62cd71fda68a7a0deb4ab246eb2643a7e683f659",
+    "draftIndex": 1
+  },
+  "authoring": {
+    "languageVariety": "en",
+    "readiness": "Proposed for 12–35 months, pending independent review. A genuinely familiar caregiver is present and welcomed by the family. A settled greeting can happen without diverting attention from care.",
+    "exclusions": "Not a rehearsal for separation, a visitor-acclimatisation exercise or an exposure task. No forced contact, unfamiliar speaker, language substitution or care instruction.",
+    "changesFromDraft": "Replaced assumed family roles and performance prompts with the family's actual greeting. Removed added props/movement and any instruction about care. Language remains the adult's comfortable choice, not an inferred family trait.",
+    "unresolvedFindings": []
+  },
+  "template": {
+    "title": "An unhurried hello",
+    "summary": "Make a little room for your child in a greeting that is already happening.",
+    "instructions": "When a familiar caregiver is already greeting your child in a settled indoor moment, greet them in words you comfortably use. Leave room for your child to join in their own way. Answer what they actually offer, if anything, then carry on with the day. Do not stage an arrival or ask anyone to leave and return.",
+    "conversation_prompt": "Use the greeting you normally use with this person. There is no special phrase to learn or word for your child to repeat.",
+    "look_for": "If useful, note which people and language were actually part of the greeting. Silence does not establish comprehension, preference or lack of interest.",
+    "why_it_matters": "This keeps a language opportunity inside family life instead of adding a lesson. The source framework supports responsive communication; it does not prescribe a daily greeting quota or prove bilingual gains.",
+    "safety_note": "Keep ordinary care and safety first. This invitation adds no objects, touch or repositioning. Stay attentive throughout, use only the familiar setting described and stop whenever care is needed. Existing individual professional guidance takes priority.",
+    "parent_preparation": "Wait until the person is inside and any door, belongings or care task has been dealt with. Use a language you are comfortable communicating in. The one-minute estimate is not a target.",
+    "adult_role": "Leave room without putting the child on display. Support their preferred greeting, including no greeting.",
+    "child_choices": "They can acknowledge the person, stay with what they were doing or decline. A wave, word, eye contact, hug or kiss is never required.",
+    "make_easier": "Greet the caregiver yourself and carry on without inviting a response.",
+    "extend_activity": "If your child starts a further exchange, respond naturally. Do not add a new language, translation drill or repeated practice.",
+    "stop_signals": "End the invitation if the child declines, turns away, seems uncomfortable or needs you. Do not delay essential care to finish a greeting.",
+    "avoid_prompt": "Avoid “Say hello”, “Give them a kiss” and praise for performing on request. Do not assume which relative speaks which language.",
+    "source_note": "Original MIRA draft, not a reproduction or endorsement by a source organisation. Linked claims concern general practice or programmes, not this activity's efficacy. The proposed ages, timing, requirements and variations need independent exact-version review.",
+    "materials": [],
+    "setting": [
+      "A familiar indoor place; no relocation or reaching"
+    ],
+    "support_ladder": [
+      "Acknowledge the child's contribution.",
+      "Offer fewer words or quiet company if welcome.",
+      "Stop rather than requiring a response."
+    ],
+    "observation_prompts": [
+      "If useful, note which people and language were actually part of the greeting. Silence does not establish comprehension, preference or lack of interest.",
+      "Was there anything about your response or the setting you would change? Recording a note is optional."
+    ],
+    "hazards": [
+      "Adult attention diverted from essential care",
+      "Pressure to respond or continue",
+      "Unwanted sound or communication demand",
+      "Unsafe movement or reaching if the stated setting is changed"
+    ],
+    "domain": "language",
+    "experience_type": "embedded",
+    "cleanup_level": "none",
+    "cost_level": "none",
+    "caregiver_skill_level": "basic",
+    "screen_requirement": "none",
+    "energy_level": "quiet",
+    "supervision_level": "continuous",
+    "min_age_months": 12,
+    "max_age_months": 35,
+    "duration_minutes": 1,
+    "setup_minutes": 0,
+    "context_requirements": {
+      "schema_version": 1,
+      "max_valid_days": 1,
+      "checks": [
+        {
+          "id": "settled_indoor_moment",
+          "category": "environment",
+          "statement": "We can use a familiar indoor place without moving, reaching or interrupting essential care."
+        },
+        {
+          "id": "attentive_caregiver",
+          "category": "supervision",
+          "statement": "An adult familiar with the child's communication can remain attentive throughout."
+        },
+        {
+          "id": "invitation_readiness",
+          "category": "readiness",
+          "statement": "This is a settled greeting with a familiar caregiver; my child may choose not to respond or make contact."
+        },
+        {
+          "id": "individual_guidance",
+          "category": "restrictions",
+          "statement": "I have checked the listed exclusions and any individual care or communication guidance; this invitation does not conflict with them."
+        }
+      ],
+      "not_required": {
+        "materials": "This exact invitation introduces and handles no objects. This is not approval for material substitutions."
+      }
+    }
+  },
+  "associations": {
+    "capabilities": [
+      {
+        "code": "social_participation",
+        "emphasis": "primary",
+        "rationale": "Offers optional participation in a real family interaction."
+      },
+      {
+        "code": "communication_language",
+        "emphasis": "supporting",
+        "rationale": "Places familiar language in its actual social context."
+      }
+    ],
+    "tracks": [
+      {
+        "code": "languages",
+        "rationale": "A context for a caregiver's comfortable language, not a lesson or proficiency assessment."
+      }
+    ]
+  },
+  "claims": [
+    {
+      "claimId": "play-communication",
+      "claimFingerprint": "c37e848b532684b6c4be323418811215e48d3d1b704a25a1b5329839b3f29a53",
+      "sourceIds": [
+        "unicef-ccd",
+        "who-ecd-2020"
+      ],
+      "wording": "Play and everyday communication can be contexts for responsive caregiving.",
+      "applicability": "Implementation approach This is background only; the exact MIRA candidate has not been evaluated.",
+      "notSupported": "Any invented material substitution or activity being safe for a particular child. The proposed age band and planning minutes are not validated prescriptions.",
+      "support": "general_mechanism"
+    },
+    {
+      "claimId": "family-fit",
+      "claimFingerprint": "a70004f47e97c9f2a3f73df2ebaa44f261aec1a8e74e65d3f6ddcb724b15fa01",
+      "sourceIds": [
+        "who-nurturing-2018",
+        "who-ecd-2020"
+      ],
+      "wording": "Learning opportunities belong within supportive care and family needs.",
+      "applicability": "Framework-level guidance This is background only; the exact MIRA candidate has not been evaluated.",
+      "notSupported": "A scientifically established daily activity quota. The proposed age band and planning minutes are not validated prescriptions.",
+      "support": "general_mechanism"
+    }
+  ],
+  "personalization": "none"
+}

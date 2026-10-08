@@ -3,27 +3,28 @@
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { parseActivityObservation } from "@/lib/activity-observation";
 
 export type FeedbackState = { error: string | null };
 
 export async function saveFeedback(_previous: FeedbackState, formData: FormData): Promise<FeedbackState> {
-  const instanceId = String(formData.get("instanceId") ?? "");
-  const engagement = String(formData.get("engagement") ?? "");
-  const challenge = String(formData.get("challenge") ?? "");
+  let observation;
+  try { observation = parseActivityObservation(formData); }
+  catch (error) { return { error: error instanceof Error ? error.message : "Check your observation before saving." }; }
+  const { instanceId, ...args } = observation;
   const requestedReturn = String(formData.get("returnTo") ?? "/today");
   const returnTo = requestedReturn === `/activity/${instanceId}` ? requestedReturn : "/today";
-  if (!instanceId || !["low", "medium", "high"].includes(engagement) || !["easy", "just_right", "stretch"].includes(challenge)) return { error: "Choose an engagement and challenge level." };
   const supabase = await createClient();
   const { data: authData } = await supabase.auth.getClaims();
   if (!authData?.claims?.sub) redirect("/auth/login");
-  const { error } = await supabase.rpc("record_activity_feedback", {
-    p_instance_id: instanceId,
-    p_engagement: engagement,
-    p_challenge_level: challenge,
-    p_repeated: formData.get("repeated") === "on",
-    p_parent_note: String(formData.get("note") ?? "").trim() || null,
-  });
-  if (error) return { error: error.message };
+  let result;
+  try { result = await supabase.rpc("record_activity_observation_checked", args); }
+  catch { return { error: "The save could not be confirmed. Keep your note and reload the activity to check before retrying." }; }
+  if (result.error) return { error: result.error.message.includes("MIRA_STALE_OBSERVATION")
+    ? "This observation changed in another session. Keep your note and reload to compare before saving again."
+    : result.error.message.includes("MIRA_ACTIVITY_CHANGED") ? "This activity changed while you were writing. Keep your note and reload before saving."
+    : "The save could not be confirmed. Keep your note and reload the activity to check before retrying." };
+  if (!Number.isInteger(result.data) || result.data <= args.p_expected_revision) return { error: "MIRA could not confirm the saved observation. Reload to check before retrying." };
   revalidatePath("/today");
   revalidatePath("/week");
   revalidatePath("/insights");

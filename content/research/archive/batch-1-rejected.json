@@ -1,0 +1,204 @@
+{
+  "compilerVersion": "mira-research-drafts-1",
+  "catalogVersion": "research-foundation-2026-10-01.1",
+  "catalogHash": "fe9257d4462dc6ffa2e709a84711f53c5cc408a9f5274fc618dc4ceacf59332f",
+  "familyDataSent": false,
+  "stacks": [
+    {
+      "primitiveId": "responsive-turn",
+      "status": "unreviewed_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-01T03:20:48.658Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "0f3a87488bbeada28a3e14d7777d83db3dc855929510506f64b2c01663a048ed",
+      "promptTokens": 382,
+      "completionTokens": 243,
+      "latencyMs": 6775,
+      "drafts": [
+        {
+          "title": "Quiet Shared Moment: Gentle Echo",
+          "invitation": "When you notice your child makes a soft sound or lifts a hand, gently mirror it—like a quiet wave. Pause, breathe, and wait. If they signal again, respond with the same warmth. Let silence be part of the exchange.",
+          "caregiverWords": "I hear you. I’m here.",
+          "observation": "No need to interpret. Just be present.",
+          "claimIds": [
+            "responsive-exchange",
+            "play-communication"
+          ]
+        },
+        {
+          "title": "Familiar Routine: Morning Pause",
+          "invitation": "During a familiar moment—like dressing or feeding—pause when your child looks up or makes a small sound. Match their rhythm with a soft tone or gesture. Stay open. If they return to the moment, continue. If not, gently return to the flow.",
+          "caregiverWords": "Let’s take a breath together.",
+          "observation": "Their signal is enough. No need to fill the space.",
+          "claimIds": [
+            "responsive-exchange",
+            "play-communication"
+          ]
+        }
+      ]
+    },
+    {
+      "primitiveId": "shared-attention",
+      "status": "unreviewed_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-01T03:20:58.455Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "7e0f3095330c686b78fdb2269f817dbfda561385ef62291070a5f1c84dbdb65e",
+      "promptTokens": 394,
+      "completionTokens": 319,
+      "latencyMs": 9794,
+      "drafts": [
+        {
+          "title": "Noticing the Light on the Wall",
+          "invitation": "Sit together on the floor, facing the window. When you see a patch of sunlight move across the wall, pause and softly say, 'Look—there’s the light moving.' Then wait. If they glance over, you might add, 'It’s going across the wall.' If they look away, just stay still. No need to do more.",
+          "caregiverWords": "'Look—there’s the light moving.' 'It’s going across the wall.'",
+          "observation": "No need to interpret what they see. Just notice with them, if they choose to.",
+          "claimIds": [
+            "responsive-exchange",
+            "play-communication"
+          ]
+        },
+        {
+          "title": "Watching the Tree Outside",
+          "invitation": "Lean back in your chair, facing the window where you can see the tree. When you notice a leaf flutter or a branch shift, say quietly, 'The tree’s moving a little.' Then pause. If they turn to look, you might say, 'Yes—wind’s blowing it.' If they don’t, stay quiet. No need to guide or explain.",
+          "caregiverWords": "'The tree’s moving a little.' 'Yes—wind’s blowing it.'",
+          "observation": "Their attention is their own. You’re just sharing the moment, not leading it.",
+          "claimIds": [
+            "responsive-exchange",
+            "play-communication"
+          ]
+        }
+      ]
+    },
+    {
+      "primitiveId": "shared-book",
+      "status": "unreviewed_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-01T03:21:05.015Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "6d17c243ee2846beb470be3f5e6bf5bb5fb182089b7981d2766869c032135703",
+      "promptTokens": 386,
+      "completionTokens": 195,
+      "latencyMs": 6560,
+      "drafts": [
+        {
+          "title": "Familiar Picture: Gentle Revisit",
+          "invitation": "Let’s look at this page again—what do you notice this time?",
+          "caregiverWords": "I see the dog is wagging its tail. What’s the cat doing?",
+          "observation": "The child points to the sun in the corner.",
+          "claimIds": [
+            "responsive-exchange",
+            "shared-reading"
+          ]
+        },
+        {
+          "title": "Returning to a Favourite Page: Quiet Reconnection",
+          "invitation": "We’ve come back to your favorite part. What feels familiar here?",
+          "caregiverWords": "I remember you smiled when we saw the red balloon last time. Is it still there?",
+          "observation": "The child traces the balloon with a fingertip.",
+          "claimIds": [
+            "responsive-exchange",
+            "shared-reading"
+          ]
+        }
+      ]
+    },
+    {
+      "primitiveId": "routine-language",
+      "status": "unreviewed_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-01T03:21:13.111Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "15bc2abd74bd913174c5f7461959f0a41bdfec757976f49841ed53ea1075269d",
+      "promptTokens": 365,
+      "completionTokens": 261,
+      "latencyMs": 8095,
+      "drafts": [
+        {
+          "title": "Leaving the Room with Words",
+          "invitation": "As you gather your things before stepping out, name what you're doing in simple, warm tones—'Time to go, now. Shoes on, then the door.' Let your voice match the rhythm of the moment, not a lesson. The child hears you, not a script.",
+          "caregiverWords": "'We’re leaving this room. I’ll carry the bag. You hold your jacket.'",
+          "observation": "Notice if the child pauses, looks up, or reaches for something—these are quiet cues of attention.",
+          "claimIds": [
+            "play-communication",
+            "family-fit"
+          ]
+        },
+        {
+          "title": "Greeting the Familiar Caregiver",
+          "invitation": "When the caregiver arrives, greet them with a brief, natural phrase that names the moment—'There you are! I was just waiting for you.' Let your tone carry warmth, not performance. The child learns language through presence, not prompts.",
+          "caregiverWords": "'You’re here. I’m so glad to see you.'",
+          "observation": "Watch for a smile, a shift in posture, or a small sound—these are signs the moment is shared.",
+          "claimIds": [
+            "play-communication",
+            "family-fit"
+          ]
+        }
+      ]
+    },
+    {
+      "primitiveId": "responsive-imitation",
+      "status": "unreviewed_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-01T03:21:20.777Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "92ed9fbf9abbe1b4ae7df60dcfc790c4b550b727b054b96b8f746e11502a26ec",
+      "promptTokens": 333,
+      "completionTokens": 278,
+      "latencyMs": 7666,
+      "drafts": [
+        {
+          "title": "Shared Sound Moments",
+          "invitation": "When your child makes a sound—like a hum, a coo, or a laugh—pause gently and mirror it back with a soft, warm tone. Let the moment breathe. No need to prompt, repeat, or respond with words. Just be present in the sound they’ve offered.",
+          "caregiverWords": "Ah… yes, I hear that too.",
+          "observation": "Notice how the child’s expression shifts—perhaps a pause, a smile, or a new sound. No need to interpret. Just stay with the shared rhythm.",
+          "claimIds": [
+            "responsive-exchange"
+          ]
+        },
+        {
+          "title": "The Quiet Exchange",
+          "invitation": "When your child makes a sound or gesture—like a breathy sigh, a hand wave, or a soft grunt—respond with a quiet, matching expression. Match the tone, not the content. Let the exchange be gentle, unforced, and brief.",
+          "caregiverWords": "Mmm… I feel that too.",
+          "observation": "Watch for subtle shifts—eyes softening, breath slowing. These are not signs to act on, just signals of connection.",
+          "claimIds": [
+            "responsive-exchange"
+          ]
+        }
+      ]
+    },
+    {
+      "primitiveId": "shared-story",
+      "status": "unreviewed_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-01T03:21:26.754Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "6e7d07ca3d32e4104132d6de243a204bd07837eed8d80a0671d34d42c7bd6240",
+      "promptTokens": 365,
+      "completionTokens": 272,
+      "latencyMs": 5977,
+      "drafts": [
+        {
+          "title": "The Doorbell’s Pause",
+          "invitation": "I just heard the doorbell ring, but no one’s there. I stood still for a moment—just listening. Then I smiled. It reminded me of when you used to press it on your way in, even if you’d just come from the kitchen. The sound’s so small, but it says, ‘I’m here.’",
+          "caregiverWords": "I’m here.",
+          "observation": "The quiet after the ring felt full.",
+          "claimIds": [
+            "play-communication",
+            "family-fit"
+          ]
+        },
+        {
+          "title": "The Sock That Stole the Chair",
+          "invitation": "I was sitting here, and suddenly—my sock was on the chair. Not on my foot. Not in the laundry. Just… on the chair. I looked at it like it had a secret. Then I laughed. It must’ve slipped off when I sat down. Now it’s guarding the seat like a tiny sentry.",
+          "caregiverWords": "Guarding the seat like a tiny sentry.",
+          "observation": "The sock stayed put, as if waiting for a story.",
+          "claimIds": [
+            "play-communication",
+            "family-fit"
+          ]
+        }
+      ]
+    }
+  ]
+}

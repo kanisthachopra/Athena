@@ -12,11 +12,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: "#2d342e",
-        cream: "#f7f3e9",
-        paper: "#fffdf8",
-        coral: "#e39076",
-        sage: "#becbb3",
+        ink: "#322c35",
+        cream: "#fcfafd",
+        paper: "#ffffff",
+        coral: "#e5ba9a",
+        sage: "#eee5f0",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

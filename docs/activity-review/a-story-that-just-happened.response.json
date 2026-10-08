@@ -1,0 +1,147 @@
+{
+  "format": "mira-activity-release-review",
+  "version": 1,
+  "instructions": "Review the complete release candidate identified by candidateFingerprint, not just its original AI invitation. Every check covers the final wording, materials, context questions, variations and associations. The embedded response retains source appraisal and reviewer evidence. Complete paperwork does not verify the reviewer or authorize publication.",
+  "candidateFingerprint": "55c52f08ab8ecbe6b4c63a90b73c23a07dbcb330ac63930c137466391bc37988",
+  "submission": {
+    "format": "mira-editorial-response",
+    "version": 1,
+    "packageFingerprint": "d3e62809c1b67bc62648e55e7371fc57c9b8216c16b3364cfb46f16932e7ed38",
+    "instructions": "Complete only checks within your expertise. Use acceptable, changes_required, outside_expertise or reject. Keep unknown fields null. Supply source locators and requested changes, not just a tick. A complete response is ready for an editorial decision, never automatic publication. Do not enter family or child data.",
+    "reviewers": [
+      {
+        "id": "reviewer-1",
+        "name": null,
+        "qualifications": null,
+        "relevantExpertise": null,
+        "conflictsOfInterest": null
+      }
+    ],
+    "sources": [
+      {
+        "sourceId": "who-ecd-2020",
+        "sourceFingerprint": "238430f56bda011870995915dc7206266828e1e3e8088bdadb5976a5d27d5555",
+        "reviewerId": null,
+        "checkedOn": null,
+        "reviewDueOn": null,
+        "access": null,
+        "appraisal": null,
+        "limitations": null,
+        "rightsAssessment": null
+      },
+      {
+        "sourceId": "unicef-ccd",
+        "sourceFingerprint": "d79f27d4c1a4b1eb3a3339a18e3114a8c0b9d80101668a780f1eed03e8152cad",
+        "reviewerId": null,
+        "checkedOn": null,
+        "reviewDueOn": null,
+        "access": null,
+        "appraisal": null,
+        "limitations": null,
+        "rightsAssessment": null
+      },
+      {
+        "sourceId": "who-nurturing-2018",
+        "sourceFingerprint": "ed103e837b47c570b5e059d76ab6c900694175c08d069775dbe524d8e58aceb4",
+        "reviewerId": null,
+        "checkedOn": null,
+        "reviewDueOn": null,
+        "access": null,
+        "appraisal": null,
+        "limitations": null,
+        "rightsAssessment": null
+      }
+    ],
+    "primitives": [
+      {
+        "primitiveId": "shared-story",
+        "contentFingerprint": "81018e3722736b89bb59ee64e3c4e24bba5c83baf11a24b26cdec11c31d47c53",
+        "decision": null,
+        "decisionReviewerId": null,
+        "reviewedOn": null,
+        "reviewDueOn": null,
+        "draftIndices": [
+          0
+        ],
+        "ageMonths": {
+          "minimum": null,
+          "maximum": null
+        },
+        "readinessAndExclusions": null,
+        "languageVarieties": [],
+        "checks": [
+          {
+            "id": "evidence",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "applicability",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "materials",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "supervision",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "hazards",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "autonomy",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "wording",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "adaptation",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "language",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          },
+          {
+            "id": "rights",
+            "reviewerId": null,
+            "outcome": null,
+            "evidence": null,
+            "requiredChanges": null
+          }
+        ]
+      }
+    ]
+  }
+}

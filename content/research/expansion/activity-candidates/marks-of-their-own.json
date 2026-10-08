@@ -1,0 +1,137 @@
+{
+  "format": "mira-activity-release-candidate",
+  "version": 1,
+  "instructions": "Unpublished authoring candidate, not instructions for families. Complete missing fields and resolve the original drafting findings. Source links support only the stated general mechanism. Review the entire completed candidate, including questions, variations and associations. No field here approves or publishes content. Do not add family or child data.",
+  "origin": {
+    "packageFingerprint": "6dc5489c98fc951a80a34d8c31feeae0b34598bd5cff7e54ea793d28dedab0c6",
+    "primitiveId": "open-mark-making",
+    "contentFingerprint": "79c9f7f28aaaeb5745c22575c992658343c734a935ceae91b37b67b2978f7204",
+    "draftIndex": 0
+  },
+  "authoring": {
+    "languageVariety": "en",
+    "readiness": "Proposed for 48–71 months, not an approved age threshold. The child can choose to use the listed drawing materials without mouthing them, with an attentive adult and suitable access to the work surface. Age alone does not establish suitability. The independent reviewer must assess the material class, dimensions, breakage and individual access exclusions; the author has not certified any product.",
+    "exclusions": "Not an infant/toddler prescription. Do not use when materials are mouthed, labels are missing, the child cannot access the materials comfortably without a new physical adaptation, relevant allergies or professional restrictions are unresolved, or continuous adult attention is unavailable. Do not add scissors, paint, glue, powders, water play, edible supplies, loose decorations or grip aids.",
+    "changesFromDraft": "Replaced the instruction to stay silent with responsive company: quiet is welcome, and a brief description is optional if the child invites conversation. Added preparation, labelled-material limits, adult cleanup, stopping guidance, optional observation and bounded variations. No motor, language or emotional benefit is promised. Proposed timing/age/material boundaries are authoring hypotheses for exact-version review, not approved facts.",
+    "unresolvedFindings": []
+  },
+  "template": {
+    "title": "Marks of their own",
+    "summary": "A blank page, one crayon and no picture to copy.",
+    "instructions": "Offer the prepared paper and crayon without drawing a model. Your child can make marks, watch or leave it for another time. If they begin, let them choose where the marks go. Stay available; quiet company is enough. If they invite conversation, describe something you can actually see or listen to their explanation without naming a feeling or correcting the picture. The child can stop or turn away. When finished, the adult puts the materials away and supports ordinary handwashing.",
+    "conversation_prompt": "Use a short description of a visible mark if conversation is welcome. If your child tells you what it is, use their meaning; there is no need to ask them to explain.",
+    "look_for": "If you want to, notice whether they return to a mark, add another or choose to stop. A note is optional and is not a measure of skill or creativity.",
+    "why_it_matters": "This offers space to make something without a predetermined result. NAEYC describes this kind of choice-led process art in preschool practice. That is a practice rationale, not evidence that this particular activity improves development.",
+    "safety_note": "Use only the listed materials with readable original product information and an age/use label that includes this child. No safety label makes a crayon edible or prevents breakage. Keep materials out of mouths, food and drinks away from this workspace, and younger children away from these supplies. Stay attentive throughout. Stop and remove the materials if mouthing, breakage, an unusual reaction or unsafe use occurs. Do not continue through discomfort or override individual professional guidance.",
+    "parent_preparation": "Check the labels and condition before offering one intact solid wax crayon and plain paper. Reject supplies with unknown origin, missing labels, hazard warnings, detachable parts or broken pieces. Use an already accessible, stable, uncluttered drawing surface, away from an adult art studio or stored chemicals. Keep extra supplies out of reach. The two-minute setup and five-minute activity estimates are planning allowances, not a required duration.",
+    "adult_role": "Prepare the space, stay available and follow the child's choices. Do not guide their hand, correct their grip or add a task to make the picture more advanced. Help with setup and putting materials away; cleanup is not a test or a condition of approval.",
+    "child_choices": "They may make marks or not, leave the page unfinished, tell you what it means, say nothing, ask for help or stop.",
+    "make_easier": "Offer the same materials without a question or a model. If using them is uncomfortable or requires a new physical adaptation, omit this activity until an appropriate adaptation has been independently reviewed.",
+    "extend_activity": "If they choose to return to their own marks during the same supervised opportunity, leave space for another mark with the same materials. Add no new tools, technique, target or demand to continue.",
+    "stop_signals": "Stop on refusal, turning away, discomfort, mouthing, broken crayon pieces, unsafe handling or a need for care. Stop if the adult cannot remain attentive. A changed setting or material is not an approved variation.",
+    "avoid_prompt": "No picture to copy, colour quiz, tidy-picture standard, comparison with another child or interpretation of their marks as a mood, ability or diagnosis.",
+    "source_note": "Original unpublished MIRA candidate. The process-art claim links to NAEYC's Winter 2023 practice article. Later material-selection research is separately bound to this authoring package: AAP, Choosing Safe Art & Craft Supplies for Children (updated 16 July 2024), https://www.healthychildren.org/English/safety-prevention/at-home/Pages/Choosing-Safe-Arts-and-Craft-Supplies.aspx . This US-oriented guidance does not establish Indian product compliance, certify an exact supply or approve this activity. Full independent content, material, access, rights and age review remains required.",
+    "materials": [
+      "Plain drawing paper with no staples, clips, attached decorations or coatings proposed as play materials.",
+      "One intact, age-labelled solid wax crayon intended for children, with complete original manufacturer information, ASTM D4236 statement and ACMI AP label as proposed selection requirements; no cautionary label, detachable pieces or unlabelled substitution. These labels are not an Indian compliance certification or a guarantee of suitability."
+    ],
+    "setting": [
+      "An already accessible, stable indoor drawing surface with a clear surrounding area; no new positioning or physical assistance is part of this candidate.",
+      "Separate from food/drinks, younger children's access and an adult studio or stored chemicals."
+    ],
+    "support_ladder": [
+      "Offer the prepared materials without an expected picture.",
+      "Stay quietly available, or acknowledge the child's own meaning if they share it.",
+      "Help with setup or putting materials away; stop rather than physically guiding a response."
+    ],
+    "observation_prompts": [
+      "If useful, record a visible choice: returning to a mark, adding another, asking for help or stopping.",
+      "You can leave no note. Do not infer creativity, fine-motor ability or emotion from the page."
+    ],
+    "hazards": [
+      "Ingestion or choking from supplies or broken pieces, including access by younger children.",
+      "Chemical exposure or reaction from unidentified, inappropriate or substituted materials.",
+      "Contact injury, paper edges, slipping or reaching if the workspace is unsuitable.",
+      "Unwanted physical guidance, pressure to finish or interpretation of artwork as a diagnosis.",
+      "Diverted supervision during setup or cleanup."
+    ],
+    "domain": "creative",
+    "experience_type": "intentional",
+    "cleanup_level": "low",
+    "cost_level": "low",
+    "caregiver_skill_level": "basic",
+    "screen_requirement": "none",
+    "energy_level": "quiet",
+    "supervision_level": "continuous",
+    "min_age_months": 48,
+    "max_age_months": 71,
+    "duration_minutes": 5,
+    "setup_minutes": 2,
+    "context_requirements": {
+      "schema_version": 1,
+      "max_valid_days": 1,
+      "checks": [
+        {
+          "id": "listed_materials",
+          "category": "materials",
+          "statement": "We have the exact kinds of paper and crayon described, with readable original product information, the stated labels and no damage, detachable parts or hazard warnings. I am not substituting other art supplies."
+        },
+        {
+          "id": "accessible_workspace",
+          "category": "environment",
+          "statement": "The child can already access a stable, clear drawing surface comfortably; supplies are separate from food, drinks, younger children and adult art chemicals."
+        },
+        {
+          "id": "attentive_adult",
+          "category": "supervision",
+          "statement": "An adult can remain attentive throughout, remove materials if needed and put them away afterward."
+        },
+        {
+          "id": "voluntary_use",
+          "category": "readiness",
+          "statement": "This is an optional invitation; my child can use these materials without mouthing them. No new positioning, grip correction or physical adaptation is needed."
+        },
+        {
+          "id": "individual_restrictions",
+          "category": "restrictions",
+          "statement": "The product age/use information includes my child, and there are no unresolved material sensitivities or conflicts with individual professional guidance. If uncertain, I will not offer this activity."
+        }
+      ],
+      "not_required": {}
+    }
+  },
+  "associations": {
+    "capabilities": [
+      {
+        "code": "curiosity_play_creativity",
+        "emphasis": "primary",
+        "rationale": "Provides a choice-led making opportunity, not a measured gain in creativity."
+      },
+      {
+        "code": "independence_practical",
+        "emphasis": "supporting",
+        "rationale": "Leaves choices about making and stopping with the child while the adult handles preparation and care."
+      }
+    ],
+    "tracks": [
+      {
+        "code": "art_design",
+        "rationale": "Exploring marks without a prescribed finished product."
+      }
+    ]
+  },
+  "claims": [
+    {
+      "claimId": "process-art-choice",
+      "claimFingerprint": "db9924ef310dcb172cf266efe16d07fd843bf565650d9fa6f6e5c2f084678858",
+      "sourceIds": [
+        "naeyc-process-art-2023"
+      ],
+      "wording": "The article describes prepared art exploration in which children choose what to make rather than copy a required product.",
+      "applicability": "Preschool educational practice account, not a clinical or experimental finding",
+      "notSupported": "Guaranteed creativity, emotional interpretation of artwork, safe supplies, suitability across birth to six or approval of any MIRA draft.",
+      "support": "general_mechanism"
+    }
+  ],
+  "personalization": "none"
+}

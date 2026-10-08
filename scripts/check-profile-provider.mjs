@@ -16,7 +16,8 @@ const extractor = moduleUrl("../lib/ai/profile-extractor.ts", { "@/lib/ai/nebius
 });
 const { extractProfile } = await import(extractor);
 try {
-  const result = await extractProfile("We have 10 minutes on weekdays and 20 minutes on weekends. I speak Hindi. I hope our child grows with Mandarin too. We prefer spontaneous play and everyday routines. Curiosity and kindness matter to us.");
+  // This explicit live diagnostic has only the fictional note above, no family context.
+  const result = await extractProfile("We have 10 minutes on weekdays and 20 minutes on weekends. I speak Hindi. I hope our child grows with Mandarin too. We prefer spontaneous play and everyday routines. Curiosity and kindness matter to us.", async () => {});
   console.log(JSON.stringify({ suggestions: result.suggestions, completionTokens: result.completionTokens, latencyMs: result.latencyMs }, null, 2));
 } catch (error) {
   console.error(error.message);

@@ -1,0 +1,21 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import ts from "typescript";
+const source = readFileSync(new URL("../lib/supabase/request.ts", import.meta.url), "utf8");
+const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
+const api = {};
+let calls = 0;
+const fakeFetch = (_input, init) => new Promise((resolve, reject) => {
+  calls++;
+  const keepAlive = setTimeout(() => resolve(new Response("unexpected")), 100);
+  const cancel = () => { clearTimeout(keepAlive); reject(init.signal.reason); };
+  if (init.signal.aborted) cancel();
+  else init.signal.addEventListener("abort", cancel, { once: true });
+});
+new Function("exports", "fetch", compiled)(api, fakeFetch);
+await assert.rejects(api.boundedFetch(5)("https://synthetic.invalid"), error => error.name === "TimeoutError");
+assert.equal(calls, 1);
+const cancel = new AbortController(); cancel.abort();
+await assert.rejects(api.boundedFetch(1000)("https://synthetic.invalid", { signal: cancel.signal }), error => error.name === "AbortError");
+assert.equal(calls, 2);
+console.log("Request timeout checks passed: bounded wait, caller cancellation preserved, no automatic retry. No network used.");

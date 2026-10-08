@@ -1,0 +1,140 @@
+{
+  "format": "mira-activity-release-candidate",
+  "version": 1,
+  "instructions": "Unpublished authoring candidate, not instructions for families. Complete missing fields and resolve the original drafting findings. Source links support only the stated general mechanism. Review the entire completed candidate, including questions, variations and associations. No field here approves or publishes content. Do not add family or child data.",
+  "origin": {
+    "packageFingerprint": "d3e62809c1b67bc62648e55e7371fc57c9b8216c16b3364cfb46f16932e7ed38",
+    "primitiveId": "notice-comparison",
+    "contentFingerprint": "771870c3d3e79f17635d55a5aec6217969b99a4b7dd964ec9f25c29a5d2fc006",
+    "draftIndex": 0
+  },
+  "authoring": {
+    "languageVariety": "en",
+    "readiness": "Proposed for 36–83 months, pending independent review across that broad band. A comparison has been initiated by the child through an accessible communication method. Age alone does not establish readiness.",
+    "exclusions": "No infant prescription, performance assessment, collected objects, movement challenge or handling of materials. Do not generalise to outdoor/water/food contexts or introduce unknown physical substitutions.",
+    "changesFromDraft": "Removed breathing and interest interpretations, inconsistent naming and the punctuation artefact. Replaced vague wording with a child-led comparison sequence and an uncertainty response. Proposed 36–83-month coverage must be independently assessed, not inferred from the study.",
+    "unresolvedFindings": []
+  },
+  "template": {
+    "title": "A difference they notice",
+    "summary": "Explore your child's comparison without turning it into a test.",
+    "instructions": "When your child points out a difference in the familiar room, acknowledge the comparison they are already making. If their meaning is clear, describe that same difference in ordinary words. If it is not clear, say you are unsure rather than supplying an answer. Let them elaborate or move on. Keep everything where it is.",
+    "conversation_prompt": "“You noticed a difference.” You can also say “I’m not sure what you mean yet.” There is no correct answer to produce.",
+    "look_for": "If useful, note the comparison they made in their own words or communication method. Do not score mathematical ability, attention or future interests.",
+    "why_it_matters": "This is an opportunity to discuss a child-led comparison. Practice guidance supports agency and context; guided-play research does not establish gains from this particular invitation.",
+    "safety_note": "Keep ordinary care and safety first. This invitation adds no objects, touch or repositioning. Stay attentive throughout, use only the familiar setting described and stop whenever care is needed. Existing individual professional guidance takes priority.",
+    "parent_preparation": "Use only something already visible from a familiar indoor place. No collecting, sorting materials or walking to a new location. The three-minute estimate is for planning, not participation.",
+    "adult_role": "Stay with their meaning. If they ask a factual question you cannot answer, say so; do not make up an explanation.",
+    "child_choices": "They decide what difference matters, whether to explain it, whether to disagree, and when to move on.",
+    "make_easier": "Acknowledge the comparison without adding a question or new vocabulary.",
+    "extend_activity": "If they offer another comparison in the same surroundings, discuss that. Do not add a sorting, counting or correct-answer task.",
+    "stop_signals": "Stop when they decline, turn away, lose interest or need care. Do not follow a comparison into reaching, climbing or handling inaccessible objects.",
+    "avoid_prompt": "No colour quiz, sorting challenge, counting quota, praise for being clever or interpretation of breathing as interest.",
+    "source_note": "Original MIRA draft, not a reproduction or endorsement by a source organisation. Linked claims concern general practice or programmes, not this activity's efficacy. The proposed ages, timing, requirements and variations need independent exact-version review.",
+    "materials": [],
+    "setting": [
+      "A familiar indoor place; no relocation or reaching"
+    ],
+    "support_ladder": [
+      "Acknowledge the child's contribution.",
+      "Offer fewer words or quiet company if welcome.",
+      "Stop rather than requiring a response."
+    ],
+    "observation_prompts": [
+      "If useful, note the comparison they made in their own words or communication method. Do not score mathematical ability, attention or future interests.",
+      "Was there anything about your response or the setting you would change? Recording a note is optional."
+    ],
+    "hazards": [
+      "Adult attention diverted from essential care",
+      "Pressure to respond or continue",
+      "Unwanted sound or communication demand",
+      "Unsafe movement or reaching if the stated setting is changed"
+    ],
+    "domain": "maths",
+    "experience_type": "embedded",
+    "cleanup_level": "none",
+    "cost_level": "none",
+    "caregiver_skill_level": "basic",
+    "screen_requirement": "none",
+    "energy_level": "quiet",
+    "supervision_level": "continuous",
+    "min_age_months": 36,
+    "max_age_months": 83,
+    "duration_minutes": 3,
+    "setup_minutes": 0,
+    "context_requirements": {
+      "schema_version": 1,
+      "max_valid_days": 1,
+      "checks": [
+        {
+          "id": "settled_indoor_moment",
+          "category": "environment",
+          "statement": "We can use a familiar indoor place without moving, reaching or interrupting essential care."
+        },
+        {
+          "id": "attentive_caregiver",
+          "category": "supervision",
+          "statement": "An adult familiar with the child's communication can remain attentive throughout."
+        },
+        {
+          "id": "invitation_readiness",
+          "category": "readiness",
+          "statement": "My child has initiated a comparison, and we can discuss it where we are without collecting, moving or touching things."
+        },
+        {
+          "id": "individual_guidance",
+          "category": "restrictions",
+          "statement": "I have checked the listed exclusions and any individual care or communication guidance; this invitation does not conflict with them."
+        }
+      ],
+      "not_required": {
+        "materials": "This exact invitation introduces and handles no objects. This is not approval for material substitutions."
+      }
+    }
+  },
+  "associations": {
+    "capabilities": [
+      {
+        "code": "cognition_problem_solving",
+        "emphasis": "primary",
+        "rationale": "Offers a chance to discuss a comparison, without measuring competence."
+      },
+      {
+        "code": "communication_language",
+        "emphasis": "supporting",
+        "rationale": "Allows the child to explain or revise their meaning."
+      }
+    ],
+    "tracks": [
+      {
+        "code": "mathematics",
+        "rationale": "Comparison is a proposed subject connection, not a claim of mathematical gain."
+      }
+    ]
+  },
+  "claims": [
+    {
+      "claimId": "child-led-play-context",
+      "claimFingerprint": "2dd94412e15ffbd93c9311f60cda1f115788ebb27106760e78beb1d2887d5189",
+      "sourceIds": [
+        "naeyc-dap"
+      ],
+      "wording": "Child choice and context-sensitive adult support are a professional-practice basis for play opportunities.",
+      "applicability": "Professional practice guidance across birth through eight; not an activity prescription This is background only; the exact MIRA candidate has not been evaluated.",
+      "notSupported": "A fixed age threshold, a required response, or approved hazards for a generated activity. The proposed age band and planning minutes are not validated prescriptions.",
+      "support": "general_mechanism"
+    },
+    {
+      "claimId": "guided-play-limits",
+      "claimFingerprint": "60c28185b42e40b09e369c9344b3e708e9dc46e7aceb37da356897048b5118e2",
+      "sourceIds": [
+        "skene-guided-play-2022"
+      ],
+      "wording": "Evidence for guided play varies by outcome and comparison; broad claims of superiority are not supported.",
+      "applicability": "Research synthesis with substantial uncertainty This is background only; the exact MIRA candidate has not been evaluated.",
+      "notSupported": "Guaranteed gains, prescribed doses or efficacy of a particular MIRA activity. The proposed age band and planning minutes are not validated prescriptions.",
+      "support": "general_mechanism"
+    }
+  ],
+  "personalization": "none"
+}

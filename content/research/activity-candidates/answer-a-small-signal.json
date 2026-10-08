@@ -1,0 +1,138 @@
+{
+  "format": "mira-activity-release-candidate",
+  "version": 1,
+  "instructions": "Unpublished authoring candidate, not instructions for families. Complete missing fields and resolve the original drafting findings. Source links support only the stated general mechanism. Review the entire completed candidate, including questions, variations and associations. No field here approves or publishes content. Do not add family or child data.",
+  "origin": {
+    "packageFingerprint": "d3e62809c1b67bc62648e55e7371fc57c9b8216c16b3364cfb46f16932e7ed38",
+    "primitiveId": "responsive-turn",
+    "contentFingerprint": "5cb2e7c5468614bedef606f81610e554f0264475a5c8e11989160e85108870a4",
+    "draftIndex": 0
+  },
+  "authoring": {
+    "languageVariety": "en",
+    "readiness": "Proposed for birth–11 months, pending independent age and accessibility review. An awake, comfortable shared moment and an adult who can respond to the baby's usual communication are required. Eye contact and speech are not prerequisites.",
+    "exclusions": "Not for waking a baby, settling distress, feeding, bathing, carrying out a care procedure or testing communication. Do not touch or reposition the baby for this invitation. Follow existing individual care guidance.",
+    "changesFromDraft": "Replaced the generic invitation with a concrete adult sequence. Removed breathing as a cue and made disengagement an ending. Added care, sensory-access and non-testing boundaries; proposed age/context/duration still need independent review.",
+    "unresolvedFindings": []
+  },
+  "template": {
+    "title": "Answer a small signal",
+    "summary": "A quiet exchange that begins with something your baby does.",
+    "instructions": "During an already comfortable, awake moment together, notice a sound or gesture your baby offers. Answer softly with a few words or an expression they are comfortable with. Then leave a pause. If another signal comes, you can answer it; if not, let the moment end. There is nothing to complete.",
+    "conversation_prompt": "“I heard you. I’m here.” Use your own familiar words; you do not need a script.",
+    "look_for": "If you want to remember something, describe the sound or gesture and what you did next. A quiet response or no response does not tell us what your baby can do.",
+    "why_it_matters": "This is an opportunity to practise responding rather than directing. The linked sources discuss responsive care, not a measured benefit from this particular invitation.",
+    "safety_note": "Keep ordinary care and safety first. This invitation adds no objects, touch or repositioning. Stay attentive throughout, use only the familiar setting described and stop whenever care is needed. Existing individual professional guidance takes priority.",
+    "parent_preparation": "Choose a moment when essential care is not competing for attention. No objects, special position or timer are needed. The displayed two minutes is a planning estimate, not time your baby should stay involved.",
+    "adult_role": "Notice, answer gently and make room. Do not draw out another response or interpret distress as an invitation to practise.",
+    "child_choices": "Your baby can respond, look elsewhere or make no further signal. Each is a valid ending.",
+    "make_easier": "Offer a quiet acknowledgement without trying to continue the exchange.",
+    "extend_activity": "If your baby initiates another signal, respond to that. Do not add materials, bigger sounds or a repetition target.",
+    "stop_signals": "End the invitation when your baby turns away, becomes unsettled or needs care. Do not wait for an educational response before attending to them.",
+    "avoid_prompt": "Do not ask for eye contact, a smile, a word or a repeated gesture. Do not use changes in breathing as learning cues.",
+    "source_note": "Original MIRA draft, not a reproduction or endorsement by a source organisation. Linked claims concern general practice or programmes, not this activity's efficacy. The proposed ages, timing, requirements and variations need independent exact-version review.",
+    "materials": [],
+    "setting": [
+      "A familiar indoor place; no relocation or reaching"
+    ],
+    "support_ladder": [
+      "Acknowledge the child's contribution.",
+      "Offer fewer words or quiet company if welcome.",
+      "Stop rather than requiring a response."
+    ],
+    "observation_prompts": [
+      "If you want to remember something, describe the sound or gesture and what you did next. A quiet response or no response does not tell us what your baby can do.",
+      "Was there anything about your response or the setting you would change? Recording a note is optional."
+    ],
+    "hazards": [
+      "Adult attention diverted from essential care",
+      "Pressure to respond or continue",
+      "Unwanted sound or communication demand",
+      "Unsafe movement or reaching if the stated setting is changed"
+    ],
+    "domain": "language",
+    "experience_type": "embedded",
+    "cleanup_level": "none",
+    "cost_level": "none",
+    "caregiver_skill_level": "basic",
+    "screen_requirement": "none",
+    "energy_level": "quiet",
+    "supervision_level": "continuous",
+    "min_age_months": 0,
+    "max_age_months": 11,
+    "duration_minutes": 2,
+    "setup_minutes": 0,
+    "context_requirements": {
+      "schema_version": 1,
+      "max_valid_days": 1,
+      "checks": [
+        {
+          "id": "settled_indoor_moment",
+          "category": "environment",
+          "statement": "We can use a familiar indoor place without moving, reaching or interrupting essential care."
+        },
+        {
+          "id": "attentive_caregiver",
+          "category": "supervision",
+          "statement": "An adult familiar with the child's communication can remain attentive throughout."
+        },
+        {
+          "id": "invitation_readiness",
+          "category": "readiness",
+          "statement": "My baby is awake and comfortable, and I can recognise and respect their usual ways of communicating or disengaging."
+        },
+        {
+          "id": "individual_guidance",
+          "category": "restrictions",
+          "statement": "I have checked the listed exclusions and any individual care or communication guidance; this invitation does not conflict with them."
+        }
+      ],
+      "not_required": {
+        "materials": "This exact invitation introduces and handles no objects. This is not approval for material substitutions."
+      }
+    }
+  },
+  "associations": {
+    "capabilities": [
+      {
+        "code": "relationships_attachment",
+        "emphasis": "primary",
+        "rationale": "Provides a moment of responsive company, not an attachment assessment."
+      },
+      {
+        "code": "communication_language",
+        "emphasis": "supporting",
+        "rationale": "Makes room for voluntary communication without requiring speech."
+      }
+    ],
+    "tracks": []
+  },
+  "claims": [
+    {
+      "claimId": "responsive-exchange",
+      "claimFingerprint": "6a1936bfad594be15fb205cc03008968e2a189ee258a142152b051af0cf25e1b",
+      "sourceIds": [
+        "who-ecd-2020",
+        "harvard-responsive",
+        "jeong-2021"
+      ],
+      "wording": "Responsive caregiver-child interaction is a supported general direction for early-learning programmes.",
+      "applicability": "General mechanism and programme-level evidence This is background only; the exact MIRA candidate has not been evaluated.",
+      "notSupported": "A particular MIRA script, number of turns or developmental outcome. The proposed age band and planning minutes are not validated prescriptions.",
+      "support": "general_mechanism"
+    },
+    {
+      "claimId": "play-communication",
+      "claimFingerprint": "c37e848b532684b6c4be323418811215e48d3d1b704a25a1b5329839b3f29a53",
+      "sourceIds": [
+        "unicef-ccd",
+        "who-ecd-2020"
+      ],
+      "wording": "Play and everyday communication can be contexts for responsive caregiving.",
+      "applicability": "Implementation approach This is background only; the exact MIRA candidate has not been evaluated.",
+      "notSupported": "Any invented material substitution or activity being safe for a particular child. The proposed age band and planning minutes are not validated prescriptions.",
+      "support": "general_mechanism"
+    }
+  ],
+  "personalization": "none"
+}

@@ -1,0 +1,12 @@
+{
+  "catalogVersion": "research-play-expansion-2026-10-02.1",
+  "checkpointHash": "11c5b2c261bf07acd1f239ac5a0d4dcc124ddfbd25815944c3faeda3db6627cd",
+  "reviewType": "AI-assisted editorial inspection; not independent review",
+  "publicationApproved": false,
+  "findings": {
+    "small-movement-mirror": "Quarantined: incomplete caregiver wording. Source does not establish this physical variant or age/readiness. Do not silently repair and mark reviewed.",
+    "quiet-rhythm-exchange": "Quarantined: renewed focus is an inferred mental state; withholding all reaction is not established as responsive practice. Adult use of your voice is not itself an address error.",
+    "open-mark-making": "Structure passed, but first draft says without comment while caregiver direction suggests describing. Resolve that tension. Neither draft specifies approved materials, age, accessibility, supervision or hazards; no exact activity approval.",
+    "child-chosen-grouping": "Quarantined: duplicate titles. Wording about a block leaning toward an edge is unsuitable for the single-layer concept. Needs concrete adult role and complete object/context review."
+  }
+}

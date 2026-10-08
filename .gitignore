@@ -12,6 +12,9 @@
 
 # testing
 /coverage
+/tmp/pglite-tests/
+/.impeccable/review/*.png
+/.impeccable/review/*.jpg
 
 # next.js
 /.next/
@@ -33,6 +36,11 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*.local
 .env
+.env.*
+!.env.example
+
+# Personal planning context
+/devpost/learner-profile.md
 
 # vercel
 .vercel
@@ -40,3 +48,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.devswarm-temp/
+
+# Local working material and private correspondence
+/tmp/
+/output/
+/.impeccable/review/
+/.impeccable/questions/
+/status --short

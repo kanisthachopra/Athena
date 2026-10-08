@@ -11,8 +11,9 @@ const valueSchemas: Record<string, Record<string, unknown>> = {
   preferEmbedded: { type: "string", enum: ["true", "false"] },
 };
 
-export async function extractProfile(rawNote: string) {
+export async function extractProfile(rawNote: string, beforeRequest: () => Promise<void>) {
   const completion = await createStructuredCompletion({
+    beforeRequest,
     schemaName: "mira_profile_proposal",
     maxTokens: 1100,
     schema: {

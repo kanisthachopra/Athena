@@ -1,0 +1,150 @@
+{
+  "compilerVersion": "mira-play-expansion-drafts-2",
+  "catalogVersion": "research-play-expansion-2026-10-02.1",
+  "catalogHash": "bd409abc46f87bf86bf7968158b14259aaa543a39a24b958ea85fb48171dbda0",
+  "familyDataSent": false,
+  "stacks": [
+    {
+      "primitiveId": "small-movement-mirror",
+      "status": "rejected_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-02T05:34:10.653Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "dc2ee37d99bf3ce1d59e25d55e29dc88d422e5fcd132bb8cb662c9603fceb135",
+      "promptTokens": 607,
+      "completionTokens": 241,
+      "latencyMs": 6243,
+      "drafts": [],
+      "validationIssue": "Draft failed the local content contract; editorial review required.",
+      "rejectedOutput": {
+        "drafts": [
+          {
+            "title": "Follow a Small Movement: Mirror Play",
+            "invitation": "If the child lifts a finger, use your hand to gently move in the same way, matching the motion without pressure or expectation. The child can stop or turn away.",
+            "caregiverWords": "Use soft, slow motion to mirror the child’s movement. Describe the action as it happens, like 'moving up' or 'turning sideways.' Avoid asking for more or faster",
+            "observation": "If you want to, notice whether the child watches your hand after the movement ends.",
+            "claimIds": [
+              "play-movement-practice"
+            ]
+          },
+          {
+            "title": "Follow a Small Movement: Quiet Rhythm",
+            "invitation": "If the child taps a fingertip once, let your hand follow the same small motion, keeping it gentle and unhurried. The child can stop or turn away.",
+            "caregiverWords": "Describe the movement as it happens, like 'a little tap' or 'a small turn.' Avoid correcting or repeating the action.",
+            "observation": "If you want to, notice whether the child pauses before making the next movement.",
+            "claimIds": [
+              "play-movement-practice"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "primitiveId": "quiet-rhythm-exchange",
+      "status": "rejected_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-02T05:34:53.006Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "412b49b0d4ce062ca1149a71e57f34cae79be7bf5b0eeddd6eb10856a6cb1000",
+      "promptTokens": 593,
+      "completionTokens": 211,
+      "latencyMs": 4172,
+      "drafts": [],
+      "validationIssue": "Draft failed the local content contract; editorial review required.",
+      "rejectedOutput": {
+        "drafts": [
+          {
+            "title": "Quiet Rhythm Exchange: Adult as Echo",
+            "invitation": "If the child offers a quiet vocal rhythm, use your voice to softly mirror it once, then pause. The child can stop or turn away.",
+            "caregiverWords": "Use a quiet, gentle tone to echo the child’s rhythm exactly as offered, without embellishment or correction.",
+            "observation": "If you want to, notice whether the child repeats the rhythm with slight variation after the echo.",
+            "claimIds": [
+              "play-movement-practice"
+            ]
+          },
+          {
+            "title": "Rhythm Flow: Let the Child Lead",
+            "invitation": "If the child alters their quiet rhythm, let the silence follow without reaction. The child can stop or turn away.",
+            "caregiverWords": "Let the pause hold space—do not fill it with sound, words, or gestures.",
+            "observation": "If you want to, notice whether the child returns to the rhythm with renewed focus after a pause.",
+            "claimIds": [
+              "play-movement-practice"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "primitiveId": "open-mark-making",
+      "status": "unreviewed_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-02T05:34:57.274Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "55c4a47fc5feec22f3d7ac701b1168197fcb730003fca634522ffec59cfc1caa",
+      "promptTokens": 644,
+      "completionTokens": 218,
+      "latencyMs": 4262,
+      "drafts": [
+        {
+          "title": "Open Mark-Making: Trust the Process",
+          "invitation": "If the child picks up the crayon and begins to move it across the paper, let them continue without comment. The child can stop or turn away.",
+          "caregiverWords": "Let the child lead the motion; describe only what is visible, not what it might mean.",
+          "observation": "If you want to, notice whether the child pauses to look at the marks they’ve made.",
+          "claimIds": [
+            "process-art-choice"
+          ]
+        },
+        {
+          "title": "Open Mark-Making: No Model, No Pressure",
+          "invitation": "If the child draws a line and then sets the crayon down, let them decide whether to return to the paper. The child can stop or turn away.",
+          "caregiverWords": "Describe the mark’s path—curved, straight, broken—without naming it or suggesting a shape.",
+          "observation": "If you want to, notice whether the child returns to the same area to add another mark.",
+          "claimIds": [
+            "process-art-choice"
+          ]
+        }
+      ],
+      "validationIssue": null,
+      "rejectedOutput": null
+    },
+    {
+      "primitiveId": "child-chosen-grouping",
+      "status": "rejected_ai_draft",
+      "schedulable": false,
+      "generatedAt": "2026-10-02T05:35:01.294Z",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "582cd76581f2a0d02998c3ca031dbf894d7383055bda23274cf8baa3536f8ee4",
+      "promptTokens": 612,
+      "completionTokens": 191,
+      "latencyMs": 4016,
+      "drafts": [],
+      "validationIssue": "Draft failed the local content contract; editorial review required.",
+      "rejectedOutput": {
+        "drafts": [
+          {
+            "title": "Try an arrangement",
+            "invitation": "If the child places a block in a new spot, use the space to explore how it fits with the rest. The child can stop or turn away.",
+            "caregiverWords": "Use descriptive language about the placement, like 'This one leans toward the edge.'",
+            "observation": "If you want to, notice whether the child adjusts a block after placing it.",
+            "claimIds": [
+              "play-comparison-practice"
+            ]
+          },
+          {
+            "title": "Try an arrangement",
+            "invitation": "If the child shifts a block to a different position, let them see how the shape changes the space. The child can stop or turn away.",
+            "caregiverWords": "Let the child lead the movement; describe what shifts without naming the change.",
+            "observation": "If you want to, notice whether the child pauses to look at the new layout.",
+            "claimIds": [
+              "play-comparison-practice"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "failures": [],
+  "pendingPrimitiveIds": [],
+  "compilationComplete": true,
+  "publicationAllowed": false
+}

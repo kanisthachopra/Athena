@@ -1,0 +1,19 @@
+{
+  "format": "mira-authoring-sources",
+  "version": 1,
+  "basePackageFingerprint": "0a7aabc59ae08ab843ac945454723de84b8a933a6a4b691df9a345f161c4ae45",
+  "sources": [{
+    "id": "aap-art-materials-2024",
+    "title": "Choosing Safe Art & Craft Supplies for Children",
+    "publisher": "American Academy of Pediatrics; Sophie J. Balk and Ruth A. Etzel",
+    "year": 2024,
+    "url": "https://www.healthychildren.org/English/safety-prevention/at-home/Pages/Choosing-Safe-Arts-and-Craft-Supplies.aspx",
+    "type": "Professional guidance",
+    "location": "Updated 16 July 2024; material-selection and closing supervision/storage guidance",
+    "access": "Full article text and update/source notice read on 2 October 2026. Underlying testing reports not independently appraised.",
+    "summary": "Advises checking labelled child art supplies, avoiding unsuitable or unidentified materials, supervising use and storing supplies appropriately.",
+    "limit": "Labels do not guarantee safety. US-oriented guidance is not Indian product certification, an exact crayon specification or approval of this MIRA activity. Current local availability, dimensions, breakage, access needs and exposure risks need qualified review.",
+    "rights": "Original brief paraphrase and link only; no copied images, extended quotations or article reproduction. Independent rights review remains required."
+  }],
+  "bindings": [{"primitiveId":"open-mark-making","sourceIds":["aap-art-materials-2024"]}]
+}

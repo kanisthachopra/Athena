@@ -46,7 +46,7 @@ export function ResendConfirmationForm() {
         />
       </label>
       {error && <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p>}
-      {status && <p role="status" className="rounded-xl bg-[#eef3ea] px-4 py-3 text-sm text-[#52634e]">{status}</p>}
+      {status && <p role="status" className="rounded-xl bg-[#f1eaf3] px-4 py-3 text-sm text-[#63486b]">{status}</p>}
       <button className="button-primary w-full" type="submit" disabled={busy}>
         {busy ? <><LoaderCircle className="animate-spin" size={17} /> Sending…</> : <><Send size={17} /> Send a new link</>}
       </button>

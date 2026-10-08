@@ -1,0 +1,362 @@
+{
+  "version": "research-foundation-2026-10-01.2",
+  "checkedAt": "2026-10-01",
+  "scope": "Initial targeted evidence map, not an exhaustive or systematic review. All MIRA primitives and drafts below require independent content, safety, applicability and rights review before publication.",
+  "sources": [
+    {
+      "id": "who-ecd-2020",
+      "title": "Improving early childhood development",
+      "publisher": "World Health Organization",
+      "year": 2020,
+      "url": "https://www.who.int/publications/i/item/97892400020986/",
+      "type": "Guideline",
+      "location": "Publication overview; recommendations on responsive care and early learning",
+      "access": "Official overview inspected; full guideline appraisal pending",
+      "summary": "Recommends supporting responsive caregiving and early learning during the first three years, alongside wider family support.",
+      "limit": "Programme guidance is not validation of an individual MIRA activity, dose, material or age boundary.",
+      "rights": "Link and original summary only; no WHO text, illustrations or counselling cards reproduced."
+    },
+    {
+      "id": "unicef-ccd",
+      "title": "Care for Child Development",
+      "publisher": "UNICEF / WHO",
+      "year": 2012,
+      "url": "https://www.unicef.org/documents/care-child-development",
+      "type": "Implementation package",
+      "location": "About; package overview",
+      "access": "Official overview inspected; manuals and cards require separate review",
+      "summary": "Combines play and communication with caregiver support to notice and respond to children's signals.",
+      "limit": "A trained service-delivery approach cannot be treated as evidence that a generated app activity achieves the same outcomes.",
+      "rights": "Link and original summary only; package adaptation rights not cleared."
+    },
+    {
+      "id": "jeong-2021",
+      "title": "Parenting interventions to promote early child development in the first three years of life",
+      "publisher": "Jeong et al., PLOS Medicine",
+      "year": 2021,
+      "url": "https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1003602",
+      "type": "Systematic review and meta-analysis",
+      "location": "Abstract, study characteristics and limitations",
+      "access": "Abstract, methods/results sections and limitations inspected",
+      "summary": "Synthesizes 102 randomized trials across 33 countries; finds average benefits from parenting interventions across several child and parenting outcomes.",
+      "limit": "Substantial heterogeneity and variable reporting limit transfer to specific components. Programmes, not MIRA-generated micro-activities, were tested; only one intervention was virtual.",
+      "rights": "Link and original summary; no tables or study figures reused."
+    },
+    {
+      "id": "harvard-responsive",
+      "title": "5 Steps for Brain-Building Serve and Return",
+      "publisher": "Harvard Center on the Developing Child",
+      "year": 2017,
+      "url": "https://developingchild.harvard.edu/resources/briefs/5-steps-for-brain-building-serve-and-return/",
+      "type": "Practice explanation",
+      "location": "Public resource overview",
+      "access": "Official resource page inspected",
+      "summary": "Explains responsive back-and-forth interaction between a child and an attentive adult.",
+      "limit": "An educational explanation is not a trial of this app or a prescription for a fixed number of exchanges.",
+      "rights": "Link and original summary only; no handout or five-step wording reproduced."
+    },
+    {
+      "id": "aap-literacy-2024",
+      "title": "Literacy Promotion: An Essential Component of Primary Care Pediatric Practice",
+      "publisher": "American Academy of Pediatrics",
+      "year": 2024,
+      "url": "https://publications.aap.org/pediatrics/article/154/6/e2024069090/199467/",
+      "type": "Policy statement",
+      "location": "Public policy abstract / recommendation",
+      "access": "Publisher-indexed abstract inspected; full-page retrieval unavailable",
+      "summary": "Recommends encouraging shared reading from birth as part of relationship-supporting, language-rich family interactions.",
+      "limit": "Supports a broad practice, not compulsory book completion, early reading performance, or a specific book/material choice.",
+      "rights": "Link and original abstract summary only; full content and book rights not cleared."
+    },
+    {
+      "id": "who-nurturing-2018",
+      "title": "Nurturing care for early childhood development",
+      "publisher": "WHO / UNICEF / World Bank and partners",
+      "year": 2018,
+      "url": "https://www.who.int/publications/i/item/9789241514064/",
+      "type": "Framework",
+      "location": "Official publication overview",
+      "access": "Official overview inspected; full framework appraisal pending",
+      "summary": "Places early learning within a broader supportive environment, care, health, nutrition and safety context.",
+      "limit": "Does not justify maximizing scheduled activities, replacing care routines, or claims of guaranteed return for a family.",
+      "rights": "Link and original summary only; no framework graphics reused."
+    },
+    {
+      "id": "naeyc-dap",
+      "title": "Principles of Child Development and Learning and Implications That Inform Practice",
+      "publisher": "NAEYC",
+      "year": 2020,
+      "url": "https://www.naeyc.org/node/3796",
+      "type": "Professional position statement",
+      "location": "Principles 2–4, 6–8",
+      "access": "Official principles page inspected on 1 October 2026; underlying references not individually appraised",
+      "summary": "Frames play, child agency and interconnected domains across birth through age eight, with attention to individual, cultural and language context.",
+      "limit": "Professional guidance is not a trial of a MIRA activity or an age-specific material-safety approval. Do not infer an individual child's readiness.",
+      "rights": "Link and original summary only. No proprietary lesson text, images or supporting book content reproduced."
+    },
+    {
+      "id": "skene-guided-play-2022",
+      "title": "Can guidance during play enhance children’s learning and development in educational contexts?",
+      "publisher": "Skene et al., Child Development",
+      "year": 2022,
+      "url": "https://doi.org/10.1111/cdev.13730",
+      "type": "Systematic review and meta-analysis",
+      "location": "Abstract; methods; risk of bias; discussion; limitations",
+      "access": "Publisher-indexed methods, results and limitations inspected on 1 October 2026; supplementary study-level extraction remains pending",
+      "summary": "Reviewed 39 studies; 17 entered meta-analysis. Some comparisons favoured guided play for mathematics, shape knowledge and task switching; other outcomes showed no detected difference.",
+      "limit": "High risk of bias, sparse outcome groups and heterogeneous delivery limit confidence. This does not establish a universally best method, home-app effectiveness or safety of generated activities.",
+      "rights": "Link and original summary only; no tables, figures or intervention scripts reproduced."
+    }
+  ],
+  "claims": [
+    {
+      "id": "responsive-exchange",
+      "sourceIds": [
+        "who-ecd-2020",
+        "harvard-responsive",
+        "jeong-2021"
+      ],
+      "text": "Responsive caregiver-child interaction is a supported general direction for early-learning programmes.",
+      "scope": "General mechanism and programme-level evidence",
+      "notSupported": "A particular MIRA script, number of turns or developmental outcome.",
+      "reviewStatus": "research_mapped_not_expert_reviewed"
+    },
+    {
+      "id": "play-communication",
+      "sourceIds": [
+        "unicef-ccd",
+        "who-ecd-2020"
+      ],
+      "text": "Play and everyday communication can be contexts for responsive caregiving.",
+      "scope": "Implementation approach",
+      "notSupported": "Any invented material substitution or activity being safe for a particular child.",
+      "reviewStatus": "research_mapped_not_expert_reviewed"
+    },
+    {
+      "id": "shared-reading",
+      "sourceIds": [
+        "aap-literacy-2024"
+      ],
+      "text": "Shared reading is recommended as a relationship-supporting language opportunity.",
+      "scope": "Professional practice guidance",
+      "notSupported": "Accelerated reading, required sitting time or a validated effect from this draft.",
+      "reviewStatus": "research_mapped_not_expert_reviewed"
+    },
+    {
+      "id": "family-fit",
+      "sourceIds": [
+        "who-nurturing-2018",
+        "who-ecd-2020"
+      ],
+      "text": "Learning opportunities belong within supportive care and family needs.",
+      "scope": "Framework-level guidance",
+      "notSupported": "A scientifically established daily activity quota.",
+      "reviewStatus": "research_mapped_not_expert_reviewed"
+    },
+    {
+      "id": "child-led-play-context",
+      "sourceIds": [
+        "naeyc-dap"
+      ],
+      "text": "Child choice and context-sensitive adult support are a professional-practice basis for play opportunities.",
+      "scope": "Professional practice guidance across birth through eight; not an activity prescription",
+      "notSupported": "A fixed age threshold, a required response, or approved hazards for a generated activity.",
+      "reviewStatus": "research_mapped_not_expert_reviewed"
+    },
+    {
+      "id": "guided-play-limits",
+      "sourceIds": [
+        "skene-guided-play-2022"
+      ],
+      "text": "Evidence for guided play varies by outcome and comparison; broad claims of superiority are not supported.",
+      "scope": "Research synthesis with substantial uncertainty",
+      "notSupported": "Guaranteed gains, prescribed doses or efficacy of a particular MIRA activity.",
+      "reviewStatus": "research_mapped_not_expert_reviewed"
+    }
+  ],
+  "primitives": [
+    {
+      "id": "responsive-turn",
+      "name": "Respond to a child's signal",
+      "mechanism": "An adult notices a voluntary sound or gesture, responds, and leaves room for another signal.",
+      "claimIds": [
+        "responsive-exchange",
+        "play-communication"
+      ],
+      "materials": [
+        "No added objects"
+      ],
+      "readiness": "Individual comfort and communication context must be reviewed; no exact age prescription established.",
+      "constraints": [
+        "Do not demand a response or count turns.",
+        "Do not touch or reposition the child as part of the generated draft.",
+        "Stop or pause when the child disengages."
+      ],
+      "contexts": [
+        "A quiet shared moment",
+        "A familiar routine"
+      ],
+      "status": "draft_primitive"
+    },
+    {
+      "id": "shared-attention",
+      "name": "Follow what catches their attention",
+      "mechanism": "The adult attends to what the child is already noticing and offers a short, optional comment.",
+      "claimIds": [
+        "responsive-exchange",
+        "play-communication"
+      ],
+      "materials": [
+        "Existing surroundings only; no new objects"
+      ],
+      "readiness": "Setting, access and supervision require review before a template can be published.",
+      "constraints": [
+        "Do not introduce small parts, food, water, heights or new equipment.",
+        "Do not redirect attention to meet a task target.",
+        "A glance away or refusal is a valid ending."
+      ],
+      "contexts": [
+        "Looking around a familiar room",
+        "Noticing through a window from an existing comfortable position"
+      ],
+      "status": "draft_primitive"
+    },
+    {
+      "id": "shared-book",
+      "name": "Share attention around a book",
+      "mechanism": "An adult and child explore an available book together without needing to finish it.",
+      "claimIds": [
+        "shared-reading",
+        "responsive-exchange"
+      ],
+      "materials": [
+        "One existing book; suitability and condition still require review"
+      ],
+      "readiness": "Book format, positioning and material risks need age-specific content review.",
+      "constraints": [
+        "Do not introduce book modifications or material substitutions.",
+        "No reading test, required words or page-completion target.",
+        "No copyrighted story excerpts; generate only original caregiver phrasing."
+      ],
+      "contexts": [
+        "A familiar picture",
+        "Returning to a favourite page"
+      ],
+      "status": "draft_primitive"
+    },
+    {
+      "id": "routine-language",
+      "name": "Make room for language in a routine",
+      "mechanism": "The adult uses brief, responsive language around something already happening.",
+      "claimIds": [
+        "play-communication",
+        "family-fit"
+      ],
+      "materials": [
+        "No added objects"
+      ],
+      "readiness": "Select a routine where the adult can remain fully attentive to care and safety.",
+      "constraints": [
+        "Do not add feeding, sleep, medical or physical-care instructions.",
+        "Do not distract the adult from essential care.",
+        "Use a comfortable caregiver language; no promised bilingual outcomes."
+      ],
+      "contexts": [
+        "Getting ready to leave a room",
+        "Greeting a familiar caregiver"
+      ],
+      "status": "draft_primitive"
+    },
+    {
+      "id": "responsive-imitation",
+      "name": "Answer a voluntary expression",
+      "mechanism": "The adult acknowledges or gently echoes a child-initiated sound or expression.",
+      "claimIds": [
+        "responsive-exchange"
+      ],
+      "materials": [
+        "No added objects"
+      ],
+      "readiness": "Sensory comfort and individual communication differences need review.",
+      "constraints": [
+        "Do not prescribe mouth movements, motor exercises or physical manipulation.",
+        "Do not require eye contact, speech or imitation from the child.",
+        "No loud sounds, rewards, tests or repetitions quota."
+      ],
+      "contexts": [
+        "An expression the child offers",
+        "A sound the child chooses"
+      ],
+      "status": "draft_primitive"
+    },
+    {
+      "id": "shared-story",
+      "name": "Tell a small story about ordinary life",
+      "mechanism": "An adult offers an original, brief account of a familiar event, leaving room for the child's response.",
+      "claimIds": [
+        "play-communication",
+        "family-fit"
+      ],
+      "materials": [
+        "No added objects"
+      ],
+      "readiness": "Language complexity and context require review; not a prescribed milestone task.",
+      "constraints": [
+        "No invented family facts or cultural assumptions.",
+        "No frightening themes, factual teaching claims or copyrighted stories.",
+        "No question testing or required recall."
+      ],
+      "contexts": [
+        "A greeting that just happened",
+        "An ordinary sound in the room"
+      ],
+      "status": "draft_primitive"
+    },
+    {
+      "id": "follow-pretend",
+      "name": "Join a pretend idea without taking over",
+      "mechanism": "The adult follows a pretend idea initiated by the child, leaving the child in control of the direction.",
+      "claimIds": [
+        "child-led-play-context",
+        "guided-play-limits"
+      ],
+      "materials": [
+        "No added objects"
+      ],
+      "readiness": "Requires a child-initiated pretend context; applicability and alternatives for different communication needs need review. Not an infant prescription.",
+      "constraints": [
+        "Do not introduce props, costumes, food, physical positioning or new equipment.",
+        "Do not assign a role, demand speech or turn pretend play into a test.",
+        "The child may change the idea, decline company or stop."
+      ],
+      "contexts": [
+        "The child invites an adult into a pretend idea",
+        "The child changes the direction of an existing pretend idea"
+      ],
+      "status": "draft_primitive"
+    },
+    {
+      "id": "notice-comparison",
+      "name": "Stay with a comparison they notice",
+      "mechanism": "The adult acknowledges a comparison initiated by the child without asking for a correct answer.",
+      "claimIds": [
+        "child-led-play-context",
+        "guided-play-limits"
+      ],
+      "materials": [
+        "Existing surroundings only; no new objects"
+      ],
+      "readiness": "Child interest, setting and communication access require review. No exact age or sorting/counting expectation is established.",
+      "constraints": [
+        "Do not collect, move or introduce materials, food, water or small parts.",
+        "No sorting test, counting quota, correct-answer prompt or performance praise.",
+        "Do not infer mathematical ability from a response; turning away ends the invitation."
+      ],
+      "contexts": [
+        "A child notices a visible difference in the surroundings",
+        "A child points out something that seems similar"
+      ],
+      "status": "draft_primitive"
+    }
+  ]
+}

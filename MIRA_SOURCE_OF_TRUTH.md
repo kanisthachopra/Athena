@@ -1,8 +1,8 @@
 # MIRA — Source of Truth
 ## Product, behaviour, architecture and delivery baseline
 
-**Version:** 1.0 · **Prepared:** 30 September 2026  
-**Status:** Consolidated baseline for owner adoption; not a verified implementation report.  
+**Version:** 1.1 · **Prepared:** 30 September 2026  
+**Status:** Research-informed continuation of v1.0, prepared for owner adoption; not a verified implementation report.  
 **Product owner:** The project founder/user. The sister is the intended first family tester, not an assumed approver of every design decision.  
 **Repository, branch and commit:** Not supplied or inspected for this document.
 
@@ -433,7 +433,7 @@ Measure practical usefulness: clarity of instructions, effort to prepare, ease o
 
 ## 16. Current state and unresolved decisions
 
-**Known from this conversation:** the founder has begun work in Codex; a Supabase dashboard named MIRA was shown; project setup instructions and SQL examples were discussed. **Not known:** repository URL/branch/commit, files implemented, migrations actually applied, tests passed, deployment status, current model configuration, production data use or whether the GitHub connection issue was resolved. [R; C03–C05]
+**Known from this conversation:** the founder has begun work in Codex; a Supabase dashboard named MIRA was shown; project setup instructions and SQL examples were discussed. By 30 September, the founder reports an existing app and dissatisfaction with its UI/UX and AI handling. This is a reported state, not a verified screen or code audit. [C06] **Not known:** repository URL/branch/commit, files implemented, migrations actually applied, tests passed, deployment status, current model configuration, production data use or whether the GitHub connection issue was resolved. [R; C03–C05]
 
 Do not infer the sister's location, exact child age, languages, caregiving arrangement, availability, cultural preferences or budget from illustrative examples. These remain onboarding/user-research questions. [S01 pp. 22–24, 162–163]
 
@@ -447,8 +447,65 @@ Before modifying code after a model/session change: read the applicable instruct
 
 ---
 
+## 18. Competitive research and controlled experience redesign — v1.1
+
+**Provenance:** C06 is the founder’s 30 September request for a distinctive, intuitive UI and better-controlled AI using Impeccable. C07 is the request to research competitors and update this specification. W01–W41 are dated public research sources. All specific design/engineering additions below are **H — proposals pending owner adoption**, unless an existing requirement already establishes the same boundary. Research is not an implementation instruction or approval.
+
+### 18.1 Positioning and evidence discipline
+
+The September research found material overlap with MIRA’s individual concepts. Do not claim that parent-only AI, routine-based activities, family preferences, selective regeneration or user control are unique features. A possible advantage is better execution of the family learning loop and multilingual-context fit; validate it with caregivers rather than treating it as established. [W01, W04, W17, W23–W24]
+
+`docs/COMPETITIVE_RESEARCH.md` distinguishes vendor claims, product documentation, actual visual observations, public repository evidence and original MIRA recommendations. Absence from a public page is not proof that a feature is absent. Do not present a public mockup as an installed-app test or a public component library as a competitor’s complete application source.
+
+### 18.2 Founder approval is different from parent control
+
+For development, use the sequence **audit → proposed workflows → comparable previews → owner choice → one bounded implementation → review**. Preserve existing code and local work. Do not change auth, RLS, migrations, provider configuration, production prompts, dependency stack or product scope during a cosmetic redesign without a separate approval.
+
+Compare three visual directions on the SAME synthetic Today, Activity and change-preview flow, including empty/failure states. The proposed directions in `docs/DESIGN_DECISIONS.md` are alternatives, not a selected brand. Keep useful standard interactions, readable type and multilingual coverage; novelty is not a reason to reduce accessibility. Any `PRODUCT.md` or `DESIGN.md` used by Impeccable is a derivative brief, subordinate to the adopted master and recorded owner decisions, not a new product authority. [C06–C07; W33–W37]
+
+### 18.3 Task-first information architecture
+
+Today prioritizes a suitable next experience, its effort/materials and a short real reason. Secondary routines should not compete visually with the primary action. “Leave today open” and a lighter day remain valid. Existing Today/Week/Ask/Insights/Family navigation is the baseline to test, not permission to add more top-level modules. Ask remains contextual and gated, not the application’s only control surface.
+
+Activity preparation shows what the adult does, materials and readily accessible safety/stop guidance. Deeper parent education and evidence use progressive disclosure. Do not remove provenance or controls merely to make a screen sparse. Observations, source facts and tentative interpretations have different visual states. No child photograph is required. [W03, W09, W15–W20; existing sections 5–7]
+
+### 18.4 Bounded changes, pinning and reversal
+
+Model-generated or broad changes use the proposed contract in `docs/AI_INTERACTION_CONTRACT.md`: draft, validated proposal, parent acceptance, current-state revalidation and a single authorized commit. The preview names affected items, preserved/pinned items, burden changes and uncertainty. It provides an unchanged-plan option. A blocked/safety-invalid proposal cannot be accepted.
+
+Explicit bounded parent actions such as “skip this activity” or saving a direct observation may execute without an unnecessary second confirmation. Show the result and feasible reversal. Pinning protects a parent’s choice from automatic replacement, not from a newly applicable safety block. If an item becomes ineligible, explain that and offer reviewed alternatives; do not keep it active merely because it was pinned.
+
+An undo creates a compatible new state and must not erase later observations or other authorized work. Stale results, duplicate submission and conflicting updates do not silently mutate current state. A review click cannot broaden permissions, relax safety or authorize future unrelated changes. [W04, W09; D-12; existing sections 8 and 12]
+
+### 18.5 Meaningful non-AI use and explicit data choices
+
+Propose a parent-controlled non-AI mode: reviewed content, already-saved plans and direct observations remain usable with a functioning application backend. Optional AI extraction, chat and generation are unavailable when the relevant processing permission is off. Enforce this on the server and recheck queued requests, not only by hiding a button.
+
+Before an external AI transfer, describe actual data categories, providers, purposes and relevant retention/observability arrangements. Material changes need a reviewed consent/version process. Withdrawal stops new transfers covered by that permission; historical deletion follows a disclosed process and must not be falsely described as immediate deletion everywhere. No-AI, AI failure and loss of network connectivity are different states. This is a proposed product/engineering control, not a legal-compliance certification. [W23–W25; existing sections 13–14]
+
+### 18.6 First value, family resources and observation integrity
+
+Offer a synthetic sample so parents can understand the service without entering a detailed profile. A real recommendation still needs age context and required safety/resource information. Use progressive profiling; avoid repeating completed questions. Preserve parent-written observations before any model processing. Show extraction as tentative, preserve unknowns and allow correction without restarting onboarding.
+
+Prefer owned materials and parent-provided resource references. Do not implement a general web-to-curriculum importer, compliance portfolio or multi-child timetable merely because a competitor advertises one. Such capabilities remain deferred until separately approved with rights, safety and privacy review. Multilingual UI availability is not evidence of an effective language-exposure plan. [W04–W09, W15–W19; existing sections 6, 9–10]
+
+### 18.7 Design states and validation
+
+Target WCAG 2.2 AA and verify actual controls, keyboard access, focus, contrast, reflow and non-drag alternatives. A preferred 44px touch target is MIRA’s proposed usability target, not a statement that WCAG AA always requires 44px. Show distinct empty, loading, generating, stale, declined, disabled, saved and failed states. Never display a successful save when the backend has not confirmed it. Test long labels, text enlargement and the scripts in approved language coverage. [W37]
+
+Ordinary navigation, reading a saved plan and structured feedback should not trigger new model calls. Evaluate relevant context, output length, bounded retries and actual need for AI together with fidelity and permissions. An attractive answer or fast generation is not enough. Usability targets and the small pilot sample in the research report are hypotheses, not validated educational results. [W12–W13; existing sections 13 and 15]
+
+### 18.8 Open-source and content reuse
+
+A freely accessible app or article is not automatically open-source or licensed for commercial modification. Public utilities are not core product code. Before reuse, record the exact artifact/commit, license, attribution/notice obligations, dependency impact and separate asset/content rights. Do not import third-party instructions or execute installation scripts without inspection/approval. Current research references are optional engineering inputs; none requires changing MIRA’s stack. [W18, W21, W26–W34, W38–W40]
+
+### 18.9 Adoption and implementation status
+
+The package adds MIRA-CMP-001 through MIRA-CMP-024 and AT-077 through AT-100. All 76 original requirement and scenario records are retained unchanged. Added application scenarios are NOT RUN. D-21 through D-28 are pending owner decisions. `docs/RESEARCH_CHANGES.md` explains the delta and merge approach. The founder reports an app exists; its current UI, runtime AI, repository and deployed schema remain uninspected here. No current implementation is certified or replaced by this package.
+
+
 ## Reference and operating files
 
-`docs/SOURCE_MAP.md` contains historical provenance and limited current technical verification. `docs/DEVELOPMENT_MATRIX.md` preserves the original matrix. `docs/DATA_CONTRACTS.md` records conceptual fields and invariants. `docs/DECISIONS_AND_OPEN_QUESTIONS.md` prevents silent reconciliation. `docs/PROJECT_STATUS.md` separates reported and verified work. `docs/ROADMAP.md` defines the gates. `docs/REQUIREMENTS.json` indexes requirements. `evals/ACCEPTANCE_TESTS.md` and its JSON companion define pending acceptance scenarios. `docs/HANDOVER.md` provides the first Codex prompt.
+`docs/SOURCE_MAP.md` contains historical provenance and limited current technical verification. `docs/DEVELOPMENT_MATRIX.md` preserves the original matrix. `docs/DATA_CONTRACTS.md` records conceptual fields and invariants. `docs/DECISIONS_AND_OPEN_QUESTIONS.md` prevents silent reconciliation. `docs/PROJECT_STATUS.md` separates reported and verified work. `docs/ROADMAP.md` defines the gates. `docs/REQUIREMENTS.json` indexes requirements. `evals/ACCEPTANCE_TESTS.md` and its JSON companion define pending acceptance scenarios. `docs/HANDOVER.md` provides the first Codex prompt. The v1.1 research, AI interaction, design, source register and Impeccable documents support section 18; they do not override the master.
 
 **The operating rule:** preserve the original intent, make uncertainty explicit, inspect what actually exists, and change the system through small, reviewable, tested decisions.

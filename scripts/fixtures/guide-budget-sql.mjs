@@ -1,0 +1,61 @@
+// Synthetic in-memory SQL checks, never production content or account writes.
+import assert from 'node:assert/strict';
+export async function checkGuideBudgetSql(db,{owner,other,viewer,family}) {
+  const one=async(sql,args=[])=>(await db.query(sql,args)).rows[0];
+  const login=async id=>db.query("select set_config('request.jwt.claim.sub',$1,false)",[id]);
+  const reserve=async()=> (await one('select public.reserve_guide_request($1) id',[family])).id;
+  const attempt=id=>one('select public.begin_guide_request_attempt($1) n',[id]);
+  const finish=(id,outcome='failed')=>one('select public.finish_guide_request($1,$2,null,null,null,null,null) ok',[id,outcome]);
+  await db.exec('reset role; set role authenticated'); await login(owner);
+  await assert.rejects(reserve,/MIRA_GUIDE_PERMISSION/);
+  const revision=(await one('select revision from public.family_ai_preferences where family_id=$1',[family])).revision;
+  await db.query("select public.set_family_ai_preferences($1,$2,true,false,false,'2026-10-01-v2')",[family,revision]);
+  const first=await reserve();
+  await assert.rejects(finish(first,'succeeded'),/MIRA_GUIDE_INVALID_METADATA/);
+  assert.equal((await attempt(first)).n,1);assert.equal((await attempt(first)).n,2);
+  await assert.rejects(attempt(first),/MIRA_GUIDE_REQUEST_CLOSED/);
+  assert.equal((await finish(first)).ok,true);assert.equal((await finish(first)).ok,false);
+  await assert.rejects(attempt(first),/MIRA_GUIDE_REQUEST_CLOSED/);
+  const row=await one('select * from public.guide_request_reservations where id=$1',[first]);
+  assert.equal(row.reported_prompt_tokens,null);assert.equal(row.attempts,2);
+  await assert.rejects(db.query('update public.guide_request_reservations set attempts=0 where id=$1',[first]),e=>e.code==='42501');
+  await assert.rejects(db.query('delete from public.guide_request_reservations where id=$1',[first]),e=>e.code==='42501');
+  await assert.rejects(db.query('insert into public.guide_request_reservations(user_id,family_id) values($1,$2)',[owner,family]),e=>e.code==='42501');
+  await login(other);await assert.rejects(reserve,/MIRA_GUIDE_PERMISSION/);await assert.rejects(attempt(first),/MIRA_GUIDE_PERMISSION/);await assert.rejects(finish(first),/MIRA_GUIDE_PERMISSION/);
+  assert.equal((await db.query('select * from public.guide_request_reservations')).rows.length,0);
+  await login(viewer); const viewerRequest=await reserve(); // Guide explains; it cannot mutate family content.
+  await assert.rejects(attempt(first),/MIRA_GUIDE_PERMISSION/);assert.equal((await attempt(viewerRequest)).n,1);
+  assert.equal((await one("select public.finish_guide_request($1,'succeeded','synthetic',12,3,5,null) ok",[viewerRequest])).ok,true);
+  assert.equal((await one('select reported_prompt_tokens n from public.guide_request_reservations where id=$1',[viewerRequest])).n,12);
+  await login(owner);
+  const revoked=await reserve();
+  await db.query('select public.set_family_ai_preferences($1,$2,false,false,false,null)',[family,revision+1]);
+  await assert.rejects(attempt(revoked),/MIRA_GUIDE_PERMISSION/);
+  await finish(revoked);
+  await db.query("select public.set_family_ai_preferences($1,$2,true,false,false,'2026-10-01-v2')",[family,revision+2]);
+  const expired=await reserve();
+  await db.exec('reset role');await db.query("update public.guide_request_reservations set created_at=clock_timestamp()-interval '6 minutes' where id=$1",[expired]);
+  await db.exec('set role authenticated');await assert.rejects(attempt(expired),/MIRA_GUIDE_REQUEST_CLOSED/);
+  for(let n=3;n<20;n++)await reserve();
+  await assert.rejects(reserve,/MIRA_GUIDE_ALLOWANCE_REACHED/);
+  await finish(expired);await assert.rejects(reserve,/MIRA_GUIDE_ALLOWANCE_REACHED/);
+  await db.exec('reset role');await db.query("update public.guide_request_reservations set created_at=clock_timestamp()-interval '25 hours' where id=$1",[first]);
+  await db.exec('set role authenticated');await reserve();await assert.rejects(reserve,/MIRA_GUIDE_ALLOWANCE_REACHED/);
+  await db.exec('reset role');await db.query("update public.guide_request_reservations set created_at=clock_timestamp()-interval '25 hours' where id=$1",[expired]);
+  await db.query("insert into public.ai_runs(user_id,family_id,feature,model,status,input_hash) values($1,$2,'ask','synthetic','failed','synthetic')",[owner,family]);
+  await db.exec('set role authenticated');await assert.rejects(reserve,/MIRA_GUIDE_ALLOWANCE_REACHED/);
+  // Deleting an empty synthetic family cannot erase its user's quota entry.
+  await db.exec('reset role');
+  const temporary=(await one("insert into public.families(display_name) values('Synthetic quota deletion fixture') returning id")).id;
+  await db.query("insert into public.family_members(family_id,user_id,role) values($1,$2,'owner')",[temporary,other]);
+  await login(other);await db.exec('set role authenticated');
+  await db.query("select public.set_family_ai_preferences($1,0,true,false,false,'2026-10-01-v2')",[temporary]);
+  const retained=(await one('select public.reserve_guide_request($1) id',[temporary])).id;
+  await db.exec('reset role');await db.query('delete from public.families where id=$1',[temporary]);
+  assert.equal((await one('select family_id from public.guide_request_reservations where id=$1',[retained])).family_id,null);
+  await db.exec('set role authenticated');await assert.rejects(attempt(retained),/MIRA_GUIDE_PERMISSION/);
+  assert.equal((await finish(retained)).ok,true);
+  await db.exec('reset role; set role anon');
+  for(const op of [reserve,()=>attempt(first),()=>finish(first),()=>db.query('select * from public.guide_request_reservations')])await assert.rejects(op,e=>e.code==='42501');
+  console.log('PASS Guide SQL: rolling allowance, legacy transition, two attempts, closed/expired/withdrawn denial, failed/abandoned reservations retained, immutable counts, caller isolation and anonymous denial. Single SQL session, not an independent-session race test.');
+}

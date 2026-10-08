@@ -1,0 +1,59 @@
+{
+  "title": "Studio, with more room to breathe",
+  "question": "The same spacious layout in three palettes. Left navigation, search, breadcrumbs and shorter AI guidance are shared. Choose a palette or tell me what to adjust. These are fictional design studies.",
+  "options": [
+    {
+      "id": "forest",
+      "label": "Forest & Chalk",
+      "thesis": "Grounded, clear and easy on the eyes.",
+      "palette": [
+        "#294638",
+        "#FAFCF9",
+        "#C9D985"
+      ],
+      "materials": [
+        "clear sans-serif type",
+        "spacious layout"
+      ],
+      "viewport": "Studio proportions with search, breadcrumbs, one activity and concise contextual help.",
+      "risk": "The dark sidebar remains a strong visual anchor.",
+      "comp": ".impeccable/mocks/palette/forest.png"
+    },
+    {
+      "id": "plum",
+      "label": "Plum & Porcelain",
+      "thesis": "Warm character with a distinctive, deeper accent.",
+      "palette": [
+        "#49334F",
+        "#FCFAFD",
+        "#E5BA9A"
+      ],
+      "materials": [
+        "clear sans-serif type",
+        "spacious layout"
+      ],
+      "viewport": "Studio proportions with search, breadcrumbs, one activity and concise contextual help.",
+      "risk": "The richer hue has more personality; judge whether it feels right every day.",
+      "comp": ".impeccable/mocks/palette/plum.png"
+    },
+    {
+      "id": "stone",
+      "label": "Stone & Clay",
+      "thesis": "A lighter sidebar with color reserved for actions.",
+      "palette": [
+        "#EAE7E2",
+        "#FFFFFF",
+        "#A9442B"
+      ],
+      "materials": [
+        "clear sans-serif type",
+        "spacious layout"
+      ],
+      "viewport": "Studio proportions with search, breadcrumbs, one activity and concise contextual help.",
+      "risk": "Quieter branding and less contrast between navigation and content.",
+      "comp": ".impeccable/mocks/palette/stone.png"
+    }
+  ],
+  "reroll": true,
+  "steer": true
+}

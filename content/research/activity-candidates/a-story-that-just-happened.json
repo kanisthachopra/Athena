@@ -1,0 +1,142 @@
+{
+  "format": "mira-activity-release-candidate",
+  "version": 1,
+  "instructions": "Unpublished authoring candidate, not instructions for families. Complete missing fields and resolve the original drafting findings. Source links support only the stated general mechanism. Review the entire completed candidate, including questions, variations and associations. No field here approves or publishes content. Do not add family or child data.",
+  "origin": {
+    "packageFingerprint": "d3e62809c1b67bc62648e55e7371fc57c9b8216c16b3364cfb46f16932e7ed38",
+    "primitiveId": "shared-story",
+    "contentFingerprint": "81018e3722736b89bb59ee64e3c4e24bba5c83baf11a24b26cdec11c31d47c53",
+    "draftIndex": 0
+  },
+  "authoring": {
+    "languageVariety": "en",
+    "readiness": "Proposed for 24–35 months, pending independent review. An ordinary greeting was genuinely shared and is comfortable to revisit. Speech, sentence length and story recall are not prerequisites.",
+    "exclusions": "Not for processing distress, separation, conflict, trauma or developmental concerns. No assumed relatives, culture, sounds or household events. No hot-water, food or appliance scene.",
+    "changesFromDraft": "Discarded invented autobiography and the hot-kettle example. Re-authored the greeting context using only adult-known events, explicit correction, no recall test and no required child response.",
+    "unresolvedFindings": []
+  },
+  "template": {
+    "title": "A little story from today",
+    "summary": "Put a real, ordinary moment into a few words together.",
+    "instructions": "After a settled greeting you both just experienced, briefly describe what actually happened. Keep to the people and actions you know; do not guess what anyone felt. Leave space for your child's contribution or correction. If they add something, acknowledge it. If they do not, the story can end there.",
+    "conversation_prompt": "In your own words, say who greeted whom and what happened next. Only include details you actually know; no example family story needs to be copied.",
+    "look_for": "You might save their exact words or gesture, if you want to remember it. A missing detail or no response is not evidence about memory or understanding.",
+    "why_it_matters": "This offers ordinary conversation about a shared event. It is a proposed use of responsive communication, not a validated storytelling or memory intervention.",
+    "safety_note": "Keep ordinary care and safety first. This invitation adds no objects, touch or repositioning. Stay attentive throughout, use only the familiar setting described and stop whenever care is needed. Existing individual professional guidance takes priority.",
+    "parent_preparation": "Choose a greeting that actually happened and is comfortable to revisit. No book, photo, recording or invented backstory is needed. Two minutes is a planning allowance, not a listening expectation.",
+    "adult_role": "Offer a brief account, listen and accept corrections. Do not quiz the child or turn the story into an explanation of their behaviour.",
+    "child_choices": "They can add, change the topic, correct you, listen or decline.",
+    "make_easier": "Mention only the greeting, without adding a sequence or asking for a contribution.",
+    "extend_activity": "If they want to add a detail, make room for it. Do not introduce a new event or demand a beginning, middle and end.",
+    "stop_signals": "End when they change the subject, turn away, decline, become uncomfortable or need care. Do not revisit an upsetting event through this activity.",
+    "avoid_prompt": "No “What happened first?” test, required recall, invented feelings, frightening story or copied storybook text.",
+    "source_note": "Original MIRA draft, not a reproduction or endorsement by a source organisation. Linked claims concern general practice or programmes, not this activity's efficacy. The proposed ages, timing, requirements and variations need independent exact-version review.",
+    "materials": [],
+    "setting": [
+      "A familiar indoor place; no relocation or reaching"
+    ],
+    "support_ladder": [
+      "Acknowledge the child's contribution.",
+      "Offer fewer words or quiet company if welcome.",
+      "Stop rather than requiring a response."
+    ],
+    "observation_prompts": [
+      "You might save their exact words or gesture, if you want to remember it. A missing detail or no response is not evidence about memory or understanding.",
+      "Was there anything about your response or the setting you would change? Recording a note is optional."
+    ],
+    "hazards": [
+      "Adult attention diverted from essential care",
+      "Pressure to respond or continue",
+      "Unwanted sound or communication demand",
+      "Unsafe movement or reaching if the stated setting is changed"
+    ],
+    "domain": "language",
+    "experience_type": "embedded",
+    "cleanup_level": "none",
+    "cost_level": "none",
+    "caregiver_skill_level": "basic",
+    "screen_requirement": "none",
+    "energy_level": "quiet",
+    "supervision_level": "continuous",
+    "min_age_months": 24,
+    "max_age_months": 35,
+    "duration_minutes": 2,
+    "setup_minutes": 0,
+    "context_requirements": {
+      "schema_version": 1,
+      "max_valid_days": 1,
+      "checks": [
+        {
+          "id": "settled_indoor_moment",
+          "category": "environment",
+          "statement": "We can use a familiar indoor place without moving, reaching or interrupting essential care."
+        },
+        {
+          "id": "attentive_caregiver",
+          "category": "supervision",
+          "statement": "An adult familiar with the child's communication can remain attentive throughout."
+        },
+        {
+          "id": "invitation_readiness",
+          "category": "readiness",
+          "statement": "We just shared an ordinary, comfortable greeting, and I can describe it without guessing events or feelings."
+        },
+        {
+          "id": "individual_guidance",
+          "category": "restrictions",
+          "statement": "I have checked the listed exclusions and any individual care or communication guidance; this invitation does not conflict with them."
+        }
+      ],
+      "not_required": {
+        "materials": "This exact invitation introduces and handles no objects. This is not approval for material substitutions."
+      }
+    }
+  },
+  "associations": {
+    "capabilities": [
+      {
+        "code": "communication_language",
+        "emphasis": "primary",
+        "rationale": "Offers conversation about a genuinely shared event."
+      },
+      {
+        "code": "social_participation",
+        "emphasis": "supporting",
+        "rationale": "Makes room for the child's account instead of requiring adult agreement."
+      }
+    ],
+    "tracks": [
+      {
+        "code": "literacy_literature",
+        "rationale": "An oral-story opportunity; not evidence of reading readiness or memory skill."
+      }
+    ]
+  },
+  "claims": [
+    {
+      "claimId": "play-communication",
+      "claimFingerprint": "c37e848b532684b6c4be323418811215e48d3d1b704a25a1b5329839b3f29a53",
+      "sourceIds": [
+        "unicef-ccd",
+        "who-ecd-2020"
+      ],
+      "wording": "Play and everyday communication can be contexts for responsive caregiving.",
+      "applicability": "Implementation approach This is background only; the exact MIRA candidate has not been evaluated.",
+      "notSupported": "Any invented material substitution or activity being safe for a particular child. The proposed age band and planning minutes are not validated prescriptions.",
+      "support": "general_mechanism"
+    },
+    {
+      "claimId": "family-fit",
+      "claimFingerprint": "a70004f47e97c9f2a3f73df2ebaa44f261aec1a8e74e65d3f6ddcb724b15fa01",
+      "sourceIds": [
+        "who-nurturing-2018",
+        "who-ecd-2020"
+      ],
+      "wording": "Learning opportunities belong within supportive care and family needs.",
+      "applicability": "Framework-level guidance This is background only; the exact MIRA candidate has not been evaluated.",
+      "notSupported": "A scientifically established daily activity quota. The proposed age band and planning minutes are not validated prescriptions.",
+      "support": "general_mechanism"
+    }
+  ],
+  "personalization": "none"
+}

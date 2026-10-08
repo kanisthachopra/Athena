@@ -1,0 +1,49 @@
+{
+  "compilerVersion": "mira-play-expansion-drafts-1",
+  "catalogVersion": "research-play-expansion-2026-10-02.1",
+  "catalogHash": "bd409abc46f87bf86bf7968158b14259aaa543a39a24b958ea85fb48171dbda0",
+  "familyDataSent": false,
+  "stacks": [
+    {
+      "primitiveId": "small-movement-mirror", "status": "unreviewed_ai_draft", "schedulable": false,
+      "generatedAt": "2026-10-02T05:31:33.923Z", "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash": "521c437593106b3d50985237d86fe5f71e7f988e31865afd7c519eb07fda74ea",
+      "promptTokens": 526, "completionTokens": 408, "latencyMs": 10611,
+      "drafts": [
+        {"title":"Follow a Small Movement","invitation":"If you want to, notice how your hand moves when you wiggle just one finger. You can show me a tiny motion—like a flick or a twist—and I’ll follow along if you say yes. If you’d rather not, that’s okay too. You can stop anytime, turn away, or change your idea. I’ll just watch or wait, no pressure.","caregiverWords":"I’ll mirror your small movement only if you invite me. No need to copy perfectly, go faster, or keep going. You’re in charge of what happens next.","observation":"If you want to, notice what your hand does when you move it a little—like a quick twist or a soft tap. Watch if you want, or try something new. You can stop or look away at any time.","claimIds":["play-movement-practice"]},
+        {"title":"A Tiny Hand Motion, Shared","invitation":"If you want to, try a small hand movement—just a little wiggle, a soft tap, or a slow twist. I’ll follow it if you say so. You can change your idea, stop, turn away, or just watch. No need to keep going or do it right.","caregiverWords":"I’ll mirror your movement only if you invite me. There’s no right way, no race, no rule to keep going. You decide what happens next.","observation":"If you want to, notice how your hand moves when you do something small—like a flick or a pause. You can watch, change, or stop at any moment.","claimIds":["play-movement-practice"]}
+      ],"validationIssue":null,"rejectedOutput":null
+    },
+    {
+      "primitiveId":"quiet-rhythm-exchange","status":"unreviewed_ai_draft","schedulable":false,
+      "generatedAt":"2026-10-02T05:31:42.309Z","model":"Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash":"3cad0a5942557933724fb8f7db1e085ba2d7048cdd533c9a01d434ed962f5de3",
+      "promptTokens":512,"completionTokens":416,"latencyMs":8383,
+      "drafts":[
+        {"title":"Quiet Rhythm Exchange: A Gentle Invitation","invitation":"If you want to, notice the quiet sounds you make with your voice. You can hum, whisper, tap your lips, or make soft clicks—whatever feels easy. If you’d like, I’ll gently echo what you share. You can repeat it, change it, or stop anytime. I’m here to listen, not to lead. You’re in charge of what happens next.","caregiverWords":"I’ll follow your rhythm, just as you’ve made it. No need to match, no need to keep going. You can pause, shift, or turn away—your choice always.","observation":"If you want to, notice how your voice moves when you make quiet sounds. Watch if you repeat a pattern, change it, or pause. No need to explain or perform—just see what happens when you listen and try.","claimIds":["play-movement-practice"]},
+        {"title":"Rhythm Without Rules: A Child-Led Pause","invitation":"If you want to, try making a quiet sound with your voice—just one, or a few. It can be soft, short, or even a pause that feels like a sound. I’ll listen and echo it back, gently. You can keep going, change it, or stop at any moment. I won’t ask for more, and I won’t touch or prompt. Your rhythm, your pace.","caregiverWords":"I’ll follow your quiet rhythm, exactly as you give it. No corrections, no pressure. You can turn away, stop, or start again—whenever you choose.","observation":"If you want to, notice if your voice stays the same, shifts, or stops. Watch if you repeat a sound, pause, or move to something new. No need to do anything—just see what unfolds when you’re free to be","claimIds":["play-movement-practice"]}
+      ],"validationIssue":null,"rejectedOutput":null
+    },
+    {
+      "primitiveId":"open-mark-making","status":"unreviewed_ai_draft","schedulable":false,
+      "generatedAt":"2026-10-02T05:31:52.234Z","model":"Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash":"c14c3ae89c055cb9c1280e81e3a10b4045dae77a7bbac7f19185af57de0bd16c",
+      "promptTokens":563,"completionTokens":357,"latencyMs":9922,
+      "drafts":[
+        {"title":"Explore Marks Without a Model","invitation":"If you want to, notice what happens when you press the crayon on the paper. You can make any mark you like—lines, dots, swirls—or just watch. If you want to, you can add more or change what’s there. If you don’t want to, you can stop or walk away. There’s no right way, and no need to finish.","caregiverWords":"You can try any mark you like. If you want to, you can describe it or leave it as it is. If you don’t want to, you can stop or walk away.","observation":"If you want to, notice what kind of marks you make—long, short, wiggly, or straight. Notice if you add to them or leave them alone. If you want to, notice if you touch the paper again or walk away.","claimIds":["process-art-choice"]},
+        {"title":"Choose What to Do with Your Marks","invitation":"If you want to, notice what you feel like doing with the marks you’ve made. You can add more, cover them, leave them, or walk away. If you want to, you can describe them or say nothing. If you don’t want to, you can stop or leave the paper.","caregiverWords":"You can decide what to do next—add, change, or leave it. If you don’t want to, you can stop or walk away.","observation":"If you want to, notice whether you touch the paper again, make new marks, or walk away. Notice if you look at your marks or turn away.","claimIds":["process-art-choice"]}
+      ],"validationIssue":null,"rejectedOutput":null
+    },
+    {
+      "primitiveId":"child-chosen-grouping","status":"unreviewed_ai_draft","schedulable":false,
+      "generatedAt":"2026-10-02T05:32:02.268Z","model":"Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "promptHash":"49bf4ccea8b4245d8a190cddf32ce092bb591f985343dd16202a52b38b06ec53",
+      "promptTokens":531,"completionTokens":363,"latencyMs":10033,
+      "drafts":[
+        {"title":"Try an arrangement: Let the child lead","invitation":"If you want to, notice how the blocks feel in your hands and where you’d like to place them. You can make any shape or pattern you like—no rules, no right answer. If you want to, you can invite me to join you, or I can just watch. You can change it anytime, or stop and walk away. I’ll follow your lead.","caregiverWords":"I’m here if you’d like help, but I won’t ask you to explain or fix anything. You’re in charge of how it looks and when you’re done.","observation":"If you want to, notice how the blocks move when you shift them, where they settle, and whether you place them close together or far apart.","claimIds":["play-comparison-practice"]},
+        {"title":"Try an arrangement: Change it your way","invitation":"If you want to, notice what happens when you rearrange the blocks—maybe you move one, add another, or shift a whole group. You can make it different, or keep it the same. I’ll stay open to whatever you choose. You can stop, change your mind, or walk away at any time.","caregiverWords":"I’ll follow your lead. No need to show me, explain, or finish. You decide when it’s done—or if it isn’t.","observation":"If you want to, notice how your hands guide the blocks and whether you repeat a movement or try something new.","claimIds":["play-comparison-practice"]}
+      ],"validationIssue":null,"rejectedOutput":null
+    }
+  ],
+  "failures":[],"pendingPrimitiveIds":[],"compilationComplete":true,"publicationAllowed":false
+}

@@ -65,11 +65,11 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card className="rounded-[1.75rem] border-black/5 bg-paper shadow-[0_25px_80px_rgba(55,62,53,.1)]">
+      <Card className="rounded-xl border-black/5 bg-paper shadow-[0_25px_80px_rgba(55,62,53,.1)]">
         <CardHeader>
-          <CardTitle className="font-serif text-3xl">Welcome back</CardTitle>
+          <CardTitle className="font-serif text-3xl"><h1>Log in to MIRA</h1></CardTitle>
           <CardDescription>
-            Come back to your family&apos;s learning space.
+            Continue with your family’s plan.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -80,6 +80,7 @@ export function LoginForm({
                 <Input
                   id="email"
                   type="email"
+                  autoComplete="email"
                   placeholder="you@example.com"
                   required
                   value={email}
@@ -99,14 +100,15 @@ export function LoginForm({
                 <Input
                   id="password"
                   type="password"
+                  autoComplete="current-password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               {error && <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm leading-6 text-red-700">{error}</p>}
-              {isSlow && !error && <p role="status" className="rounded-xl bg-[#e2efe9] px-4 py-3 text-sm leading-6 text-[#386357]">The sign-in service is taking longer than usual. MIRA will stop waiting automatically if it cannot connect.</p>}
-              <Button type="submit" className="h-12 w-full rounded-2xl bg-ink hover:bg-[#414b42]" disabled={isLoading}>
+              {isSlow && !error && <p role="status" className="rounded-xl bg-[#f1eaf3] px-4 py-3 text-sm leading-6 text-[#63486b]">The sign-in service is taking longer than usual. MIRA will stop waiting automatically if it cannot connect.</p>}
+              <Button type="submit" className="h-12 w-full rounded-2xl bg-ink hover:bg-[#63486b]" disabled={isLoading}>
                 {isLoading ? <><LoaderCircle className="animate-spin" size={17} /> Signing in…</> : "Log in"}
               </Button>
             </div>

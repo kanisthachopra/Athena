@@ -1,0 +1,82 @@
+{
+  "format": "mira-source-reading-notes",
+  "version": 1,
+  "checkedOn": "2026-10-02",
+  "status": "author_research_not_independent_review",
+  "scope": "Targeted authoring notes for six draft candidates. Not an exhaustive search, systematic review, safety certification, rights clearance or publication decision. Original catalog and generation fingerprints are retained unchanged.",
+  "sourceChecks": [
+    {
+      "sourceId": "who-ecd-2020",
+      "url": "https://www.who.int/publications/i/item/97892400020986/",
+      "locator": "Official overview and recommendation topics",
+      "access": "overview_only_full_text_download_failed",
+      "summary": "The WHO overview addresses responsive care and early learning in the first three years, within wider caregiver support. It does not validate an app script.",
+      "limitation": "The full guideline download timed out; NCBI's alternative returned a browser check. Recommendation evidence tables and full applicability remain unappraised in this pass.",
+      "nextReview": "Read the full guideline and relevant evidence tables; assess transfer from supported programmes to these parent-only micro-invitations."
+    },
+    {
+      "sourceId": "unicef-ccd",
+      "url": "https://www.unicef.org/media/91176/file/3-CCD-Participant-Manual.pdf",
+      "locator": "Physical PDF pages 6–10 (printed pages 2–7), extracted text, including the embedded counselling card",
+      "access": "selected_full_text_sections_read",
+      "summary": "The manual situates play and communication in caregiver counselling and practice. It includes age-group examples and coaching; MIRA is not delivering that complete service.",
+      "limitation": "Only selected sections read, not the full manual, clinical practice package or outcome evidence. Historical object/positioning/eye-contact examples were not adopted as app safety rules.",
+      "nextReview": "Review the complete relevant manual and counselling context, accessible alternatives and adaptation rights. Do not infer that a household item or activity is safe from the source's general wording."
+    },
+    {
+      "sourceId": "harvard-responsive",
+      "url": "https://developingchild.harvard.edu/wp-content/uploads/2024/10/HCDC_ServeReturn_for_Parents_Caregivers_2019.pdf",
+      "locator": "Both PDF pages, steps 1–5 and explanatory text",
+      "access": "full_handout_text_read",
+      "summary": "The handout describes noticing a child's contribution, responding, allowing time and recognising endings. It is a practice explanation, not an evaluation of MIRA.",
+      "limitation": "No source-derived age cutoff, exchange quota, clinical instruction or app-specific outcome is established. Underlying studies and FIND coaching are not independently appraised here.",
+      "nextReview": "Check accessibility and the distinction between a practice explanation and intervention evidence. Resolve reuse/attribution rights before any handout adaptation."
+    },
+    {
+      "sourceId": "jeong-2021",
+      "url": "https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1003602",
+      "locator": "Abstract, moderator results, Discussion and limitations",
+      "access": "selected_full_text_sections_read",
+      "summary": "The synthesis covers 102 interventions in 33 countries during the first three years. Programme outcomes cannot establish the efficacy of an isolated MIRA invitation.",
+      "limitation": "Unexplained heterogeneity, variable measures, incomplete implementation reporting and multiple comparisons constrain transfer. Preschool-only interventions were outside its scope; it is not evidence for the 36–83-month candidate.",
+      "nextReview": "Appraise risk of bias, component/delivery differences and relevant original trials; avoid extracting an activity dose or a per-child prediction from pooled results."
+    },
+    {
+      "sourceId": "who-nurturing-2018",
+      "url": "https://www.who.int/publications/i/item/9789241514064/",
+      "locator": "Official framework overview",
+      "access": "overview_only",
+      "summary": "The framework situates early learning within a supportive care environment. It supplies context, not a prescription for a daily activity schedule.",
+      "limitation": "Full framework appraisal remains pending. Economic returns and population-level claims are not used as promises to a family.",
+      "nextReview": "Read the full relevant framework and assess the bounded family-fit claim; check rights independently."
+    },
+    {
+      "sourceId": "naeyc-dap",
+      "url": "https://www.naeyc.org/node/3796",
+      "locator": "Principles 4–8, especially individual/context variation, agency and integrated subject opportunities",
+      "access": "selected_full_text_sections_read",
+      "summary": "The professional statement emphasises context, individual variation and child agency. It supports considering those factors rather than treating age bands as fixed performance stages.",
+      "limitation": "This is professional guidance, not a trial of the comparison candidate. Underlying references, home transfer, the exact proposed age range and communication access need independent appraisal.",
+      "nextReview": "Review the proposed 36–83-month range and content across that span; narrow, split or reject it if appropriate. Do not infer readiness from chronological age alone."
+    },
+    {
+      "sourceId": "skene-guided-play-2022",
+      "url": "https://doi.org/10.1111/cdev.13730",
+      "locator": "Prior catalog notes from 2026-10-01; direct DOI retry on 2026-10-02",
+      "access": "current_full_text_access_failed",
+      "summary": "The prior catalog records a heterogeneous guided-play synthesis, not support for universally superior outcomes or this activity.",
+      "limitation": "Current DOI retrieval failed. No fresh full-text or supplement appraisal is claimed in this pass. The comparison candidate has no activity-specific efficacy evidence.",
+      "nextReview": "Obtain the article and supplements; assess risk of bias, populations, outcomes, comparators and relevance of the actual guided-play interventions."
+    }
+  ],
+  "editorialProposals": {
+    "ages": "Each JSON contains a proposed, unapproved age range for independent review. Numerical coverage across 0–83 months is not reviewed coverage or a balanced library.",
+    "minutes": "One to three minutes are author planning estimates, not evidence-based doses, minimum participation or timers.",
+    "contextValidity": "One-day context validity is an authoring proposal requiring review; answers must reflect the offered setting. It is not a scientifically established freshness interval.",
+    "language": "English wording only. A caregiver's comfortable interaction language is not a reviewed translation or proof of 30–40-language support.",
+    "noObjects": "These first candidates intentionally introduce no objects. They do not cover the product's full movement, making, book, music or exploration needs.",
+    "authorship": "AI-assisted editorial rewrites of the recorded Nebius invitations, not a new Nebius generation. No runtime provider call or credit use was needed.",
+    "rights": "Original short summaries and original MIRA draft wording only. No source illustrations, tables, training worksheets or story excerpts copied. Independent rights/attribution assessment remains pending.",
+    "pending": "Independent content/safety/accessibility/source review, verified reviewer identity and separately authorized editor publication. No reviewer is invented, no response is marked acceptable."
+  }
+}

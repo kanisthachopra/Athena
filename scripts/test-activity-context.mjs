@@ -1,0 +1,36 @@
+import assert from 'node:assert/strict';
+import { calendarFixture } from './fixtures/family-calendar.mjs';
+import {readFileSync} from 'node:fs';import{createRequire}from'node:module';import ts from'typescript';import React from'react';import{renderToStaticMarkup}from'react-dom/server';
+import {contextFixture} from './fixtures/activity-context-sql.mjs';
+const require=createRequire(import.meta.url);
+function load(path,deps={}){deps={'@/lib/family-calendar':calendarFixture,...deps};const js=ts.transpileModule(readFileSync(new URL(path,import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;const exports={};new Function('require','exports',js)(id=>deps[id]??require(id),exports);return exports;}
+const context=load('../lib/activity-context.ts');
+assert.deepEqual(context.parseContextContract(contextFixture),contextFixture);
+for(const bad of [null,{}, {...contextFixture,max_valid_days:0},{...contextFixture,max_valid_days:8},{...contextFixture,extra:true},{...contextFixture,checks:[]},{...contextFixture,checks:[...contextFixture.checks,contextFixture.checks[0]]},{...contextFixture,not_required:{}},{...contextFixture,not_required:{...contextFixture.not_required,supervision:'Skip it'}}])assert.equal(context.parseContextContract(bad),null);
+for(const bad of [{adult:true},{adult:true,book:'true'},{adult:true,book:true,extra:true},null])assert.equal(context.parseContextAnswers(bad,contextFixture),null);
+assert.deepEqual(context.parseContextAnswers({adult:null,book:false},contextFixture),{adult:null,book:false});
+assert.equal(context.isContextDate('2026-02-30'),false);assert.equal(context.isContextDate('2024-02-29'),true);
+const id='11111111-1111-4111-8111-111111111111',child='22222222-2222-4222-8222-222222222222';
+const today=new Date().toISOString().slice(0,10);let calls=[],role='owner',activeId=child,rpcError=null,rpcData=1,throws=false;
+const action=load('../app/library/context/actions.ts',{'@/lib/activity-context':context,'@/lib/family-context':{requireFamilyContext:async()=>({membership:{role},activeChild:{id:activeId},supabase:{rpc:async(name,args)=>{calls.push({name,args});if(throws)throw Error('Private details');return{data:rpcData,error:rpcError};}}})},'next/cache':{revalidatePath(){}}});
+function form(changes={}){const f=new FormData();for(const [k,v]of Object.entries({childId:child,templateId:id,contentVersion:'2',revision:'0',validFrom:today,validUntil:today,contract:JSON.stringify(contextFixture),answers:JSON.stringify({adult:null,book:false}),...changes}))f.set(k,v);return f;}
+for(const patch of [{revision:''},{revision:'-1'},{contentVersion:'0'},{templateId:'bad'},{contract:'{}'},{answers:'{}'},{validFrom:'2026-02-30'},{validUntil:context.contextDatePlus(today,7)}])assert.ok((await action.saveActivityContext({},form(patch))).error);
+assert.equal(calls.length,0);role='viewer';assert.ok((await action.saveActivityContext({},form())).error);role='owner';activeId='other';assert.ok((await action.saveActivityContext({},form())).error);activeId=child;assert.equal(calls.length,0);
+const saved=await action.saveActivityContext({},form());assert.equal(saved.revision,1);assert.ok(saved.success);assert.deepEqual(calls[0].args.p_answers,{adult:null,book:false});assert.equal(calls[0].name,'save_activity_context');
+rpcError={message:'MIRA_CONTEXT_STALE'};assert.equal((await action.saveActivityContext({},form())).refreshRequired,true);
+rpcError={message:'private SQL'};assert.ok(!(await action.saveActivityContext({},form())).error.includes('private'));rpcError=null;rpcData=null;assert.equal((await action.saveActivityContext({},form())).success,null);
+throws=true;assert.match((await action.saveActivityContext({},form())).error,/connection/);throws=false;
+let pending=false,formState=null;
+const {ActivityContextForm}=load('../components/activity-context-form.tsx',{'@/lib/activity-context':context,'@/app/library/context/actions':action,react:{...React,useActionState:(_fn,initial)=>[formState??initial,()=>{},pending]}});
+const option={template_id:id,title:'Synthetic <script> title',content_version:2,contract:contextFixture,confirmation:null};
+const render=(p={})=>renderToStaticMarkup(React.createElement(ActivityContextForm,{option,childId:child,date:today,canEdit:true,...p}));
+const html=render();assert.equal((html.match(/checked=""/g)??[]).length,2);assert.ok(html.includes('&quot;adult&quot;:null'));assert.ok(html.includes('Not sure'));assert.ok(!html.includes('<script> title'));
+const viewerHtml=render({canEdit:false});assert.ok(viewerHtml.includes('disabled=""'));assert.ok(!viewerHtml.includes('Save context answers'));
+pending=true;assert.ok(render().includes('Saving answers'));pending=false;
+formState={error:'Refresh to compare',success:null,revision:1,refreshRequired:true};assert.ok(render().includes('Refresh saved checks'));assert.ok(render().includes('disabled=""'));formState=null;
+let pageError=null,pageData=[];
+const page=load('../app/library/context/page.tsx',{'@/lib/activity-context':context,'@/components/activity-context-form':{ActivityContextForm:()=>React.createElement('div',null,'Synthetic form')},'@/components/app-header':{AppHeader:()=>null},'@/lib/family-context':{requireFamilyContext:async()=>({activeChild:{id:child,nickname:'Synthetic'},membership:{role},family:{display_name:'Synthetic'},supabase:{rpc:async()=>({data:pageData,error:pageError})}})},'next/link':{default:({children,...props})=>React.createElement('a',props,children)}}).default;
+const pageHtml=async()=>renderToStaticMarkup(await page({searchParams:Promise.resolve({date:today})}));
+assert.match(await pageHtml(),/No reviewed ideas/);pageError={message:'private'};assert.match(await pageHtml(),/could not be loaded/);assert.ok(!(await pageHtml()).includes('No reviewed ideas'));pageError=null;
+pageData=[option];assert.match(await pageHtml(),/Synthetic form/);pageData=[{...option,contract:{}}];assert.match(await pageHtml(),/could not be loaded/);
+console.log('PASS context contract/action/form states: unknown retained, strict schema/dates, child/role binding, confirmed save only, stale/transport failures, read-only/pending, escaped copy and empty versus unavailable. Synthetic rendering, not live suitability evidence.');
