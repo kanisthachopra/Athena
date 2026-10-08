@@ -1,4 +1,6 @@
-# MIRA
+# Athena
+
+Formerly MIRA. The current Athena resource-first experience includes an explorable world, a researched resource shelf, live search, source explanations and English voice input. See [current implementation and limits](docs/ATHENA_RESOURCE_FUNCTIONALITY.md). The feature inventory below also preserves the earlier MIRA groundwork.
 
 Product authority: [MIRA Source of Truth](MIRA_SOURCE_OF_TRUTH.md), explicitly adopted by the owner on 30 September 2026. Read it and [AGENTS.md](AGENTS.md) before development. The historical feature inventory below is not a current verification report; see [project status](docs/PROJECT_STATUS.md) and [decisions](docs/DECISIONS_AND_OPEN_QUESTIONS.md).
 
